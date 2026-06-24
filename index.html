@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liberville — житловий комплекс у Ходосівці</title>
+  <meta name="description" content="Liberville — преміальний житловий квартал у Ходосівці: чотири башти на спільному стилобаті, закритий двір та власна інфраструктура.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ПРЕЛОАДЕР -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__logo">Liberville</div>
+      <div class="preloader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- ШАПКА -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a href="#top" class="logo">Liberville</a>
+
+      <nav class="nav" id="nav">
+        <a href="#about">Про комплекс</a>
+        <a href="#infrastructure">Інфраструктура</a>
+        <a href="#genplan">Генплан</a>
+        <a href="#plan">Планування</a>
+        <a href="gallery.html">Галерея</a>
+        <a href="progress.html">Хід будівництва</a>
+      </nav>
+
+      <div class="header__right">
+        <a href="tel:+380638875728" class="header__phone">+380 63 887 57 28</a>
+        <div class="lang">
+          <a href="#" class="lang__item is-active">UK</a>
+          <a href="#" class="lang__item">EN</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ГЛАВНЫЙ БАННЕР (сцена слайда 11 — двір з мідним навісом) -->
+  <section class="hero">
+    <div class="hero__media" id="hero-media">
+      <img src="assets/img/cam_01.jpg" alt="Житловий комплекс Liberville">
+    </div>
+    <div class="container hero__inner">
+      <h1 class="hero__title">Простір свободи<br>у Ходосівці</h1>
+      <p class="hero__subtitle">Преміальний квартал на 1,2 га: чотири башти на спільному стилобаті, закритий двір без машин та власна інфраструктура — від дитсадка до фітнесу</p>
+      <button class="btn btn--accent js-open-modal">Дізнатись деталі</button>
+    </div>
+    <div class="hero__scroll">Гортайте вниз</div>
+  </section>
+
+  <!-- ВІДЕО -->
+  <section class="section section--dark video-section">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Відео</span>
+        <h2 class="section__title">Liberville з висоти пташиного польоту</h2>
+      </div>
+      <div class="video-frame reveal">
+        <video src="assets/video/liberville.mp4" poster="assets/img/video_poster.jpg" controls autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНЦЕПЦІЯ -->
+  <section class="section" id="about">
+    <div class="container two-cols">
+      <div class="two-cols__text reveal">
+        <span class="eyebrow">Концепція</span>
+        <h2 class="section__title">Основна ідея</h2>
+        <p>Liberville — це чотири окремі башти, що зростають зі спільного стилобата й оточують захищений внутрішній двір. Така структура дарує десятки світлих кутових квартир із вікнами на два боки.</p>
+        <p>Башти розставлені так, щоб не затуляти одна одну: панорама та сонце залишаються з вами протягом усього дня.</p>
+      </div>
+      <div class="two-cols__media reveal">
+        <video src="assets/video/about.mp4" poster="assets/img/about_poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ДВІР -->
+  <section class="section section--dark">
+    <div class="container two-cols two-cols--reverse">
+      <div class="two-cols__text reveal">
+        <span class="eyebrow">Благоустрій</span>
+        <h2 class="section__title">Двір як вітальня</h2>
+        <p>Закритий приватний двір на стилобаті: відкритий амфітеатр, дитячі майданчики та озеленення у три рівні. Комерція винесена по периметру — всередині лише спокій та зелень.</p>
+        <p>Фірмова деталь двору — скульптурний мідний навіс, що став обличчям усього кварталу.</p>
+      </div>
+      <div class="two-cols__media reveal">
+        <img src="assets/img/cam_06.jpg" alt="Внутрішній двір з благоустроєм">
+      </div>
+    </div>
+  </section>
+
+  <!-- ПАНОРАМА -->
+  <section class="section">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Архітектура</span>
+        <h2 class="section__title">Архітектура, що формує панорами</h2>
+        <p class="section__lead">Розташування башт враховує інсоляцію та відкриває вигідні панорами з переважної більшості квартир.</p>
+      </div>
+      <div class="media-wide reveal">
+        <video src="assets/video/panorama.mp4" poster="assets/img/panorama_poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФІТНЕС -->
+  <section class="section section--dark">
+    <div class="container two-cols">
+      <div class="two-cols__text reveal">
+        <span class="eyebrow">Здоров'я</span>
+        <h2 class="section__title">Фітнес-клуб у комплексі</h2>
+        <p>Власний фітнес-клуб на перших поверхах стилобату — тренування поряд з домом, без поїздок через усе місто.</p>
+      </div>
+      <div class="two-cols__media reveal">
+        <img src="assets/img/cam_05.jpg" alt="Фітнес-клуб">
+      </div>
+    </div>
+  </section>
+
+  <!-- ІНФРАСТРУКТУРА -->
+  <section class="section" id="infrastructure">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Інфраструктура</span>
+        <h2 class="section__title">Все необхідне на перших поверхах</h2>
+        <p class="section__lead">Стилобат віддано під сервіси для мешканців: дитсадок, школа, ресторан, фітнес, коворкінг і магазини — за дві хвилини від вашого ліфта.</p>
+      </div>
+      <div class="cards-4">
+        <div class="card reveal">
+          <div class="card__icon">🎓</div>
+          <h3>Освіта</h3>
+          <p>Власний дитячий садок (≈458 м²) та початкова школа на території.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🏋️</div>
+          <h3>Спорт та робота</h3>
+          <p>Фітнес-клуб і коворкінг просто у вашому будинку.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🛍️</div>
+          <h3>Сервіси</h3>
+          <p>Ресторан, мінімаркет, салон краси та грумінг по периметру.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon">🌳</div>
+          <h3>Двір без машин</h3>
+          <p>Амфітеатр, дитячі майданчики та озеленення у три рівні.</p>
+        </div>
+      </div>
+      <div class="media-wide reveal" style="height:auto;margin-top:40px;background:#fff;padding:10px">
+        <img src="assets/img/floor1.jpg" alt="Схема першого поверху" style="height:auto;object-fit:contain">
+      </div>
+    </div>
+  </section>
+
+  <!-- ДЕТАЛІ -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Деталі</span>
+        <h2 class="section__title">Преміум у кожній деталі</h2>
+      </div>
+      <div class="features">
+        <div class="feature reveal">
+          <span class="feature__num">01</span>
+          <div>
+            <h3>Мідний навіс-«гриб»</h3>
+            <p>Фірмова скульптурна деталь двору — впізнаваний символ кварталу.</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <span class="feature__num">02</span>
+          <div>
+            <h3>Відкритий амфітеатр</h3>
+            <p>Місце для відпочинку, заходів та сусідського спілкування.</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <span class="feature__num">03</span>
+          <div>
+            <h3>Озеленення у три рівні</h3>
+            <p>Зелень на землі, на стилобаті та на покрівлях.</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <span class="feature__num">04</span>
+          <div>
+            <h3>Підземний паркінг</h3>
+            <p>115 підземних та 71 тимчасове машиномісце — разом 186.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГЕНПЛАН -->
+  <section class="section" id="genplan">
+    <div class="container two-cols">
+      <div class="two-cols__text reveal">
+        <span class="eyebrow">Генплан</span>
+        <h2 class="section__title">Схема генерального плану</h2>
+        <p>Відкритий доступ до комерції по периметру та закритий приватний двір на стилобаті. Поетапна реалізація у дві черги без втрати цілісності середовища.</p>
+        <p>Площа ділянки — 1,2 га. Чотири башти заввишки 9–10 поверхів.</p>
+      </div>
+      <div class="two-cols__media reveal" style="height:auto;background:#fff;padding:10px">
+        <img src="assets/img/genplan.jpg" alt="Схема генерального плану" style="height:auto;object-fit:contain">
+      </div>
+    </div>
+  </section>
+
+  <!-- ПЛАНУВАННЯ -->
+  <section class="section section--dark" id="plan">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Планування</span>
+        <h2 class="section__title">210 квартир на вибір</h2>
+        <p class="section__lead">Багато кутових квартир із панорамними видами. Оберіть свій формат.</p>
+      </div>
+
+      <div class="tabs reveal" id="flatFilter">
+        <button class="filter-btn is-active" data-rooms="all">Всі</button>
+        <button class="filter-btn" data-rooms="1">1К</button>
+        <button class="filter-btn" data-rooms="2">2К</button>
+        <button class="filter-btn" data-rooms="3">3К</button>
+        <button class="filter-btn" data-rooms="4">4К</button>
+      </div>
+
+      <div class="flats-slider reveal">
+        <button class="flats-nav flats-nav--prev" id="flatsPrev" aria-label="Назад">‹</button>
+        <div class="flats-track" id="flatsGrid"></div>
+        <button class="flats-nav flats-nav--next" id="flatsNext" aria-label="Вперед">›</button>
+      </div>
+      <p class="flats-note reveal">Демонстраційний перелік. Повний каталог з реальними квартирами та цінами з'явиться після завантаження даних.</p>
+
+      <div class="plan-example reveal">
+        <div class="plan-example__img"><img src="assets/img/plan_s01.jpg" alt="Приклад планування поверху"></div>
+        <p class="plan-example__cap">Приклад планування поверху (секція S01)</p>
+      </div>
+
+      <div class="plan-actions">
+        <a href="assets/pdf/project.pdf" class="btn btn--accent" download>Завантажити презентацію (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЦИФРИ -->
+  <section class="section developer">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Коротко</span>
+        <h2 class="section__title">Liberville у цифрах</h2>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><span class="stat__num">210</span><span class="stat__label">квартир</span></div>
+        <div class="stat"><span class="stat__num">4</span><span class="stat__label">башти на стилобаті</span></div>
+        <div class="stat"><span class="stat__num">1,2 га</span><span class="stat__label">площа ділянки</span></div>
+        <div class="stat"><span class="stat__num">186</span><span class="stat__label">машиномісць</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВИНИ -->
+  <section class="section section--dark" id="news">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Новини</span>
+        <h2 class="section__title">Останні новини</h2>
+      </div>
+      <div class="news-grid">
+        <article class="news-card reveal">
+          <div class="news-card__img"><video src="assets/video/news_start.mp4" poster="assets/img/news_start_poster.jpg" autoplay muted loop playsinline preload="metadata"></video></div>
+          <div class="news-card__body">
+            <time>Червень 2026</time>
+            <h3>Старт продажів I черги Liberville</h3>
+            <p>Відкрито продаж квартир першого пускового комплексу.</p>
+            <a href="news.html" class="link-arrow">Читати →</a>
+          </div>
+        </article>
+      </div>
+      <div class="center-btn">
+        <a href="news.html" class="btn btn--outline">Всі новини</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГАЛЕРЕЯ -->
+  <section class="section">
+    <div class="container">
+      <div class="center-head reveal">
+        <span class="eyebrow">Галерея</span>
+        <h2 class="section__title">Візуалізації проекту</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-grid__item"><img src="assets/img/cam_01.jpg" alt="Вид 1"></div>
+        <div class="gallery-grid__item"><img src="assets/img/cam_03.jpg" alt="Вид 2"></div>
+        <div class="gallery-grid__item"><img src="assets/img/cam_04.jpg" alt="Вид 3"></div>
+        <div class="gallery-grid__item"><img src="assets/img/cam_05.jpg" alt="Вид 4"></div>
+        <div class="gallery-grid__item"><img src="assets/img/aerial_01.jpg" alt="Вид 5"></div>
+        <div class="gallery-grid__item"><img src="assets/img/aerial_02.jpg" alt="Вид 6"></div>
+      </div>
+      <div class="center-btn" style="margin-top:36px">
+        <a href="gallery.html" class="btn btn--outline">Вся галерея</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФУТЕР -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__col">
+        <a href="#top" class="logo logo--light">Liberville</a>
+        <p>Ходосівка, Київська область</p>
+        <a href="tel:+380638875728" class="footer__phone">+380 63 887 57 28</a>
+      </div>
+      <div class="footer__col">
+        <h4>Меню</h4>
+        <a href="#about">Про комплекс</a>
+        <a href="#infrastructure">Інфраструктура</a>
+        <a href="#genplan">Генплан</a>
+        <a href="#plan">Планування</a>
+        <a href="gallery.html">Галерея</a>
+      </div>
+      <div class="footer__col">
+        <h4>Графік роботи</h4>
+        <p>ПН–ПТ: 09:00–19:00</p>
+        <p>СБ: 09:00–18:00</p>
+        <p>НД: вихідний</p>
+      </div>
+      <div class="footer__col">
+        <h4>Соцмережі</h4>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Telegram">Telegram</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>© 2026 Liberville</span>
+      <a href="#">Політика конфіденційності</a>
+    </div>
+  </footer>
+
+  <!-- МОДАЛЬНА ФОРМА -->
+  <div class="modal" id="modal">
+    <div class="modal__overlay js-close-modal"></div>
+    <div class="modal__box">
+      <button class="modal__close js-close-modal" aria-label="Закрити">×</button>
+      <h3 class="modal__title">Залиште заявку</h3>
+      <p class="modal__text">Ми зв'яжемося з вами найближчим часом.</p>
+      <form class="form" id="form">
+        <input type="text" name="name" placeholder="Ваше ім'я" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <button type="submit" class="btn btn--accent btn--full">Відправити</button>
+      </form>
+      <div class="form__success" id="formSuccess">
+        <p>Дякуємо! Заявку відправлено.</p>
+        <button class="btn btn--accent js-close-modal">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/data/flats.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
