@@ -114,3 +114,20 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15 });
 reveals.forEach(el => observer.observe(el));
+
+// ===== «Ленивые» видео: грузятся и играют только в зоне видимости =====
+// (экономит трафик и ускоряет первую загрузку — видео не качаются все сразу)
+const lazyVideos = document.querySelectorAll('video[data-autoplay]');
+if (lazyVideos.length) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {}); // play() сам подгрузит видео (preload="none")
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+  lazyVideos.forEach(v => videoObserver.observe(v));
+}
