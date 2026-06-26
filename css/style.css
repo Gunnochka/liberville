@@ -138,8 +138,20 @@ img{max-width:100%;display:block}
   padding:36px 28px;border:1px solid var(--line);border-radius:var(--radius);
   background:rgba(255,255,255,.02);transition:.3s;
 }
-.card:hover{transform:translateY(-6px);border-color:rgba(58,187,245,.4);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.card__icon{font-size:38px;margin-bottom:18px}
+.card:hover{transform:translateY(-6px);border-color:rgba(192,130,78,.45);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.card__icon{
+  width:56px;height:56px;margin-bottom:22px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(192,130,78,.30);border-radius:14px;
+  background:linear-gradient(155deg,rgba(192,130,78,.14),rgba(192,130,78,.02));
+  color:var(--accent);transition:.3s;
+}
+.card__icon svg{width:27px;height:27px;display:block}
+.card:hover .card__icon{
+  border-color:rgba(192,130,78,.55);
+  background:linear-gradient(155deg,rgba(192,130,78,.22),rgba(192,130,78,.05));
+  box-shadow:0 0 0 4px rgba(192,130,78,.06);
+}
 .card h3{font-size:19px;font-weight:500;margin-bottom:10px;color:#fff}
 .card p{color:var(--muted);font-size:15px;font-weight:300}
 
