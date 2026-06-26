@@ -4,6 +4,74 @@ window.addEventListener('load', () => {
   setTimeout(() => preloader.classList.add('is-hidden'), 1600);
 });
 
+// ===== Кінематографічний вхід (scroll-driven, у стилі Rockstar GTA VI) =====
+(function () {
+  const intro = document.getElementById('intro');
+  if (!intro) return;
+  const mosaic = document.getElementById('introMosaic');
+  const veil   = document.getElementById('introVeil');
+  const video  = document.getElementById('introVideo');
+  const center = document.getElementById('introCenter');
+  const cta    = document.getElementById('introCta');
+  const scroll = document.getElementById('introScroll');
+
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const lerp  = (a, b, t) => a + (b - a) * t;
+  const seg   = (v, a, b) => clamp((v - a) / (b - a), 0, 1); // нормализуем участок прогресса
+
+  // Уважение к настройке «меньше движения»: статичный кадр без скролл-анимации
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    veil.style.opacity = 0.5;
+    cta.style.opacity = 1; cta.style.transform = 'none'; cta.classList.add('is-on');
+    return;
+  }
+
+  let videoOn = false, scheduled = false;
+
+  function update() {
+    scheduled = false;
+    const rect = intro.getBoundingClientRect();
+    const total = intro.offsetHeight - window.innerHeight;
+    const p = clamp(-rect.top / total, 0, 1); // 0..1 — прогресс по секции
+
+    // 1) коллаж: лёгкий зум + растворение («фото уходят»)
+    mosaic.style.transform = `scale(${lerp(1, 1.12, p)})`;
+    mosaic.style.opacity = 1 - seg(p, 0.46, 0.68);
+
+    // 2) затемнение наплывает (фокус уходит в центр)
+    veil.style.opacity = seg(p, 0.05, 0.46) * 0.96;
+
+    // 3) логотип: проявился, чуть подрос; держится, поки фото зникають,
+    //    а в самому кінці плавно тане при переході у відео
+    const lScale = lerp(0.86, 1.04, seg(p, 0, 0.5));
+    const lUp = lerp(0, -7, seg(p, 0.74, 1));
+    center.style.transform = `translateY(calc(-50% + ${lUp}vh)) scale(${lScale})`;
+    center.style.opacity = 1 - seg(p, 0.88, 1);
+
+    // 4) видео: проявляется поверх затемнення (чітко видно) і грає в зоні показу
+    video.style.opacity = seg(p, 0.6, 0.86);
+    if (p > 0.5 && !videoOn) { videoOn = true; video.play().catch(() => {}); }
+    if (p < 0.46 && videoOn) { videoOn = false; video.pause(); }
+
+    // 5) финальный призыв + скрытие подсказки скролла
+    const cOn = seg(p, 0.87, 0.99);
+    cta.style.opacity = cOn;
+    cta.style.transform = `translateY(${lerp(20, 0, cOn)}px)`;
+    cta.classList.toggle('is-on', cOn > 0.5);
+    scroll.style.opacity = 1 - seg(p, 0.1, 0.36);
+  }
+
+  // Прямой вызов update() на скролле (надёжно во всех браузерах);
+  // rAF используем лишь как «сглаживание», но НЕ зависим от него.
+  function onScroll() {
+    update();
+    if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
 // ===== Шапка меняет фон при скролле =====
 const header = document.querySelector('.header');
 window.addEventListener('scroll', () => {

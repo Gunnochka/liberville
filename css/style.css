@@ -51,10 +51,8 @@ img{max-width:100%;display:block}
 }
 .preloader.is-hidden{opacity:0;visibility:hidden}
 .preloader__inner{text-align:center}
-.preloader__logo{
-  color:#fff;font-size:34px;font-weight:200;letter-spacing:8px;
-  margin-bottom:22px;
-}
+.preloader__logo{margin-bottom:26px}
+.preloader__logo img{height:150px;width:auto;display:block;margin:0 auto}
 .preloader__bar{width:200px;height:2px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:2px}
 .preloader__bar span{display:block;height:100%;width:0;background:var(--accent);animation:load 1.6s ease forwards}
 @keyframes load{to{width:100%}}
@@ -70,7 +68,9 @@ img{max-width:100%;display:block}
   box-shadow:0 1px 0 rgba(255,255,255,.06);
 }
 .header__inner{display:flex;align-items:center;justify-content:space-between;height:80px}
-.logo{font-size:24px;font-weight:500;letter-spacing:3px;color:#fff}
+.logo{display:inline-flex;align-items:center;gap:11px;color:#fff}
+.logo__mark{height:46px;width:auto;display:block}
+.logo__word{height:19px;width:auto;display:block}
 .nav{display:flex;gap:32px}
 .nav a{font-size:14px;font-weight:300;color:rgba(255,255,255,.85);transition:color .25s;position:relative}
 .nav a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--accent);transition:.25s}
@@ -105,6 +105,100 @@ img{max-width:100%;display:block}
 .hero__subtitle{font-size:clamp(15px,2vw,20px);margin:26px 0 38px;font-weight:300;color:rgba(255,255,255,.8)}
 .hero__scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.6);animation:bob 2s infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ===== Кінематографічний вхід (scroll-driven, у стилі Rockstar) ===== */
+.intro{position:relative;height:300vh;background:#0b0907}
+.intro__stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#0b0907}
+
+/* 1. Колаж — з відступами по краях (рамка), як у референсі */
+.intro__mosaic{
+  position:absolute;top:96px;left:3.5vw;right:3.5vw;bottom:4.5vh;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);
+  gap:8px;transform-origin:center;will-change:transform,opacity;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.55);
+}
+.intro__cell{position:relative;overflow:hidden;border-radius:3px}
+.intro__cell img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.06) contrast(1.03);
+  opacity:0;transform:scale(1.14);
+  animation:cellIn 1s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay:calc(1.4s + var(--d,0s));
+}
+@keyframes cellIn{to{opacity:1;transform:scale(1)}}
+
+/* 2. Відео фінальної сцени — над затемненням, щоб у кінці було чітко видно */
+.intro__video{
+  position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:cover;
+  opacity:0;will-change:opacity;pointer-events:none;
+}
+
+/* 3. Затемнення (фокус у центр) */
+.intro__veil{
+  position:absolute;inset:0;z-index:2;opacity:0;will-change:opacity;
+  background:
+    radial-gradient(125% 95% at 50% 42%, rgba(11,9,7,0) 0%, rgba(11,9,7,.30) 42%, rgba(11,9,7,.97) 100%),
+    linear-gradient(0deg, rgba(11,9,7,.55), rgba(11,9,7,.55));
+}
+
+/* 4. Центральний логотип */
+.intro__center{
+  position:absolute;z-index:4;left:0;right:0;top:50%;transform:translateY(-50%);
+  text-align:center;color:#fff;padding:0 20px;will-change:transform,opacity;
+}
+/* Підложка, щоб назва чітко виділялась на фоні колажу */
+.intro__plate{
+  display:inline-block;padding:42px 66px;border-radius:22px;
+  background:rgba(13,10,8,.5);
+  -webkit-backdrop-filter:blur(16px) saturate(1.1);
+  backdrop-filter:blur(16px) saturate(1.1);
+  border:1px solid rgba(192,130,78,.30);
+  box-shadow:0 40px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.intro__horse,.intro__word-h,.intro__tagline{opacity:0;animation:logoIn 1.1s cubic-bezier(.2,.7,.2,1) forwards}
+.intro__horse{animation-delay:1.5s}
+.intro__word-h{animation-delay:1.72s}
+.intro__tagline{animation-delay:1.92s}
+@keyframes logoIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.intro__horse{
+  height:clamp(150px,26vh,250px);width:auto;display:block;margin:0 auto 16px;
+  filter:drop-shadow(0 14px 40px rgba(0,0,0,.45));
+}
+.intro__word-h{margin:0;line-height:0}
+.intro__word{
+  height:clamp(32px,4.6vh,50px);width:auto;display:block;margin:0 auto;
+  filter:drop-shadow(0 4px 22px rgba(192,130,78,.32));
+}
+.intro__tagline{
+  margin-top:20px;font-size:clamp(11px,1.4vw,15px);letter-spacing:.45em;
+  text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:300;padding-left:.45em;
+}
+
+/* 5. Фінальний CTA + підказка скролу */
+.intro__cta{
+  position:absolute;z-index:5;left:0;right:0;bottom:13vh;text-align:center;padding:0 24px;
+  opacity:0;transform:translateY(20px);will-change:opacity,transform;pointer-events:none;
+}
+.intro__cta.is-on{pointer-events:auto}
+.intro__sub{max-width:640px;margin:0 auto 26px;color:rgba(255,255,255,.86);font-size:clamp(15px,2vw,19px);font-weight:300}
+.intro__scroll{
+  position:absolute;z-index:5;bottom:30px;left:50%;transform:translateX(-50%);
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);
+  animation:bob 2s infinite;
+}
+
+@media(max-width:760px){
+  .intro{height:260vh}
+  .intro__mosaic{top:84px;left:3vw;right:3vw;bottom:2.5vh;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr)}
+  .intro__plate{padding:30px 26px}
+}
+@media(prefers-reduced-motion:reduce){
+  .intro{height:100vh}
+  .intro__stage{position:relative}
+  .intro__cell img{opacity:1;transform:none;animation:none}
+  .intro__horse,.intro__word-h,.intro__tagline{opacity:1;animation:none}
+}
 
 /* ===== Секции ===== */
 .section{padding:110px 0;background:var(--bg)}

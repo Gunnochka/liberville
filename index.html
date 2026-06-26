@@ -34,7 +34,7 @@
   <!-- ПРЕЛОАДЕР -->
   <div class="preloader" id="preloader">
     <div class="preloader__inner">
-      <div class="preloader__logo">Liberville</div>
+      <div class="preloader__logo"><img src="assets/img/logo-full.svg" alt="Liberville"></div>
       <div class="preloader__bar"><span></span></div>
     </div>
   </div>
@@ -42,7 +42,10 @@
   <!-- ШАПКА -->
   <header class="header" id="top">
     <div class="container header__inner">
-      <a href="#top" class="logo">Liberville</a>
+      <a href="#top" class="logo">
+        <img src="assets/img/logo-horse.svg" alt="" class="logo__mark">
+        <img src="assets/img/logo-wordmark.svg" alt="Liberville" class="logo__word">
+      </a>
 
       <nav class="nav" id="nav">
         <a href="#about">Про комплекс</a>
@@ -66,17 +69,39 @@
     </div>
   </header>
 
-  <!-- ГЛАВНЫЙ БАННЕР (сцена слайда 11 — двір з мідним навісом) -->
-  <section class="hero">
-    <div class="hero__media" id="hero-media">
-      <img decoding="async" fetchpriority="high" src="assets/img/cam_01.jpg" alt="Житловий комплекс Liberville">
+  <!-- КІНЕМАТОГРАФІЧНИЙ ВХІД: колаж → логотип → відео (scroll-driven) -->
+  <section class="intro" id="intro">
+    <div class="intro__stage">
+      <!-- 1. Колаж з існуючих рендерів -->
+      <div class="intro__mosaic" id="introMosaic">
+        <span class="intro__cell" style="--d:.05s"><img src="assets/img/collage/aerial_01.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.13s"><img src="assets/img/collage/cam_02.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.21s"><img src="assets/img/collage/cam_03.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.29s"><img src="assets/img/collage/aerial_02.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.09s"><img src="assets/img/collage/cam_04.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.17s"><img src="assets/img/collage/slide11.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.25s"><img src="assets/img/collage/cam_05.jpg" alt="" aria-hidden="true"></span>
+        <span class="intro__cell" style="--d:.33s"><img src="assets/img/collage/cam_06.jpg" alt="" aria-hidden="true"></span>
+      </div>
+      <!-- 2. Відео, що проявляється в кінці -->
+      <video class="intro__video" id="introVideo" src="assets/video/liberville.mp4" muted loop playsinline preload="none" poster="assets/img/video_poster.jpg"></video>
+      <!-- 3. Затемнювальна вуаль -->
+      <div class="intro__veil" id="introVeil"></div>
+      <!-- 4. Центральний логотип з підложкою -->
+      <div class="intro__center" id="introCenter">
+        <div class="intro__plate">
+          <img src="assets/img/logo-horse.svg" alt="" class="intro__horse">
+          <h1 class="intro__word-h"><img src="assets/img/logo-wordmark.svg" alt="Liberville — житловий комплекс у Ходосівці" class="intro__word"></h1>
+          <div class="intro__tagline">житловий квартал · ходосівка</div>
+        </div>
+      </div>
+      <!-- 5. Фінальний заклик поверх відео -->
+      <div class="intro__cta" id="introCta">
+        <p class="intro__sub">Чотири башти на спільному стилобаті, закритий двір без машин та власна інфраструктура — простір свободи у Ходосівці.</p>
+        <button class="btn btn--accent js-open-modal">Дізнатись деталі</button>
+      </div>
+      <div class="intro__scroll" id="introScroll">Гортайте вниз</div>
     </div>
-    <div class="container hero__inner">
-      <h1 class="hero__title">Простір свободи<br>у Ходосівці</h1>
-      <p class="hero__subtitle">Преміальний квартал на 1,2 га: чотири башти на спільному стилобаті, закритий двір без машин та власна інфраструктура — від дитсадка до фітнесу</p>
-      <button class="btn btn--accent js-open-modal">Дізнатись деталі</button>
-    </div>
-    <div class="hero__scroll">Гортайте вниз</div>
   </section>
 
   <!-- ВІДЕО -->
@@ -87,7 +112,7 @@
         <h2 class="section__title">Liberville з висоти пташиного польоту</h2>
       </div>
       <div class="video-frame reveal">
-        <video src="assets/video/liberville.mp4" poster="assets/img/video_poster.jpg" controls muted loop playsinline preload="none" data-autoplay></video>
+        <video src="assets/video/panorama.mp4" poster="assets/img/panorama_poster.jpg" controls muted loop playsinline preload="none" data-autoplay></video>
       </div>
     </div>
   </section>
@@ -369,7 +394,10 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__col">
-        <a href="#top" class="logo logo--light">Liberville</a>
+        <a href="#top" class="logo logo--light">
+          <img src="assets/img/logo-horse.svg" alt="" class="logo__mark">
+          <img src="assets/img/logo-wordmark.svg" alt="Liberville" class="logo__word">
+        </a>
         <p>Ходосівка, Київська область</p>
         <a href="tel:+380638875728" class="footer__phone">+380 63 887 57 28</a>
       </div>
