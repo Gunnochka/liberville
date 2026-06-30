@@ -172,16 +172,20 @@ const LEAD = {
   web3Key: ''  // ← ключ Web3Forms для дубля на e-mail (додамо пізніше)
 };
 
+let leadSubmitting = false; // захист від подвійної відправки
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
 
   // анти-спам: якщо приховане поле заповнене — це бот, мовчки виходимо
   if (form.elements['_gotcha'] && form.elements['_gotcha'].value) return;
+  if (leadSubmitting) return; // вже відправляємо — ігноруємо повторне натискання
 
   const name  = ((form.elements['name']  && form.elements['name'].value)  || '').trim();
   const phone = ((form.elements['phone'] && form.elements['phone'].value) || '').trim();
   if (!name || !phone) return;
 
+  leadSubmitting = true;
   const btn = form.querySelector('button[type="submit"]');
   const label = btn.textContent;
   btn.disabled = true;
@@ -221,6 +225,7 @@ form.addEventListener('submit', async e => {
   const results = await Promise.allSettled(tasks);
   const ok = results.some(r => r.status === 'fulfilled' && r.value);
 
+  leadSubmitting = false;
   btn.disabled = false;
   btn.textContent = label;
 
