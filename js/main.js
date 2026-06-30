@@ -169,7 +169,7 @@ document.addEventListener('keydown', e => {
 const LEAD = {
   tgToken: '8662554569:AAFGZlg9kolj03kvfb2CkD5zpeIiRAu6F0o', // бот @liberville_leads_bot
   tgChat:  '287290291',                                       // куди слати заявки в Telegram
-  web3Key: ''  // ← ключ Web3Forms для дубля на e-mail (додамо пізніше)
+  web3Key: '9370e556-dc5a-4eda-a1fc-ea79897ecf68'  // Web3Forms → e-mail Libervilleua@gmail.com
 };
 
 let leadSubmitting = false; // захист від подвійної відправки
