@@ -329,6 +329,9 @@ img{max-width:100%;display:block}
 .form__success{display:none}
 .form__success.is-visible{display:block}
 .form__success p{font-size:18px;margin-bottom:20px;color:var(--accent)}
+.form__consent{display:flex;gap:9px;align-items:flex-start;text-align:left;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
+.form__consent input{width:16px;height:16px;padding:0;margin:1px 0 0;border:0;border-radius:0;background:none;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
+.form__consent a{color:var(--accent);text-decoration:underline}
 
 /* ===== Анимация появления ===== */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}

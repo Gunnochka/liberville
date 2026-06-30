@@ -426,7 +426,7 @@
     </div>
     <div class="container footer__bottom">
       <span>© 2026 Liberville</span>
-      <a href="#">Політика конфіденційності</a>
+      <a href="privacy.html">Політика конфіденційності</a>
     </div>
   </footer>
 
@@ -442,6 +442,10 @@
         <input type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
         <!-- анти-спам: приховане поле-пастка, людина його не заповнює -->
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <label class="form__consent">
+          <input type="checkbox" name="consent" required>
+          <span>Я погоджуюсь на обробку персональних даних згідно з <a href="privacy.html" target="_blank" rel="noopener">Політикою конфіденційності</a></span>
+        </label>
         <button type="submit" class="btn btn--accent btn--full">Відправити</button>
       </form>
       <div class="form__success" id="formSuccess">

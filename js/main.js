@@ -145,6 +145,10 @@ const modal = document.getElementById('modal');
 const form = document.getElementById('form');
 const formSuccess = document.getElementById('formSuccess');
 
+// Уся логіка модалки/форми працює лише там, де ці елементи є на сторінці.
+// (підсторінки — privacy.html, progress.html тощо — підключають той самий main.js без форми)
+if (form && modal && formSuccess) {
+
 function openModal() {
   modal.classList.add('is-open');
   form.style.display = 'flex';
@@ -237,6 +241,8 @@ form.addEventListener('submit', async e => {
     alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 63 887 57 28');
   }
 });
+
+} // кінець guard (form && modal && formSuccess)
 
 // ===== Анимация появления блоков при скролле =====
 const reveals = document.querySelectorAll('.reveal');
