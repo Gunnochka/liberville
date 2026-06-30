@@ -438,8 +438,10 @@
       <h3 class="modal__title">Залиште заявку</h3>
       <p class="modal__text">Ми зв'яжемося з вами найближчим часом.</p>
       <form class="form" id="form">
-        <input type="text" name="name" placeholder="Ваше ім'я" required>
-        <input type="tel" name="phone" placeholder="Телефон" required>
+        <input type="text" name="name" placeholder="Ваше ім'я" required autocomplete="name">
+        <input type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
+        <!-- анти-спам: приховане поле-пастка, людина його не заповнює -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <button type="submit" class="btn btn--accent btn--full">Відправити</button>
       </form>
       <div class="form__success" id="formSuccess">

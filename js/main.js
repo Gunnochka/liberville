@@ -164,11 +164,73 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
-// Отправка формы (пока без сервера — просто показываем «Дякуємо»)
-form.addEventListener('submit', e => {
+// ===== Відправка заявки: Telegram (миттєво) + Email (дубль) =====
+// Налаштування каналів доставки лідів:
+const LEAD = {
+  tgToken: '8662554569:AAFGZlg9kolj03kvfb2CkD5zpeIiRAu6F0o', // бот @liberville_leads_bot
+  tgChat:  '287290291',                                       // куди слати заявки в Telegram
+  web3Key: ''  // ← ключ Web3Forms для дубля на e-mail (додамо пізніше)
+};
+
+form.addEventListener('submit', async e => {
   e.preventDefault();
-  form.style.display = 'none';
-  formSuccess.classList.add('is-visible');
+
+  // анти-спам: якщо приховане поле заповнене — це бот, мовчки виходимо
+  if (form.elements['_gotcha'] && form.elements['_gotcha'].value) return;
+
+  const name  = ((form.elements['name']  && form.elements['name'].value)  || '').trim();
+  const phone = ((form.elements['phone'] && form.elements['phone'].value) || '').trim();
+  if (!name || !phone) return;
+
+  const btn = form.querySelector('button[type="submit"]');
+  const label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Відправляємо…';
+
+  const page = location.pathname + (location.hash || '');
+  const tasks = [];
+
+  // 1) Telegram — миттєве сповіщення менеджеру
+  if (LEAD.tgToken && LEAD.tgChat) {
+    const text = `🏠 Нова заявка — Liberville\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n🌐 Сторінка: ${page}`;
+    tasks.push(
+      fetch(`https://api.telegram.org/bot${LEAD.tgToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: LEAD.tgChat, text })
+      }).then(r => r.ok).catch(() => false)
+    );
+  }
+
+  // 2) Email — дубль через Web3Forms (запрацює, щойно додамо web3Key)
+  if (LEAD.web3Key) {
+    tasks.push(
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: LEAD.web3Key,
+          subject: 'Нова заявка з сайту Liberville',
+          from_name: 'Liberville сайт',
+          name, phone, page
+        })
+      }).then(r => r.ok).catch(() => false)
+    );
+  }
+
+  const results = await Promise.allSettled(tasks);
+  const ok = results.some(r => r.status === 'fulfilled' && r.value);
+
+  btn.disabled = false;
+  btn.textContent = label;
+
+  if (ok) {
+    form.reset();
+    form.style.display = 'none';
+    formSuccess.classList.add('is-visible');
+  } else {
+    alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 63 887 57 28');
+  }
 });
 
 // ===== Анимация появления блоков при скролле =====
