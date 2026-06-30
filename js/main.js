@@ -1,7 +1,7 @@
 // ===== Прелоадер: прячем после загрузки страницы =====
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
-  setTimeout(() => preloader.classList.add('is-hidden'), 1600);
+  if (preloader) setTimeout(() => preloader.classList.add('is-hidden'), 1600);
 });
 
 // ===== Кінематографічний вхід (scroll-driven, у стилі Rockstar GTA VI) =====
