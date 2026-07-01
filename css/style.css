@@ -332,6 +332,14 @@ img{max-width:100%;display:block}
 .form__consent{display:flex;gap:9px;align-items:flex-start;text-align:left;font-size:12.5px;line-height:1.45;color:var(--muted);cursor:pointer}
 .form__consent input{width:16px;height:16px;padding:0;margin:1px 0 0;border:0;border-radius:0;background:none;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
 .form__consent a{color:var(--accent);text-decoration:underline}
+/* Фінальний заклик до дії */
+.cta-final{background:radial-gradient(120% 130% at 50% 0%, rgba(192,130,78,.13), transparent 62%), var(--bg-2)}
+.cta-final__box{max-width:780px;margin:0 auto;text-align:center;border:1px solid rgba(192,130,78,.30);border-radius:18px;padding:50px 40px;background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008))}
+.cta-final__box .section__title{margin-top:6px}
+.cta-final__text{color:var(--muted);max-width:540px;margin:16px auto 28px;font-weight:300;line-height:1.6}
+.cta-final__trust{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center;margin-top:30px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted-dim);font-size:13.5px}
+.btn--lg{padding:16px 42px;font-size:16px}
+@media(max-width:600px){.cta-final__box{padding:38px 22px}.cta-final__trust{gap:10px 18px;font-size:12.5px}}
 
 /* ===== Анимация появления ===== */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
