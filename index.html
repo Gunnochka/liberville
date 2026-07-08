@@ -28,6 +28,65 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Мікророзмітка Schema.org (для Google: організація, ЖК, сайт) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://liberville.com.ua/#organization",
+        "name": "Liberville",
+        "url": "https://liberville.com.ua/",
+        "logo": "https://liberville.com.ua/assets/img/logo-full.svg",
+        "image": "https://liberville.com.ua/assets/img/cam_01.jpg",
+        "email": "Libervilleua@gmail.com",
+        "telephone": "+380775075557",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+380775075557",
+          "email": "Libervilleua@gmail.com",
+          "contactType": "sales",
+          "areaServed": "UA",
+          "availableLanguage": ["uk"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ходосівка",
+          "addressRegion": "Київська область",
+          "addressCountry": "UA"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://liberville.com.ua/#website",
+        "url": "https://liberville.com.ua/",
+        "name": "Liberville",
+        "inLanguage": "uk",
+        "publisher": { "@id": "https://liberville.com.ua/#organization" }
+      },
+      {
+        "@type": "ApartmentComplex",
+        "name": "Liberville",
+        "description": "Преміальний житловий квартал у Ходосівці: чотири башти на спільному стилобаті, закритий двір та власна інфраструктура.",
+        "url": "https://liberville.com.ua/",
+        "image": "https://liberville.com.ua/assets/img/cam_01.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ходосівка",
+          "addressRegion": "Київська область",
+          "addressCountry": "UA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.2814,
+          "longitude": 30.5106
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
