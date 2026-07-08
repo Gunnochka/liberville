@@ -173,7 +173,12 @@ document.addEventListener('keydown', e => {
 const LEAD = {
   tgToken: '8662554569:AAFGZlg9kolj03kvfb2CkD5zpeIiRAu6F0o', // бот @liberville_leads_bot
   tgChat:  '287290291',                                       // куди слати заявки в Telegram
-  web3Key: '9370e556-dc5a-4eda-a1fc-ea79897ecf68'  // Web3Forms → e-mail Libervilleua@gmail.com
+  web3Key: '9370e556-dc5a-4eda-a1fc-ea79897ecf68', // Web3Forms → e-mail Libervilleua@gmail.com
+  crm: {                                            // G-PLUS CRM — форми лід-форм
+    url:       'https://crm.g-plus.app/api/actions',
+    partnerId: '16076',
+    token:     '308c2d896732f4963f35e5cddf735d81e2fcca62ea3fac277c742789ee304029'
+  }
 };
 
 let leadSubmitting = false; // захист від подвійної відправки
@@ -223,6 +228,29 @@ form.addEventListener('submit', async e => {
           name, phone, page
         })
       }).then(r => r.ok).catch(() => false)
+    );
+  }
+
+  // 3) G-PLUS CRM — заявка одразу потрапляє в CRM забудовника
+  if (LEAD.crm && LEAD.crm.token && LEAD.crm.partnerId) {
+    const crmData = {
+      action:     'partner-custom-form',
+      token:      LEAD.crm.token,
+      partner_id: LEAD.crm.partnerId,
+      name, phone,
+      lang: 'ua',
+      note: `Заявка з сайту Liberville (${page})`
+    };
+    // прокидаємо UTM-мітки, щоб у CRM було видно, з якої реклами прийшов лід
+    new URLSearchParams(location.search).forEach((v, k) => {
+      if (k.indexOf('utm_') === 0) crmData[k] = v;
+    });
+    tasks.push(
+      fetch(LEAD.crm.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(crmData)
+      }).then(r => r.json()).then(d => !!(d && d.success)).catch(() => false)
     );
   }
 
