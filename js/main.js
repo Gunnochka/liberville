@@ -74,17 +74,25 @@ window.addEventListener('load', () => {
 
 // ===== Шапка меняет фон при скролле =====
 const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('is-scrolled', window.scrollY > 60);
-});
+if (header) {
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 60);
+  });
+}
 
 // ===== Бургер-меню (мобильное) =====
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
-burger.addEventListener('click', () => nav.classList.toggle('is-open'));
-nav.querySelectorAll('a').forEach(link =>
-  link.addEventListener('click', () => nav.classList.remove('is-open'))
-);
+if (burger && nav) {
+  const setNav = open => {
+    nav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  burger.addEventListener('click', () => setNav(!nav.classList.contains('is-open')));
+  nav.querySelectorAll('a').forEach(link =>
+    link.addEventListener('click', () => setNav(false))
+  );
+}
 
 // ===== Каталог квартир (фильтр + рендер из assets/data/flats.js) =====
 const flatsGrid = document.getElementById('flatsGrid');
