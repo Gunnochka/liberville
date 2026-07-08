@@ -266,7 +266,7 @@ form.addEventListener('submit', async e => {
     form.style.display = 'none';
     formSuccess.classList.add('is-visible');
   } else {
-    alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 63 887 57 28');
+    alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 77 507 55 57');
   }
 });
 
