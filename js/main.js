@@ -273,6 +273,10 @@ form.addEventListener('submit', async e => {
     form.reset();
     form.style.display = 'none';
     formSuccess.classList.add('is-visible');
+    // Конверсія: повідомляємо рекламну аналітику про заявку.
+    // Спрацює автоматично, щойно підключимо GA4 та Meta Pixel (до того — мовчить).
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_page: page });
+    if (typeof fbq === 'function') fbq('track', 'Lead');
   } else {
     alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 77 507 55 57');
   }
