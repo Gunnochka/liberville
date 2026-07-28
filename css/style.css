@@ -295,9 +295,32 @@ img{max-width:100%;display:block}
 
 /* ===== Статистика девелопера ===== */
 .developer{text-align:center}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:54px}
-.stat__num{display:block;font-size:clamp(32px,4vw,52px);font-weight:200;color:var(--accent)}
-.stat__label{font-size:15px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:54px}
+.stat{
+  padding:30px 18px;border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
+  transition:border-color .3s ease, transform .3s ease;
+}
+.stat:hover{border-color:rgba(192,130,78,.45);transform:translateY(-3px)}
+.stat__num{display:block;font-size:clamp(32px,4vw,52px);font-weight:200;color:var(--accent);line-height:1.1}
+.stat__label{display:block;margin-top:8px;font-size:14.5px;color:var(--muted)}
+
+/* ===== Знаки довіри ===== */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:22px;text-align:left}
+.trust__item{
+  padding:28px 24px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--bg-2);transition:border-color .3s ease, transform .3s ease;
+}
+.trust__item:hover{border-color:rgba(192,130,78,.45);transform:translateY(-3px)}
+.trust__icon{display:block;font-size:26px;margin-bottom:14px}
+.trust__item h3{font-size:17px;font-weight:500;color:#fff;margin-bottom:8px}
+.trust__item p{font-size:14px;font-weight:300;color:var(--muted);line-height:1.55}
+@media(max-width:900px){
+  .stats,.trust{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .stats,.trust{grid-template-columns:1fr}
+}
 
 /* ===== Галерея ===== */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
