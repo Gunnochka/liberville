@@ -182,10 +182,10 @@ const LEAD = {
   tgToken: '8662554569:AAFGZlg9kolj03kvfb2CkD5zpeIiRAu6F0o', // бот @liberville_leads_bot
   tgChat:  '287290291',                                       // куди слати заявки в Telegram
   web3Key: '9370e556-dc5a-4eda-a1fc-ea79897ecf68', // Web3Forms → e-mail Libervilleua@gmail.com
-  crm: {                                            // G-PLUS CRM — форми лід-форм
+  crm: {                                  // G-PLUS CRM — кабінет Time Development
     url:       'https://crm.g-plus.app/api/actions',
-    partnerId: '16076',
-    token:     '308c2d896732f4963f35e5cddf735d81e2fcca62ea3fac277c742789ee304029'
+    partnerId: '22095',
+    token:     'ng3b9ESBSvA-GdDAhhwP9RZsN3nZuBLzeppe-hfqOKc'
   }
 };
 
