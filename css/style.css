@@ -1,3 +1,21 @@
+/* ===== Фірмовий шрифт RoadUI (з лого-буку BRAINTANK) ===== */
+@font-face{
+  font-family:'RoadUI';font-style:normal;font-weight:200;font-display:swap;
+  src:url('../assets/fonts/RoadUI-ExtraLight.woff2') format('woff2');
+}
+@font-face{
+  font-family:'RoadUI';font-style:normal;font-weight:300;font-display:swap;
+  src:url('../assets/fonts/RoadUI-Light.woff2') format('woff2');
+}
+@font-face{
+  font-family:'RoadUI';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../assets/fonts/RoadUI-Regular.woff2') format('woff2');
+}
+@font-face{
+  font-family:'RoadUI';font-style:normal;font-weight:700;font-display:swap;
+  src:url('../assets/fonts/RoadUI-Bold.woff2') format('woff2');
+}
+
 /* ===== Палитра проекта (тёплая: эспрессо + медь/бронза, по вашим рендерам) ===== */
 :root{
   --bg:#17120F;           /* основной тёмный фон (тёплый эспрессо) */
@@ -16,7 +34,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Geologica',sans-serif;
+  font-family:'RoadUI','Geologica',sans-serif;
   color:var(--text);
   background:var(--bg);
   line-height:1.6;
@@ -104,8 +122,9 @@ img{max-width:100%;display:block}
 }
 .header__inner{display:flex;align-items:center;justify-content:space-between;height:80px}
 .logo{display:inline-flex;align-items:center;gap:11px;color:#fff}
-.logo__mark{height:46px;width:auto;display:block}
-.logo__word{height:19px;width:auto;display:block}
+/* бронзовий логотип із лого-буку — трохи освітлюємо, щоб читався на темній шапці */
+.logo__mark{height:46px;width:auto;display:block;filter:brightness(1.32) saturate(1.06)}
+.logo__word{height:19px;width:auto;display:block;filter:brightness(1.32) saturate(1.06)}
 .nav{display:flex;gap:32px}
 .nav a{font-size:14px;font-weight:300;color:rgba(255,255,255,.85);transition:color .25s;position:relative}
 .nav a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--accent);transition:.25s}

@@ -31,16 +31,22 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="header is-scrolled">
     <div class="container header__inner">
       <a href="index.html" class="logo">
-        <img src="assets/img/logo-horse.svg" alt="" class="logo__mark">
-        <img src="assets/img/logo-wordmark.svg" alt="Liberville" class="logo__word">
+        <picture>
+          <source srcset="assets/img/logo-mark-bronze.webp" type="image/webp">
+          <img src="assets/img/logo-mark-bronze.png" alt="" class="logo__mark">
+        </picture>
+        <picture>
+          <source srcset="assets/img/logo-word-bronze.webp" type="image/webp">
+          <img src="assets/img/logo-word-bronze.png" alt="Liberville" class="logo__word">
+        </picture>
       </a>
       <nav class="nav" id="nav">
         <a href="index.html#about">Про комплекс</a>
