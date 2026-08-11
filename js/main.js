@@ -1,9 +1,31 @@
+// ===== Завжди починаємо з головного екрана =====
+// Браузер за замовчуванням відновлює позицію прокрутки з минулого візиту —
+// через це сторінка могла відкриватися десь посередині. Вимикаємо це.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 // ===== Прелоадер: прячем после загрузки страницы =====
 window.addEventListener('load', () => {
+  // якщо у посиланні немає якоря — піднімаємось на самий верх
+  if (!location.hash) window.scrollTo(0, 0);
+
   const preloader = document.getElementById('preloader');
   // 2400 мс — щоб анімація появи логотипа та лінія-індикатор встигли дограти
   if (preloader) setTimeout(() => preloader.classList.add('is-hidden'), 2400);
 });
+
+// ===== Кнопка «Дізнатися більше» на головному екрані =====
+// Гортаємо плавно, але НЕ лишаємо якір в адресі — інакше при наступному
+// заході браузер одразу стрибав би на «Основну ідею», минаючи головний екран.
+const leadBtn = document.querySelector('.lead__btn');
+if (leadBtn) {
+  leadBtn.addEventListener('click', e => {
+    const target = document.querySelector(leadBtn.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', location.pathname + location.search);
+  });
+}
 
 // ===== Шапка меняет фон при скролле =====
 const header = document.querySelector('.header');
