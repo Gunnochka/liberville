@@ -659,16 +659,16 @@ img{max-width:100%;display:block}
 }
 
 /* ===== Головний екран (за бренд-макетом) ===== */
-.lead{position:relative;min-height:100svh;overflow:hidden;background:#0b0907;display:flex}
+.lead{position:relative;min-height:100svh;overflow:hidden;background:#0b0907}
 .lead__media{position:absolute;inset:0;z-index:0}
 .lead__media img{width:100%;height:100%;object-fit:cover;display:block}
-/* мʼяке затемнення: зверху — під бейдж локації, справа — під заголовок */
+/* легке затемнення лише вгорі — щоб читалося меню й бейдж локації.
+   Небо нижче лишаємо світлим: на ньому напис фірмовим коричневим. */
 .lead::after{
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(11,9,7,.45) 0%, rgba(11,9,7,0) 26%),
-    linear-gradient(270deg, rgba(11,9,7,.42) 0%, rgba(11,9,7,.06) 46%, rgba(11,9,7,0) 70%),
-    linear-gradient(0deg, rgba(11,9,7,.30) 0%, rgba(11,9,7,0) 22%);
+    linear-gradient(180deg, rgba(11,9,7,.42) 0%, rgba(11,9,7,.10) 11%, rgba(11,9,7,0) 17%),
+    linear-gradient(0deg, rgba(11,9,7,.22) 0%, rgba(11,9,7,0) 16%);
 }
 
 /* бейдж локації */
@@ -676,38 +676,44 @@ img{max-width:100%;display:block}
   position:absolute;z-index:3;top:104px;left:max(28px,4vw);
   display:inline-flex;align-items:center;gap:8px;
   color:#fff;font-size:15px;font-weight:300;letter-spacing:.2px;
-  text-shadow:0 2px 14px rgba(0,0,0,.5);
+  text-shadow:0 2px 14px rgba(0,0,0,.55);
   opacity:0;animation:leadIn .9s ease .25s forwards;
 }
 .lead__place svg{width:19px;height:19px;fill:#fff;flex-shrink:0}
 
-/* блок з назвою */
+/* назва — у світлій частині неба, фірмовим коричневим */
 .lead__box{
-  position:relative;z-index:3;margin:auto max(40px,7vw) clamp(90px,14vh,150px) auto;
-  text-align:right;max-width:min(560px,80vw);
+  position:absolute;z-index:3;
+  top:clamp(150px,27vh,300px);
+  right:clamp(40px,13vw,230px);
+  text-align:right;max-width:min(560px,72vw);
 }
-.lead__title{
-  font-family:'Sitka',Georgia,serif;font-weight:400;
-  font-size:clamp(46px,7.2vw,104px);line-height:1.02;letter-spacing:-.5px;color:#fff;
-  text-shadow:0 6px 40px rgba(0,0,0,.45);
-  opacity:0;transform:translateY(16px);animation:leadIn 1.1s cubic-bezier(.2,.7,.2,1) .35s forwards;
+/* напис — фірмове накреслення з логотипу (той самий, що в шапці) */
+.lead__title{margin:0;line-height:0}
+.lead__title img{
+  width:clamp(240px,34vw,520px);height:auto;display:block;margin-left:auto;
+  filter:drop-shadow(0 6px 26px rgba(255,255,255,.42)) drop-shadow(0 2px 6px rgba(90,51,32,.28));
 }
 .lead__sub{
-  margin-top:10px;font-size:clamp(16px,2.2vw,25px);font-weight:300;color:rgba(255,255,255,.94);
-  text-shadow:0 2px 18px rgba(0,0,0,.45);
-  opacity:0;transform:translateY(12px);animation:leadIn 1s cubic-bezier(.2,.7,.2,1) .55s forwards;
+  margin-top:8px;font-size:clamp(16px,2.1vw,25px);font-weight:300;color:#6B4229;
+  text-shadow:0 1px 16px rgba(255,255,255,.5);
 }
 .lead__btn{
   display:inline-block;margin-top:26px;padding:15px 38px;border-radius:50px;
-  background:#fff;color:#17120F;font-size:15.5px;font-weight:400;letter-spacing:.2px;
-  box-shadow:0 10px 34px rgba(0,0,0,.28);transition:.25s;
-  opacity:0;transform:translateY(12px);animation:leadIn 1s cubic-bezier(.2,.7,.2,1) .72s forwards;
+  background:#5A3320;color:#fff;font-size:15.5px;font-weight:400;letter-spacing:.2px;
+  box-shadow:0 12px 34px rgba(50,26,14,.32);transition:.25s;
 }
-.lead__btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px)}
+.lead__btn:hover{background:var(--accent);transform:translateY(-2px)}
+
+/* поява */
+.lead__title{opacity:0;transform:translateY(16px);animation:leadIn 1.1s cubic-bezier(.2,.7,.2,1) .35s forwards}
+.lead__sub{opacity:0;transform:translateY(12px);animation:leadIn 1s cubic-bezier(.2,.7,.2,1) .55s forwards}
+.lead__btn{opacity:0;transform:translateY(12px);animation:leadIn 1s cubic-bezier(.2,.7,.2,1) .72s forwards}
 
 .lead__scroll{
   position:absolute;z-index:3;bottom:26px;left:50%;transform:translateX(-50%);
-  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.62);
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.75);
+  text-shadow:0 2px 12px rgba(0,0,0,.5);
   animation:bob 2.4s infinite;
 }
 @keyframes leadIn{to{opacity:1;transform:none}}
@@ -716,6 +722,6 @@ img{max-width:100%;display:block}
   .lead__scroll{animation:none}
 }
 @media(max-width:700px){
-  .lead__box{margin:auto auto clamp(80px,13vh,120px);text-align:center;padding:0 22px}
+  .lead__box{top:clamp(130px,22vh,220px);right:auto;left:50%;transform:translateX(-50%);text-align:center;max-width:88vw}
   .lead__place{top:88px;left:50%;transform:translateX(-50%);font-size:13.5px}
 }
