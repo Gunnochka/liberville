@@ -36,6 +36,9 @@
   <meta name="twitter:title" content="Liberville — житловий комплекс у Ходосівці">
   <meta name="twitter:description" content="Преміальний житловий квартал у Ходосівці.">
   <meta name="twitter:image" content="https://liberville.com.ua/assets/img/og-cover.jpg">
+  <link rel="preload" href="/assets/img/hero-2800.webp" as="image" type="image/webp" media="(min-width:1401px)">
+  <link rel="preload" href="/assets/img/hero-1800.webp" as="image" type="image/webp" media="(min-width:701px) and (max-width:1400px)">
+  <link rel="preload" href="/assets/img/hero-mobile.webp" as="image" type="image/webp" media="(max-width:700px)">
   <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
@@ -152,47 +155,31 @@
     </div>
   </header>
 
-  <!-- КІНЕМАТОГРАФІЧНИЙ ВХІД: колаж → логотип → відео (scroll-driven) -->
-  <section class="intro" id="intro">
-    <div class="intro__stage">
-      <!-- 1. Колаж з існуючих рендерів -->
-      <div class="intro__mosaic" id="introMosaic">
-        <span class="intro__cell" style="--d:.05s"><img src="assets/img/collage/aerial_01.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.13s"><img src="assets/img/collage/cam_02.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.21s"><img src="assets/img/collage/cam_03.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.29s"><img src="assets/img/collage/aerial_02.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.09s"><img src="assets/img/collage/cam_04.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.17s"><img src="assets/img/collage/slide11.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.25s"><img src="assets/img/collage/cam_05.jpg" alt="" aria-hidden="true"></span>
-        <span class="intro__cell" style="--d:.33s"><img src="assets/img/collage/cam_06.jpg" alt="" aria-hidden="true"></span>
-      </div>
-      <!-- 2. Відео, що проявляється в кінці -->
-      <video class="intro__video" id="introVideo" src="assets/video/liberville.mp4" muted loop playsinline preload="none" poster="assets/img/video_poster.jpg"></video>
-      <!-- 3. Затемнювальна вуаль -->
-      <div class="intro__veil" id="introVeil"></div>
-      <!-- 4. Центральний логотип з підложкою -->
-      <div class="intro__center" id="introCenter">
-        <div class="intro__plate">
-          <picture>
-            <source srcset="assets/img/logo-mark-bronze.webp" type="image/webp">
-            <img src="assets/img/logo-mark-bronze.png" alt="" class="intro__horse">
-          </picture>
-          <h1 class="intro__word-h">
-            <picture>
-              <source srcset="assets/img/logo-word-bronze.webp" type="image/webp">
-              <img src="assets/img/logo-word-bronze.png" alt="Liberville — житловий комплекс у Ходосівці" class="intro__word">
-            </picture>
-          </h1>
-          <div class="intro__tagline">житловий квартал · ходосівка</div>
-        </div>
-      </div>
-      <!-- 5. Фінальний заклик поверх відео -->
-      <div class="intro__cta" id="introCta">
-        <p class="intro__sub">Чотири башти на спільному стилобаті, закритий двір без машин та власна інфраструктура — простір свободи у Ходосівці.</p>
-        <button class="btn btn--accent js-open-modal">Дізнатись ціни</button>
-      </div>
-      <div class="intro__scroll" id="introScroll">Гортайте вниз</div>
+  <!-- ГОЛОВНИЙ ЕКРАН -->
+  <section class="lead" id="lead">
+    <picture class="lead__media">
+      <source media="(max-width:700px)" srcset="assets/img/hero-mobile.webp" type="image/webp">
+      <source media="(max-width:700px)" srcset="assets/img/hero-mobile.jpg">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.webp" type="image/webp">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.jpg">
+      <source media="(max-width:2200px)" srcset="assets/img/hero-2800.webp" type="image/webp">
+      <source media="(max-width:2200px)" srcset="assets/img/hero-2800.jpg">
+      <source srcset="assets/img/hero-4000.webp" type="image/webp">
+      <img src="assets/img/hero-2800.jpg" alt="Житловий квартал Liberville у Ходосівці — площа з фірмовим мідним навісом" fetchpriority="high" decoding="async">
+    </picture>
+
+    <span class="lead__place">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      Ходосівка, 20 км до Києва
+    </span>
+
+    <div class="lead__box">
+      <h1 class="lead__title">Liberville</h1>
+      <p class="lead__sub">вільне містечко</p>
+      <a href="#about" class="lead__btn">Дізнатися більше</a>
     </div>
+
+    <span class="lead__scroll" aria-hidden="true">Гортайте вниз</span>
   </section>
 
   <!-- ВІДЕО -->
