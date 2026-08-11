@@ -684,22 +684,22 @@ img{max-width:100%;display:block}
 /* назва — у світлій частині неба, фірмовим коричневим */
 .lead__box{
   position:absolute;z-index:3;
-  top:clamp(150px,27vh,300px);
-  right:clamp(40px,13vw,230px);
+  top:clamp(140px,24vh,265px);
+  right:clamp(40px,12vw,215px);
   text-align:right;max-width:min(560px,72vw);
 }
 /* напис — фірмове накреслення з логотипу (той самий, що в шапці) */
 .lead__title{margin:0;line-height:0}
 .lead__title img{
-  width:clamp(240px,34vw,520px);height:auto;display:block;margin-left:auto;
+  width:clamp(215px,29vw,455px);height:auto;display:block;margin-left:auto;
   filter:drop-shadow(0 6px 26px rgba(255,255,255,.42)) drop-shadow(0 2px 6px rgba(90,51,32,.28));
 }
 .lead__sub{
-  margin-top:8px;font-size:clamp(16px,2.1vw,25px);font-weight:300;color:#6B4229;
-  text-shadow:0 1px 16px rgba(255,255,255,.5);
+  margin-top:20px;font-size:clamp(15px,1.9vw,23px);font-weight:300;color:#6B4229;
+  letter-spacing:.3px;text-shadow:0 1px 16px rgba(255,255,255,.55);
 }
 .lead__btn{
-  display:inline-block;margin-top:26px;padding:15px 38px;border-radius:50px;
+  display:inline-block;margin-top:32px;padding:15px 38px;border-radius:50px;
   background:#5A3320;color:#fff;font-size:15.5px;font-weight:400;letter-spacing:.2px;
   box-shadow:0 12px 34px rgba(50,26,14,.32);transition:.25s;
 }
