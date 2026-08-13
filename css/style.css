@@ -736,3 +736,28 @@ img{max-width:100%;display:block}
   .lead__btn{margin-top:auto;align-self:center}
   .lead__place{top:88px;right:5vw;left:auto;transform:none;font-size:13.5px}
 }
+
+/* ===== Хмари, що пливуть ===== */
+/* Базове фото — без хмар (небо замінено гладким градієнтом).
+   Хмари винесено в окремий шар і обрізано маскою неба, тому вони
+   рухаються, але ніколи не перекривають будівлі. */
+.lead__sky{
+  position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:url('../assets/img/sky-mask.webp');mask-image:url('../assets/img/sky-mask.webp');
+  -webkit-mask-size:cover;mask-size:cover;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+}
+.lead__clouds{
+  position:absolute;inset:0;
+  background:url('../assets/img/hero-clouds.webp') center/cover no-repeat;
+  will-change:transform;
+  animation:cloudDrift 150s ease-in-out infinite alternate;
+}
+@keyframes cloudDrift{
+  from{transform:scale(1.05) translate3d(-1.1%,0,0)}
+  to  {transform:scale(1.05) translate3d(1.1%,-0.5%,0)}
+}
+/* на мобільних кадр інший (вертикальний кроп) — там лишається звичайне фото */
+@media(max-width:700px){.lead__sky{display:none}}
+@media(prefers-reduced-motion:reduce){.lead__clouds{animation:none}}

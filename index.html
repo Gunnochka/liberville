@@ -36,8 +36,8 @@
   <meta name="twitter:title" content="Liberville — житловий комплекс у Ходосівці">
   <meta name="twitter:description" content="Преміальний житловий квартал у Ходосівці.">
   <meta name="twitter:image" content="https://liberville.com.ua/assets/img/og-cover.jpg">
-  <link rel="preload" href="/assets/img/hero-2800.webp" as="image" type="image/webp" media="(min-width:1401px)">
-  <link rel="preload" href="/assets/img/hero-1800.webp" as="image" type="image/webp" media="(min-width:701px) and (max-width:1400px)">
+  <link rel="preload" href="/assets/img/hero-base-2800.webp" as="image" type="image/webp" media="(min-width:1401px)">
+  <link rel="preload" href="/assets/img/hero-base-1800.webp" as="image" type="image/webp" media="(min-width:701px) and (max-width:1400px)">
   <link rel="preload" href="/assets/img/hero-mobile.webp" as="image" type="image/webp" media="(max-width:700px)">
   <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -160,13 +160,15 @@
     <picture class="lead__media">
       <source media="(max-width:700px)" srcset="assets/img/hero-mobile.webp" type="image/webp">
       <source media="(max-width:700px)" srcset="assets/img/hero-mobile.jpg">
-      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.webp" type="image/webp">
-      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.jpg">
-      <source media="(max-width:2200px)" srcset="assets/img/hero-2800.webp" type="image/webp">
-      <source media="(max-width:2200px)" srcset="assets/img/hero-2800.jpg">
-      <source srcset="assets/img/hero-4000.webp" type="image/webp">
-      <img src="assets/img/hero-2800.jpg" alt="Житловий квартал Liberville у Ходосівці — площа з фірмовим мідним навісом" fetchpriority="high" decoding="async">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-base-1800.webp" type="image/webp">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-base-1800.jpg">
+      <source srcset="assets/img/hero-base-2800.webp" type="image/webp">
+      <img src="assets/img/hero-base-2800.jpg" alt="Житловий квартал Liberville у Ходосівці — площа з фірмовим мідним навісом" fetchpriority="high" decoding="async">
     </picture>
+
+    <!-- Хмари: окремий шар, що повільно пливе. Обрізаний маскою неба,
+         тому ніколи не наїжджає на будівлі. На мобільних вимкнено. -->
+    <div class="lead__sky" aria-hidden="true"><div class="lead__clouds"></div></div>
 
     <span class="lead__place">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
