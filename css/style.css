@@ -129,7 +129,8 @@ img{max-width:100%;display:block}
 .logo{display:inline-flex;align-items:center;gap:11px;color:#fff}
 /* бронзовий логотип із лого-буку — трохи освітлюємо, щоб читався на темній шапці */
 .logo__mark{height:46px;width:auto;display:block;filter:brightness(1.32) saturate(1.06)}
-.logo__word{height:19px;width:auto;display:block;filter:brightness(1.32) saturate(1.06)}
+/* напис із дескриптором «ВІЛЬНЕ МІСТЕЧКО» — тому висота більша */
+.logo__word{height:30px;width:auto;display:block;filter:brightness(1.32) saturate(1.06)}
 .nav{display:flex;gap:32px}
 .nav a{font-size:14px;font-weight:300;color:rgba(255,255,255,.85);transition:color .25s;position:relative}
 .nav a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--accent);transition:.25s}
