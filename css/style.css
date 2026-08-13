@@ -729,8 +729,10 @@ img{max-width:100%;display:block}
     display:flex;flex-direction:column;align-items:flex-end;
     padding:23vh 5vw 76px;text-align:right;
   }
-  .lead__title img{width:min(62vw,300px)}
-  .lead__sub{margin-top:14px;font-size:16px}
+  /* ширина підібрана так, щоб напис починався з 43% — там уже світла хмара,
+     а не темний фасад (перевірено по яскравості кадру) */
+  .lead__title img{width:min(52vw,250px)}
+  .lead__sub{margin-top:13px;font-size:15px}
   .lead__btn{margin-top:auto;align-self:center}
   .lead__place{top:88px;right:5vw;left:auto;transform:none;font-size:13.5px}
 }
