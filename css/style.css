@@ -781,36 +781,74 @@ img{max-width:100%;display:block}
   }
 }
 
-/* мʼяке підсвічування під текст, щоб читалось на будь-якому кадрі */
-.stmt::after{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg, rgba(11,9,7,.30) 0%, rgba(11,9,7,.06) 42%, rgba(11,9,7,0) 68%);
-}
-.stmt--dark-text::after{
-  background:linear-gradient(90deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.05) 45%, rgba(255,255,255,0) 70%);
-}
-
+/* ---- Текст на матовій підложці ---- */
 .stmt__text{
   position:relative;z-index:2;
-  padding:0 max(28px,6vw);
-  font-size:clamp(21px,3vw,42px);line-height:1.32;font-weight:300;color:#fff;
-  text-shadow:0 2px 26px rgba(0,0,0,.45);
-  max-width:min(720px,80vw);
+  margin:0 max(24px,5vw);
+  padding:clamp(28px,3.4vw,48px) clamp(30px,3.8vw,56px);
+  border-radius:20px;
+  max-width:min(700px,84vw);
+  font-size:clamp(23px,2.9vw,40px);line-height:1.34;font-weight:300;color:#fff;
+  /* підложка: напівпрозоре скло з мʼяким розмиттям */
+  background:rgba(13,10,8,.42);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
+  backdrop-filter:blur(16px) saturate(1.08);
+  border:1px solid rgba(192,130,78,.28);
+  box-shadow:0 30px 70px rgba(0,0,0,.34);
+  /* поява самої підложки */
+  opacity:0;transform:translateY(26px) scale(.985);
+  transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1);
 }
-.stmt__text strong{font-weight:500}
-.stmt__text--tl{align-self:flex-start;margin-top:clamp(110px,17vh,210px)}   /* угорі ліворуч */
-.stmt__text--cl{align-self:center}                                          /* по центру ліворуч */
-.stmt--dark-text .stmt__text{color:#3E2416;text-shadow:0 1px 20px rgba(255,255,255,.55)}
+.stmt.is-visible .stmt__text{opacity:1;transform:none}
 
-/* поява тексту */
-.stmt__text p{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
-.stmt.is-visible .stmt__text p{opacity:1;transform:none}
+/* світла підложка там, де кадр світлий і текст темний */
+.stmt--dark-text .stmt__text{
+  background:rgba(255,255,255,.5);
+  border-color:rgba(90,51,32,.22);
+  color:#3E2416;
+  box-shadow:0 30px 70px rgba(90,51,32,.18);
+}
+
+/* мідна риска над текстом — «прокреслюється» */
+.stmt__rule{
+  display:block;height:2px;width:0;margin-bottom:clamp(16px,1.8vw,26px);
+  background:linear-gradient(90deg,var(--accent),rgba(192,130,78,.25));
+  transition:width 1s cubic-bezier(.2,.7,.2,1) .25s;
+}
+.stmt.is-visible .stmt__rule{width:clamp(60px,7vw,110px)}
+
+/* рядки виїжджають один за одним */
+.stmt__line{
+  display:block;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.stmt.is-visible .stmt__line{opacity:1;transform:none}
+.stmt.is-visible .stmt__line:nth-child(1){transition-delay:.30s}
+.stmt.is-visible .stmt__line:nth-child(2){transition-delay:.44s}
+.stmt.is-visible .stmt__line:nth-child(3){transition-delay:.58s}
+.stmt.is-visible .stmt__line:nth-child(4){transition-delay:.72s}
+
+.stmt__text strong{font-weight:500}
+/* ключове слово — крупніше й мідним */
+.stmt__key{
+  display:inline-block;font-weight:500;
+  font-size:1.22em;color:var(--accent);letter-spacing:.4px;
+}
+.stmt--dark-text .stmt__key{color:#8A5326}
+
+.stmt__text--tl{align-self:flex-start;margin-top:clamp(112px,16vh,200px)}
+.stmt__text--cl{align-self:center}
 
 @media(prefers-reduced-motion:reduce){
   .stmt__media img{animation:none}
-  .stmt__text p{opacity:1;transform:none;transition:none}
+  .stmt__text,.stmt__line{opacity:1;transform:none;transition:none}
+  .stmt__rule{width:clamp(60px,7vw,110px);transition:none}
 }
 @media(max-width:700px){
-  .stmt__text{font-size:clamp(19px,5.4vw,26px);max-width:88vw;padding:0 22px}
-  .stmt__text--tl{margin-top:clamp(90px,14vh,140px)}
+  .stmt__text{
+    font-size:clamp(20px,5.2vw,27px);max-width:88vw;
+    padding:26px 24px;border-radius:16px;margin:0 auto;
+  }
+  .stmt__text--tl{margin-top:clamp(96px,13vh,150px)}
 }
