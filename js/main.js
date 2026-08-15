@@ -239,6 +239,16 @@ form.addEventListener('submit', async e => {
 
 } // кінець guard (form && modal && formSuccess)
 
+
+// ===== Блоки-тези: текст зʼявляється, коли секція входить в екран =====
+const stmts = document.querySelectorAll('.stmt');
+if (stmts.length) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.28 });
+  stmts.forEach(s => io.observe(s));
+}
+
 // ===== Анимация появления блоков при скролле =====
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {

@@ -761,3 +761,56 @@ img{max-width:100%;display:block}
 /* на мобільних кадр інший (вертикальний кроп) — там лишається звичайне фото */
 @media(max-width:700px){.lead__sky{display:none}}
 @media(prefers-reduced-motion:reduce){.lead__clouds{animation:none}}
+
+/* ===== Блоки-тези (повноекранне фото + коротке твердження) ===== */
+.stmt{position:relative;min-height:100svh;overflow:hidden;background:#0b0907;display:flex}
+.stmt__media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.stmt__media img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center}
+
+/* «розкриття кадру»: фото плавно наближається, поки секція проходить екран.
+   Робиться нативно браузером за прокруткою — без JS і без навантаження. */
+@supports (animation-timeline: view()){
+  .stmt__media img{
+    animation:stmtZoom linear both;
+    animation-timeline:view();
+    animation-range:entry 0% exit 100%;
+  }
+  @keyframes stmtZoom{
+    from{transform:scale(1.12)}
+    to  {transform:scale(1.0)}
+  }
+}
+
+/* мʼяке підсвічування під текст, щоб читалось на будь-якому кадрі */
+.stmt::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg, rgba(11,9,7,.30) 0%, rgba(11,9,7,.06) 42%, rgba(11,9,7,0) 68%);
+}
+.stmt--dark-text::after{
+  background:linear-gradient(90deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.05) 45%, rgba(255,255,255,0) 70%);
+}
+
+.stmt__text{
+  position:relative;z-index:2;
+  padding:0 max(28px,6vw);
+  font-size:clamp(21px,3vw,42px);line-height:1.32;font-weight:300;color:#fff;
+  text-shadow:0 2px 26px rgba(0,0,0,.45);
+  max-width:min(720px,80vw);
+}
+.stmt__text strong{font-weight:500}
+.stmt__text--tl{align-self:flex-start;margin-top:clamp(110px,17vh,210px)}   /* угорі ліворуч */
+.stmt__text--cl{align-self:center}                                          /* по центру ліворуч */
+.stmt--dark-text .stmt__text{color:#3E2416;text-shadow:0 1px 20px rgba(255,255,255,.55)}
+
+/* поява тексту */
+.stmt__text p{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.stmt.is-visible .stmt__text p{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .stmt__media img{animation:none}
+  .stmt__text p{opacity:1;transform:none;transition:none}
+}
+@media(max-width:700px){
+  .stmt__text{font-size:clamp(19px,5.4vw,26px);max-width:88vw;padding:0 22px}
+  .stmt__text--tl{margin-top:clamp(90px,14vh,140px)}
+}
