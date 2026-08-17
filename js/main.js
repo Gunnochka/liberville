@@ -240,6 +240,53 @@ form.addEventListener('submit', async e => {
 } // кінець guard (form && modal && formSuccess)
 
 
+
+// ===== Інтерактивний генплан: обʼєкти перемикаються прокручуванням =====
+const mapx = document.querySelector('.mapx');
+if (mapx) {
+  const pins  = [...mapx.querySelectorAll('.mapx__pin')];
+  const cards = [...mapx.querySelectorAll('.mapx__card')];
+  const counter = mapx.querySelector('.mapx__counter b');
+  const total = pins.length;
+
+  // висота секції: по одному екрану на обʼєкт + запас, щоб останній кадр
+  // (з усіма мітками одразу) встиг постояти перед очима
+  mapx.style.height = (total + 1.6) * 100 + 'svh';
+
+  let current = -1;
+  function setActive(i) {
+    if (i === current) return;
+    current = i;
+    pins.forEach((p, n) => {
+      p.classList.toggle('is-on', n === i);
+      p.classList.toggle('is-seen', n < i || i >= total); // після фіналу — усі видимі
+    });
+    cards.forEach((c, n) => c.classList.toggle('is-on', n === i));
+    if (counter) counter.textContent = String(Math.min(i + 1, total)).padStart(2, '0');
+  }
+
+  function onScroll() {
+    const r = mapx.getBoundingClientRect();
+    const scrollable = mapx.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    const p = Math.min(Math.max(-r.top / scrollable, 0), 1);   // 0..1 по секції
+    // останні ~14% прокрутки — фінал: показуємо всі мітки, картку ховаємо
+    const step = p >= 0.86 ? total : Math.min(Math.floor(p / 0.86 * total), total - 1);
+    setActive(step);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // клік по мітці — гортаємо до її кроку
+  pins.forEach((p, n) => p.addEventListener('click', () => {
+    const scrollable = mapx.offsetHeight - window.innerHeight;
+    const y = mapx.offsetTop + scrollable * ((n + 0.45) / total) * 0.86;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }));
+}
+
 // ===== Блоки-тези: текст зʼявляється, коли секція входить в екран =====
 const stmts = document.querySelectorAll('.stmt');
 if (stmts.length) {

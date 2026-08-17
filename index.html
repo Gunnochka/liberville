@@ -372,6 +372,152 @@
     </div>
   </section>
 
+
+  <!-- ІНТЕРАКТИВНИЙ ГЕНПЛАН: обʼєкти зʼявляються по черзі під час прокручування -->
+  <section class="mapx" id="infra-map" data-total="12">
+    <div class="mapx__stage">
+      <picture class="mapx__media">
+        <source media="(max-width:1100px)" srcset="assets/img/plan-1500.webp" type="image/webp">
+        <source media="(max-width:1100px)" srcset="assets/img/plan-1500.jpg">
+        <source srcset="assets/img/plan-2200.webp" type="image/webp">
+        <img src="assets/img/plan-2200.jpg" alt="Генплан ЖК Liberville з обʼєктами інфраструктури" loading="lazy" decoding="async">
+      </picture>
+
+      <div class="mapx__head">
+        <span class="eyebrow">Інфраструктура</span>
+        <h2>Все необхідне — на території</h2>
+      </div>
+
+      <div class="mapx__pins">
+        <button class="mapx__pin" style="--x:52%;--y:62%" data-i="0" type="button" aria-label="Фітнес центр">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Фітнес центр</span>
+        </button>
+        <button class="mapx__pin" style="--x:66%;--y:55%" data-i="1" type="button" aria-label="Супермаркет">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Супермаркет</span>
+        </button>
+        <button class="mapx__pin" style="--x:38%;--y:57%" data-i="2" type="button" aria-label="Ресторан">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Ресторан</span>
+        </button>
+        <button class="mapx__pin" style="--x:72%;--y:66%" data-i="3" type="button" aria-label="Салон краси">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Салон краси</span>
+        </button>
+        <button class="mapx__pin" style="--x:45%;--y:48%" data-i="4" type="button" aria-label="Кав'ярня">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Кав'ярня</span>
+        </button>
+        <button class="mapx__pin" style="--x:60%;--y:46%" data-i="5" type="button" aria-label="Аптека">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Аптека</span>
+        </button>
+        <button class="mapx__pin" style="--x:33%;--y:66%" data-i="6" type="button" aria-label="Лобі">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Лобі</span>
+        </button>
+        <button class="mapx__pin" style="--x:78%;--y:52%" data-i="7" type="button" aria-label="Грумінг">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Грумінг</span>
+        </button>
+        <button class="mapx__pin" style="--x:26%;--y:44%" data-i="8" type="button" aria-label="Школа та садок">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Школа та садок</span>
+        </button>
+        <button class="mapx__pin" style="--x:20%;--y:55%" data-i="9" type="button" aria-label="Майданчик">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Майданчик</span>
+        </button>
+        <button class="mapx__pin" style="--x:47%;--y:38%" data-i="10" type="button" aria-label="Двір">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Двір</span>
+        </button>
+        <button class="mapx__pin" style="--x:15%;--y:70%" data-i="11" type="button" aria-label="Паркінг">
+          <span class="mapx__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
+          </span>
+          <span class="mapx__lab">Паркінг</span>
+        </button>
+      </div>
+
+      <div class="mapx__cards">
+        <article class="mapx__card" data-i="0">
+          <h3>Дворівневий спортзал BANDA CrossFit</h3>
+          <p>Професійний спортивний простір для тренувань, групових занять та активного способу життя.</p>
+        </article>
+        <article class="mapx__card" data-i="1">
+          <h3>Супермаркет SPAR</h3>
+          <p>Усе необхідне для щоденних покупок — за кілька кроків від вашої квартири.</p>
+        </article>
+        <article class="mapx__card" data-i="2">
+          <h3>Ресторан</h3>
+          <p>Авторська кухня та затишна атмосфера для сніданків, обідів і вечерь поруч із домом.</p>
+        </article>
+        <article class="mapx__card" data-i="3">
+          <h3>Салон краси</h3>
+          <p>Сучасний простір краси та догляду для вашого комфорту щодня.</p>
+        </article>
+        <article class="mapx__card" data-i="4">
+          <h3>Кав'ярня</h3>
+          <p>Місце для ранкової кави, ділових зустрічей та затишного відпочинку.</p>
+        </article>
+        <article class="mapx__card" data-i="5">
+          <h3>Аптека</h3>
+          <p>Швидкий доступ до необхідних ліків і товарів для здоровʼя щодня.</p>
+        </article>
+        <article class="mapx__card" data-i="6">
+          <h3>Лобі</h3>
+          <p>Стильний дизайнерський простір із атмосферою преміального готелю.</p>
+        </article>
+        <article class="mapx__card" data-i="7">
+          <h3>Сервіс грумінгу</h3>
+          <p>Професійний догляд за домашніми улюбленцями поруч із вашим будинком.</p>
+        </article>
+        <article class="mapx__card" data-i="8">
+          <h3>Школа та садок</h3>
+          <p>Сучасний освітній простір, де діти навчаються та розвиваються поруч із домом.</p>
+        </article>
+        <article class="mapx__card" data-i="9">
+          <h3>Функціональний майданчик школи та садочка</h3>
+          <p>Безпечний приватний простір для активних ігор, розвитку та відпочинку дітей.</p>
+        </article>
+        <article class="mapx__card" data-i="10">
+          <h3>Двір житлового комплексу</h3>
+          <p>Закритий зелений двір без автомобілів із зонами відпочинку для всієї родини.</p>
+        </article>
+        <article class="mapx__card" data-i="11">
+          <h3>Заїзд у підземний паркінг</h3>
+          <p>Зручний вʼїзд до підземного паркінгу забезпечує комфорт у будь-яку пору року.</p>
+        </article>
+      </div>
+
+      <div class="mapx__counter"><b>01</b><span>/ 12</span></div>
+    </div>
+  </section>
+
   <!-- ДЕТАЛІ -->
   <section class="section section--dark">
     <div class="container">

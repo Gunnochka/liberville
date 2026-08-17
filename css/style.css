@@ -852,3 +852,99 @@ img{max-width:100%;display:block}
   }
   .stmt__text--tl{margin-top:clamp(96px,13vh,150px)}
 }
+
+/* ===== Інтерактивний генплан ===== */
+/* Секція висока — прокручування нею перемикає обʼєкти.
+   Кадр при цьому «прилипає» й лишається на екрані. */
+.mapx{position:relative;background:#0b0907}
+.mapx__stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.mapx__media{position:absolute;inset:0;z-index:0}
+.mapx__media img{width:100%;height:100%;object-fit:cover;display:block}
+.mapx__stage::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg, rgba(11,9,7,.55) 0%, rgba(11,9,7,.12) 22%, rgba(11,9,7,0) 40%),
+    linear-gradient(0deg, rgba(11,9,7,.45) 0%, rgba(11,9,7,0) 30%);
+}
+.mapx__head{
+  position:absolute;z-index:4;top:clamp(108px,15vh,168px);left:max(28px,5vw);
+  color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55);
+}
+.mapx__head .eyebrow{margin-bottom:10px}
+.mapx__head h2{font-size:clamp(24px,3.2vw,44px);font-weight:200;line-height:1.15}
+
+/* ---- мітки на фото ---- */
+.mapx__pins{position:absolute;inset:0;z-index:3}
+.mapx__pin{
+  position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:none;border:0;padding:0;cursor:pointer;color:#fff;
+  opacity:0;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.mapx__ico{
+  width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(13,10,8,.42);border:1.5px solid rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:.3s;
+}
+.mapx__ico svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round}
+.mapx__lab{
+  font-size:12.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:400;
+  text-shadow:0 2px 12px rgba(0,0,0,.75);white-space:nowrap;
+}
+/* активна мітка */
+.mapx__pin.is-on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.mapx__pin.is-on .mapx__ico{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 8px rgba(192,130,78,.20)}
+/* уже показані раніше — лишаються, але тьмяніші й дрібніші */
+.mapx__pin.is-seen{opacity:.62;transform:translate(-50%,-50%) scale(.78)}
+.mapx__pin.is-seen .mapx__lab{opacity:.75}
+.mapx__pin:hover{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* пульс навколо активної */
+.mapx__pin.is-on .mapx__ico::after{
+  content:'';position:absolute;width:46px;height:46px;border-radius:50%;
+  border:2px solid var(--accent);animation:mapPulse 2.2s ease-out infinite;
+}
+@keyframes mapPulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.9);opacity:0}100%{opacity:0}}
+
+/* ---- картка з описом ---- */
+.mapx__cards{position:absolute;z-index:5;right:max(28px,4vw);top:50%;transform:translateY(-50%);
+  width:min(430px,80vw);pointer-events:none}
+.mapx__card{
+  position:absolute;right:0;top:50%;transform:translateY(-50%) translateX(28px);
+  width:100%;padding:30px 32px;border-radius:20px;
+  background:rgba(13,10,8,.55);border:1px solid rgba(192,130,78,.28);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:0 30px 70px rgba(0,0,0,.42);
+  opacity:0;visibility:hidden;transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1),visibility .5s;
+}
+.mapx__card.is-on{opacity:1;visibility:visible;transform:translateY(-50%) translateX(0)}
+.mapx__card h3{font-size:clamp(18px,1.6vw,23px);font-weight:500;color:#fff;margin-bottom:12px;letter-spacing:.3px}
+.mapx__card p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.62}
+
+/* лічильник */
+.mapx__counter{
+  position:absolute;z-index:4;left:max(28px,5vw);bottom:clamp(28px,5vh,56px);
+  color:#fff;font-weight:200;letter-spacing:1px;text-shadow:0 2px 14px rgba(0,0,0,.6);
+}
+.mapx__counter b{font-size:clamp(28px,3vw,42px);font-weight:200;color:var(--accent)}
+.mapx__counter span{font-size:15px;opacity:.75;margin-left:6px}
+
+@media(max-width:900px){
+  .mapx__cards{right:auto;left:50%;transform:translateX(-50%);top:auto;bottom:clamp(84px,13vh,130px);width:min(430px,88vw)}
+  .mapx__card{top:auto;bottom:0;transform:translateY(18px);padding:22px 22px}
+  .mapx__card.is-on{transform:translateY(0)}
+  .mapx__ico{width:38px;height:38px}.mapx__ico svg{width:18px;height:18px}
+  .mapx__lab{font-size:10.5px;letter-spacing:1.6px}
+  .mapx__head{top:88px}
+}
+@media(prefers-reduced-motion:reduce){
+  .mapx__pin,.mapx__card{transition:none}
+  .mapx__pin.is-on .mapx__ico::after{animation:none}
+}
+
+/* фото всередині картки (як у бренд-макеті) */
+.mapx__card figure{margin:0 0 20px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04)}
+.mapx__card figure img{width:100%;height:190px;object-fit:cover;display:block}
+.mapx__card--nophoto figure{display:none}
