@@ -253,6 +253,28 @@ if (mapx) {
   // (з усіма мітками одразу) встиг постояти перед очима
   mapx.style.height = (total + 1.6) * 100 + 'svh';
 
+
+  // Мітки задані у відсотках від самого кадру генплану. Оскільки фото
+  // обрізається під формат екрана (object-fit: cover), рахуємо реальну
+  // геометрію відмальованого зображення й підганяємо під неї шар міток.
+  const pinsBox = mapx.querySelector('.mapx__pins');
+  const planImg = mapx.querySelector('.mapx__media img');
+  function syncPins() {
+    if (!pinsBox || !planImg || !planImg.naturalWidth) return;
+    const st = mapx.querySelector('.mapx__stage').getBoundingClientRect();
+    const ratio = planImg.naturalWidth / planImg.naturalHeight;
+    let w = st.width, h = w / ratio;
+    if (h < st.height) { h = st.height; w = h * ratio; }   // cover
+    pinsBox.style.width  = w + 'px';
+    pinsBox.style.height = h + 'px';
+    pinsBox.style.left   = (st.width - w) / 2 + 'px';
+    pinsBox.style.top    = (st.height - h) / 2 + 'px';
+  }
+  if (planImg) {
+    planImg.complete ? syncPins() : planImg.addEventListener('load', syncPins);
+    window.addEventListener('resize', syncPins);
+  }
+
   let current = -1;
   function setActive(i) {
     if (i === current) return;

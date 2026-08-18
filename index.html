@@ -36,8 +36,8 @@
   <meta name="twitter:title" content="Liberville — житловий комплекс у Ходосівці">
   <meta name="twitter:description" content="Преміальний житловий квартал у Ходосівці.">
   <meta name="twitter:image" content="https://liberville.com.ua/assets/img/og-cover.jpg">
-  <link rel="preload" href="/assets/img/hero-base-2800.webp" as="image" type="image/webp" media="(min-width:1401px)">
-  <link rel="preload" href="/assets/img/hero-base-1800.webp" as="image" type="image/webp" media="(min-width:701px) and (max-width:1400px)">
+  <link rel="preload" href="/assets/img/hero-2800.webp" as="image" type="image/webp" media="(min-width:1401px)">
+  <link rel="preload" href="/assets/img/hero-1800.webp" as="image" type="image/webp" media="(min-width:701px) and (max-width:1400px)">
   <link rel="preload" href="/assets/img/hero-mobile.webp" as="image" type="image/webp" media="(max-width:700px)">
   <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -160,19 +160,15 @@
     <picture class="lead__media">
       <source media="(max-width:700px)" srcset="assets/img/hero-mobile.webp" type="image/webp">
       <source media="(max-width:700px)" srcset="assets/img/hero-mobile.jpg">
-      <source media="(max-width:1400px)" srcset="assets/img/hero-base-1800.webp" type="image/webp">
-      <source media="(max-width:1400px)" srcset="assets/img/hero-base-1800.jpg">
-      <source srcset="assets/img/hero-base-2800.webp" type="image/webp">
-      <img src="assets/img/hero-base-2800.jpg" alt="Житловий квартал Liberville у Ходосівці — площа з фірмовим мідним навісом" fetchpriority="high" decoding="async">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.webp" type="image/webp">
+      <source media="(max-width:1400px)" srcset="assets/img/hero-1800.jpg">
+      <source srcset="assets/img/hero-2800.webp" type="image/webp">
+      <img src="assets/img/hero-2800.jpg" alt="Житловий квартал Liberville у Ходосівці — площа з фірмовим мідним навісом" fetchpriority="high" decoding="async">
     </picture>
-
-    <!-- Хмари: окремий шар, що повільно пливе. Обрізаний маскою неба,
-         тому ніколи не наїжджає на будівлі. На мобільних вимкнено. -->
-    <div class="lead__sky" aria-hidden="true"><div class="lead__clouds"></div></div>
 
     <span class="lead__place">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-      Ходосівка, 20 км до Києва
+      Ходосівка, 5 км до Києва
     </span>
 
     <div class="lead__box">
@@ -389,73 +385,73 @@
       </div>
 
       <div class="mapx__pins">
-        <button class="mapx__pin" style="--x:52%;--y:62%" data-i="0" type="button" aria-label="Фітнес центр">
+        <button class="mapx__pin" style="--x:29.4%;--y:61.5%" data-i="0" type="button" aria-label="Фітнес центр">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Фітнес центр</span>
         </button>
-        <button class="mapx__pin" style="--x:66%;--y:55%" data-i="1" type="button" aria-label="Супермаркет">
+        <button class="mapx__pin" style="--x:59.4%;--y:27.4%" data-i="1" type="button" aria-label="Супермаркет">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Супермаркет</span>
         </button>
-        <button class="mapx__pin" style="--x:38%;--y:57%" data-i="2" type="button" aria-label="Ресторан">
+        <button class="mapx__pin" style="--x:63.5%;--y:82.6%" data-i="2" type="button" aria-label="Ресторан">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Ресторан</span>
         </button>
-        <button class="mapx__pin" style="--x:72%;--y:66%" data-i="3" type="button" aria-label="Салон краси">
+        <button class="mapx__pin" style="--x:56.4%;--y:80.2%" data-i="3" type="button" aria-label="Салон краси">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Салон краси</span>
         </button>
-        <button class="mapx__pin" style="--x:45%;--y:48%" data-i="4" type="button" aria-label="Кав'ярня">
+        <button class="mapx__pin" style="--x:76.7%;--y:41.0%" data-i="4" type="button" aria-label="Кав'ярня">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Кав'ярня</span>
         </button>
-        <button class="mapx__pin" style="--x:60%;--y:46%" data-i="5" type="button" aria-label="Аптека">
+        <button class="mapx__pin" style="--x:71.7%;--y:47.6%" data-i="5" type="button" aria-label="Аптека">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Аптека</span>
         </button>
-        <button class="mapx__pin" style="--x:33%;--y:66%" data-i="6" type="button" aria-label="Лобі">
+        <button class="mapx__pin" style="--x:75.4%;--y:68.2%" data-i="6" type="button" aria-label="Лобі">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Лобі</span>
         </button>
-        <button class="mapx__pin" style="--x:78%;--y:52%" data-i="7" type="button" aria-label="Грумінг">
+        <button class="mapx__pin" style="--x:48.7%;--y:73.2%" data-i="7" type="button" aria-label="Грумінг">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Грумінг</span>
         </button>
-        <button class="mapx__pin" style="--x:26%;--y:44%" data-i="8" type="button" aria-label="Школа та садок">
+        <button class="mapx__pin" style="--x:39.4%;--y:36.2%" data-i="8" type="button" aria-label="Школа та садок">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Школа та садок</span>
         </button>
-        <button class="mapx__pin" style="--x:20%;--y:55%" data-i="9" type="button" aria-label="Майданчик">
+        <button class="mapx__pin" style="--x:11.6%;--y:45.0%" data-i="9" type="button" aria-label="Майданчик">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Майданчик</span>
         </button>
-        <button class="mapx__pin" style="--x:47%;--y:38%" data-i="10" type="button" aria-label="Двір">
+        <button class="mapx__pin" style="--x:56.1%;--y:44.2%" data-i="10" type="button" aria-label="Двір">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
           <span class="mapx__lab">Двір</span>
         </button>
-        <button class="mapx__pin" style="--x:15%;--y:70%" data-i="11" type="button" aria-label="Паркінг">
+        <button class="mapx__pin" style="--x:19.8%;--y:58.5%" data-i="11" type="button" aria-label="Паркінг">
           <span class="mapx__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="21" y2="21"/></svg>
           </span>
