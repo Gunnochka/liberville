@@ -760,29 +760,19 @@ img{max-width:100%;display:block}
 /* ---- Текст на матовій підложці ---- */
 .stmt__text{
   position:relative;z-index:2;
-  margin:0 max(24px,5vw);
-  padding:clamp(28px,3.4vw,48px) clamp(30px,3.8vw,56px);
-  border-radius:20px;
+  margin:0 max(28px,6vw);
   max-width:min(700px,84vw);
   font-size:clamp(23px,2.9vw,40px);line-height:1.34;font-weight:300;color:#fff;
-  /* підложка: напівпрозоре скло з мʼяким розмиттям */
-  background:rgba(13,10,8,.42);
-  -webkit-backdrop-filter:blur(16px) saturate(1.08);
-  backdrop-filter:blur(16px) saturate(1.08);
-  border:1px solid rgba(192,130,78,.28);
-  box-shadow:0 30px 70px rgba(0,0,0,.34);
-  /* поява самої підложки */
-  opacity:0;transform:translateY(26px) scale(.985);
+  text-shadow:0 2px 28px rgba(0,0,0,.55), 0 1px 8px rgba(0,0,0,.35);
+  opacity:0;transform:translateY(26px);
   transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1);
 }
 .stmt.is-visible .stmt__text{opacity:1;transform:none}
 
-/* світла підложка там, де кадр світлий і текст темний */
+/* на світлому кадрі — темний текст зі світлим сяйвом */
 .stmt--dark-text .stmt__text{
-  background:rgba(255,255,255,.5);
-  border-color:rgba(90,51,32,.22);
   color:#3E2416;
-  box-shadow:0 30px 70px rgba(90,51,32,.18);
+  text-shadow:0 2px 26px rgba(255,255,255,.75), 0 1px 6px rgba(255,255,255,.6);
 }
 
 /* мідна риска над текстом — «прокреслюється» */
@@ -823,8 +813,7 @@ img{max-width:100%;display:block}
 }
 @media(max-width:700px){
   .stmt__text{
-    font-size:clamp(20px,5.2vw,27px);max-width:88vw;
-    padding:26px 24px;border-radius:16px;margin:0 auto;
+    font-size:clamp(20px,5.2vw,27px);max-width:88vw;margin:0 auto;padding:0 20px;
   }
   .stmt__text--tl{margin-top:clamp(96px,13vh,150px)}
 }
