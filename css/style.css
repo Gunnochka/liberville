@@ -879,7 +879,36 @@ img{max-width:100%;display:block}
   .stmt__text{
     font-size:clamp(20px,5.2vw,27px);max-width:88vw;margin:0 auto;padding:0 20px;
   }
-  .stmt__text--tl{margin-top:clamp(96px,13vh,150px)}
+  /* Перший кадр: фасад по центру зайнятий — опускаємо текст на бруківку,
+     там порожньо і світло, темні літери читаються. */
+  .stmt--dark-text .stmt__text--tl{
+    align-self:flex-end;
+    margin-top:0;margin-bottom:clamp(92px,15vh,175px);
+  }
+  /* Другий кадр: піднімаємо текст у небо над будинком. */
+  .stmt__text--cl{
+    align-self:flex-start;
+    margin-top:clamp(104px,17vh,190px);
+  }
+
+  /* мʼякі підсвітки рівно там, де тепер лежить текст */
+  .stmt::after{
+    content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(11,9,7,.52) 0%, rgba(11,9,7,.16) 32%, rgba(11,9,7,0) 52%);
+  }
+  /* Кадр вулиці на телефоні весь у середніх тонах (28–51% яскравості),
+     світлого місця під темні літери немає — тож піднімаємо низ серпанком. */
+  .stmt--dark-text::after{
+    background:linear-gradient(0deg,
+      rgba(255,255,255,.52) 0%,
+      rgba(255,255,255,.47) 30%,
+      rgba(255,255,255,.12) 46%,
+      rgba(255,255,255,0)   60%);
+  }
+  .stmt--dark-text .stmt__text{
+    color:#2E1A10;
+    text-shadow:0 2px 22px rgba(255,255,255,.9), 0 1px 5px rgba(255,255,255,.75);
+  }
 }
 
 /* ===== Інтерактивний генплан ===== */
