@@ -1106,13 +1106,21 @@ img{max-width:100%;display:block}
   /* горизонтальна прокрутка кадру */
   .mapx__scroll{
     inset:0;overflow-x:auto;overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;
-    scrollbar-width:none;
+    overscroll-behavior-x:contain;scrollbar-width:none;
   }
   .mapx__scroll::-webkit-scrollbar{display:none}
-  /* ширину задає JS — за пропорцією знімка при повній висоті */
-  .mapx__canvas{position:relative;inset:auto;height:100%}
-  .mapx__media img{object-fit:cover}
+  /* ширину рахує сам браузер за пропорцією знімка — без вимірювань у JS,
+     інакше Safari на iOS лишав чорні поля по краях */
+  .mapx__canvas{
+    position:relative;inset:auto;
+    height:100%;width:auto;
+    aspect-ratio:var(--plan-ratio, 4 / 3);
+  }
+  /* у прокрутному контейнері тримаємо кадр у потоці, а не absolute:
+     iOS інакше промахується з розміром */
+  .mapx__media{position:relative;inset:auto;display:block;width:100%;height:100%}
+  .mapx__media img{width:100%;height:100%;object-fit:cover}
+  .mapx__pins{position:absolute;left:0;top:0;width:100%;height:100%;right:auto;bottom:auto}
 
   /* на панорамі видно одразу всі мітки */
   .mapx .mapx__pin{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -1125,6 +1133,13 @@ img{max-width:100%;display:block}
 
   .mapx__head{top:96px;left:20px;right:20px}
   .mapx__head h2{font-size:26px}
+  .mapx__hint{text-shadow:0 2px 16px rgba(0,0,0,.85)}
+  /* затемнення зверху сильніше — заголовок читається і на світлому кадрі */
+  .mapx__stage::after{
+    background:
+      linear-gradient(180deg, rgba(11,9,7,.72) 0%, rgba(11,9,7,.34) 26%, rgba(11,9,7,0) 48%),
+      linear-gradient(0deg, rgba(11,9,7,.62) 0%, rgba(11,9,7,0) 26%);
+  }
 
   /* ---- міні-карта зі стрілками ---- */
   .mapx__mini{

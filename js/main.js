@@ -317,13 +317,13 @@ if (mapx) {
   const arrowNext= mapx.querySelector('.mapx__arrow--next');
 
   if (scroll && canvas) {
-    // ширина полотна = висота сцени × пропорція знімка (без обрізки, щоб мітки
-    // лягали рівно на свої місця)
+    // Пропорцію віддаємо в CSS — ширину полотна браузер порахує сам через
+    // aspect-ratio. Так надійніше за вимірювання: Safari на iOS повертав
+    // висоту прокрутного шару невірно й лишав чорні поля по краях кадру.
     function sizeCanvas() {
-      if (!isMobile()) { canvas.style.width = ''; return; }
-      const ratio = (planImg && planImg.naturalWidth)
-        ? planImg.naturalWidth / planImg.naturalHeight : 4 / 3;
-      canvas.style.width = Math.round(scroll.clientHeight * ratio) + 'px';
+      if (!planImg || !planImg.naturalWidth) return;
+      mapx.style.setProperty('--plan-ratio',
+        planImg.naturalWidth + ' / ' + planImg.naturalHeight);
     }
 
     // біла рамка на міні-карті показує, яку частину зараз видно
