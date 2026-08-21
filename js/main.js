@@ -249,9 +249,14 @@ if (mapx) {
   const counter = mapx.querySelector('.mapx__counter b');
   const total = pins.length;
 
-  // висота секції: по одному екрану на обʼєкт + запас, щоб останній кадр
-  // (з усіма мітками одразу) встиг постояти перед очима
-  mapx.style.height = (total + 1.6) * 100 + 'svh';
+  const isMobile = () => window.matchMedia('(max-width:900px)').matches;
+
+  // Десктоп: секція заввишки в 12 екранів — обʼєкти зʼявляються по черзі на скролі.
+  // Мобільний: звичайна секція, а кадр гортається вбік як панорама.
+  function setHeight() {
+    mapx.style.height = isMobile() ? '' : (total + 1.6) * 100 + 'svh';
+  }
+  setHeight();
 
 
   // Мітки задані у відсотках від самого кадру генплану. Оскільки фото
@@ -261,6 +266,7 @@ if (mapx) {
   const planImg = mapx.querySelector('.mapx__media img');
   function syncPins() {
     if (!pinsBox || !planImg || !planImg.naturalWidth) return;
+    if (isMobile()) { pinsBox.style.cssText = ''; return; }
     const st = mapx.querySelector('.mapx__stage').getBoundingClientRect();
     const ratio = planImg.naturalWidth / planImg.naturalHeight;
     let w = st.width, h = w / ratio;
@@ -288,6 +294,7 @@ if (mapx) {
   }
 
   function onScroll() {
+    if (isMobile()) return;
     const r = mapx.getBoundingClientRect();
     const scrollable = mapx.offsetHeight - window.innerHeight;
     if (scrollable <= 0) return;
@@ -300,6 +307,71 @@ if (mapx) {
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
+
+  // ===== Мобільна панорама: кадр гортається вбік, знизу — міні-карта =====
+  const scroll   = mapx.querySelector('.mapx__scroll');
+  const canvas   = mapx.querySelector('.mapx__canvas');
+  const minimap  = mapx.querySelector('.mapx__minimap');
+  const winBox   = mapx.querySelector('.mapx__window');
+  const arrowPrev= mapx.querySelector('.mapx__arrow--prev');
+  const arrowNext= mapx.querySelector('.mapx__arrow--next');
+
+  if (scroll && canvas) {
+    // ширина полотна = висота сцени × пропорція знімка (без обрізки, щоб мітки
+    // лягали рівно на свої місця)
+    function sizeCanvas() {
+      if (!isMobile()) { canvas.style.width = ''; return; }
+      const ratio = (planImg && planImg.naturalWidth)
+        ? planImg.naturalWidth / planImg.naturalHeight : 4 / 3;
+      canvas.style.width = Math.round(scroll.clientHeight * ratio) + 'px';
+    }
+
+    // біла рамка на міні-карті показує, яку частину зараз видно
+    function syncWindow() {
+      if (!isMobile() || !winBox) return;
+      const w = scroll.scrollWidth, v = scroll.clientWidth;
+      if (w <= v) { winBox.style.left = '0'; winBox.style.width = '100%'; return; }
+      winBox.style.width = (v / w * 100) + '%';
+      winBox.style.left  = (scroll.scrollLeft / w * 100) + '%';
+      const atStart = scroll.scrollLeft <= 2;
+      const atEnd   = scroll.scrollLeft >= w - v - 2;
+      if (arrowPrev) arrowPrev.disabled = atStart;
+      if (arrowNext) arrowNext.disabled = atEnd;
+    }
+
+    function step(dir) {
+      scroll.scrollBy({ left: dir * scroll.clientWidth * 0.8, behavior: 'smooth' });
+    }
+    if (arrowPrev) arrowPrev.addEventListener('click', () => step(-1));
+    if (arrowNext) arrowNext.addEventListener('click', () => step(1));
+
+    // тап по міні-карті — стрибок у це місце панорами
+    if (minimap) minimap.addEventListener('click', e => {
+      if (!isMobile()) return;
+      const r = minimap.getBoundingClientRect();
+      const p = (e.clientX - r.left) / r.width;
+      const target = p * scroll.scrollWidth - scroll.clientWidth / 2;
+      scroll.scrollTo({ left: target, behavior: 'smooth' });
+    });
+
+    scroll.addEventListener('scroll', syncWindow, { passive: true });
+
+    function initPan() {
+      sizeCanvas();
+      if (isMobile() && !scroll.dataset.centered) {
+        // стартуємо з центру кварталу, а не з краю поля
+        scroll.scrollLeft = (scroll.scrollWidth - scroll.clientWidth) / 2;
+        scroll.dataset.centered = '1';
+      }
+      syncWindow();
+    }
+    if (planImg) {
+      planImg.complete && planImg.naturalWidth ? initPan()
+        : planImg.addEventListener('load', initPan);
+    }
+    window.addEventListener('resize', () => { setHeight(); sizeCanvas(); syncWindow(); });
+    window.addEventListener('orientationchange', () => setTimeout(initPan, 250));
+  }
 
   // ===== Перехід до обʼєкта: лупа розкривається в повний кадр =====
   const objx = document.getElementById('objx');
@@ -386,10 +458,14 @@ if (mapx) {
       objx.classList.remove('is-open');
       objx.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      if (openIdx >= 0) {
+      // на десктопі повертаємось на «свій» крок скролу; на мобільному панорама
+      // нікуди не їхала — чіпати позицію сторінки не треба
+      if (openIdx >= 0 && !isMobile()) {
         const scrollable = mapx.offsetHeight - window.innerHeight;
-        const y = mapx.offsetTop + scrollable * ((openIdx + 0.45) / total) * 0.86;
-        window.scrollTo({ top: y, behavior: 'auto' });   // лишаємось на «своєму» обʼєкті
+        if (scrollable > 0) {
+          const y = mapx.offsetTop + scrollable * ((openIdx + 0.45) / total) * 0.86;
+          window.scrollTo({ top: y, behavior: 'auto' });
+        }
       }
       openIdx = -1;
     }
