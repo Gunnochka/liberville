@@ -1300,3 +1300,42 @@ img{max-width:100%;display:block}
   .pcard{transition:none}
   .pcar__track{scroll-behavior:auto}
 }
+
+/* ===== Промо-фільм: запуск по кліку (файл важкий — не тягнемо без потреби) ===== */
+.video-frame--cta{position:relative;cursor:pointer}
+.video-frame--cta video{width:100%;height:100%;display:block;object-fit:cover}
+.video-play{
+  position:absolute;inset:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:linear-gradient(180deg, rgba(11,9,7,.28), rgba(11,9,7,.52));
+  border:0;cursor:pointer;color:#fff;
+  transition:opacity .45s ease,visibility .45s;
+}
+.video-frame--cta.is-playing .video-play{opacity:0;visibility:hidden}
+.video-play__ring{
+  width:82px;height:82px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(192,130,78,.92);
+  box-shadow:0 0 0 0 rgba(192,130,78,.5);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s ease;
+  animation:playPulse 2.6s ease-out infinite;
+}
+.video-play__ring svg{width:32px;height:32px;fill:#1B120C;margin-left:4px}
+.video-play:hover .video-play__ring{transform:scale(1.08);background:#DDA06A}
+.video-play__cap{
+  font-size:12.5px;font-weight:300;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.9);text-shadow:0 2px 14px rgba(0,0,0,.6);
+}
+@keyframes playPulse{
+  0%{box-shadow:0 0 0 0 rgba(192,130,78,.45)}
+  70%{box-shadow:0 0 0 26px rgba(192,130,78,0)}
+  100%{box-shadow:0 0 0 0 rgba(192,130,78,0)}
+}
+@media (max-width:700px){
+  .video-play__ring{width:66px;height:66px}
+  .video-play__ring svg{width:26px;height:26px}
+  .video-play__cap{font-size:11px;letter-spacing:1.4px}
+}
+@media (prefers-reduced-motion:reduce){
+  .video-play__ring{animation:none}
+}

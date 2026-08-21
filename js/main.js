@@ -595,6 +595,23 @@ reveals.forEach(el => observer.observe(el));
 
 // ===== «Ленивые» видео: грузятся и играют только в зоне видимости =====
 // (экономит трафик и ускоряет первую загрузку — видео не качаются все сразу)
+// ===== Промо-фільм: вантажимо тільки коли натиснули =====
+// Файл у повній 4K-якості (~69 МБ) — автозапуск з'їв би трафік відвідувача,
+// тому стартуємо по кліку й одразу зі звуком.
+const promoFrame = document.getElementById('promoFrame');
+const promoVideo = document.getElementById('promoVideo');
+if (promoFrame && promoVideo) {
+  const startPromo = () => {
+    if (promoFrame.classList.contains('is-playing')) return;
+    promoFrame.classList.add('is-playing');
+    promoVideo.play().catch(() => {});
+    if (typeof gtag === 'function') gtag('event', 'video_start', { video_title: 'Liberville promo' });
+  };
+  promoFrame.querySelector('.video-play').addEventListener('click', startPromo);
+  promoVideo.addEventListener('play', () => promoFrame.classList.add('is-playing'));
+  promoVideo.addEventListener('ended', () => promoFrame.classList.remove('is-playing'));
+}
+
 const lazyVideos = document.querySelectorAll('video[data-autoplay]');
 if (lazyVideos.length) {
   const videoObserver = new IntersectionObserver((entries) => {

@@ -235,11 +235,21 @@
     <div class="container">
       <div class="center-head reveal">
         <span class="eyebrow">Відео</span>
-        <h2 class="section__title">Liberville з висоти пташиного польоту</h2>
+        <h2 class="section__title">Фільм про Liberville</h2>
+        <p class="section__lead">Півхвилини про квартал: архітектура, лобі, двір та інфраструктура кварталу.</p>
       </div>
-      <div class="video-frame reveal">
-        <video src="assets/video/panorama.mp4" poster="assets/img/panorama_poster.jpg" controls muted loop playsinline preload="none" data-autoplay></video>
+      <div class="video-frame video-frame--cta reveal" id="promoFrame">
+        <video id="promoVideo" poster="assets/img/promo_poster.jpg" controls playsinline preload="none">
+          <source src="assets/video/liberville-promo.mp4" type="video/mp4">
+        </video>
+        <button class="video-play" type="button" aria-label="Відтворити фільм про Liberville">
+          <span class="video-play__ring">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg>
+          </span>
+          <span class="video-play__cap">Дивитися · 27 сек</span>
+        </button>
       </div>
+
     </div>
   </section>
 
