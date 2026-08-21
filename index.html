@@ -382,6 +382,7 @@
       <div class="mapx__head">
         <span class="eyebrow">Інфраструктура</span>
         <h2>Все необхідне — на території</h2>
+        <p class="mapx__hint">Натисніть мітку, щоб роздивитись обʼєкт</p>
       </div>
 
       <div class="mapx__pins">
@@ -519,6 +520,31 @@
       <div class="mapx__counter"><b>01</b><span>/ 12</span></div>
     </div>
   </section>
+
+  <!-- ПЕРЕХІД ДО ОБʼЄКТА: лупа розкривається в повний кадр -->
+  <div class="objx" id="objx" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Обʼєкт інфраструктури">
+    <div class="objx__zoom"><img alt="" decoding="async"></div>
+    <div class="objx__veil"></div>
+
+    <button class="objx__close" type="button" aria-label="Закрити">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <button class="objx__nav objx__nav--prev" type="button" aria-label="Попередній обʼєкт">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <button class="objx__nav objx__nav--next" type="button" aria-label="Наступний обʼєкт">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    <div class="objx__panel">
+      <figure class="objx__media is-empty"><img alt="" decoding="async"></figure>
+      <span class="objx__num"></span>
+      <h3 class="objx__title"></h3>
+      <p class="objx__desc"></p>
+      <button class="btn btn--accent objx__cta js-open-modal" type="button">Дізнатися деталі</button>
+    </div>
+  </div>
 
   <!-- ДЕТАЛІ -->
   <section class="section section--dark">

@@ -301,12 +301,127 @@ if (mapx) {
   window.addEventListener('resize', onScroll);
   onScroll();
 
-  // клік по мітці — гортаємо до її кроку
-  pins.forEach((p, n) => p.addEventListener('click', () => {
-    const scrollable = mapx.offsetHeight - window.innerHeight;
-    const y = mapx.offsetTop + scrollable * ((n + 0.45) / total) * 0.86;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }));
+  // ===== Перехід до обʼєкта: лупа розкривається в повний кадр =====
+  const objx = document.getElementById('objx');
+  if (objx) {
+    const zoomImg = objx.querySelector('.objx__zoom img');
+    const media   = objx.querySelector('.objx__media');
+    const mediaImg= media.querySelector('img');
+    const elNum   = objx.querySelector('.objx__num');
+    const elTitle = objx.querySelector('.objx__title');
+    const elDesc  = objx.querySelector('.objx__desc');
+    const Z = 2.9;                       // кратність «лупи»
+    let openIdx = -1;
+
+    // дані обʼєктів беремо з наявної розмітки — жодного дублювання текстів
+    const items = pins.map((pin, n) => {
+      const card = cards[n];
+      const img  = card && card.querySelector('figure img');
+      return {
+        x: parseFloat(pin.style.getPropertyValue('--x')) / 100,
+        y: parseFloat(pin.style.getPropertyValue('--y')) / 100,
+        title: card ? card.querySelector('h3').textContent.trim() : pin.getAttribute('aria-label'),
+        desc:  card ? card.querySelector('p').textContent.trim() : '',
+        photo: img ? img.currentSrc || img.src : '',
+        alt:   img ? img.alt : ''
+      };
+    });
+
+    // геометрія: кадр генплану розтягуємо «cover» на вікно й наводимо лупу
+    function frame(i) {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const ratio = (planImg && planImg.naturalWidth)
+        ? planImg.naturalWidth / planImg.naturalHeight : 4 / 3;
+      let w = vw, h = w / ratio;
+      if (h < vh) { h = vh; w = h * ratio; }
+      const ox = (vw - w) / 2, oy = (vh - h) / 2;
+      const px = w * items[i].x, py = h * items[i].y;
+      // куди має «прилетіти» точка: ліворуч від панелі (на мобільному — вище)
+      const tx = vw < 900 ? vw * 0.5 : vw * 0.3;
+      const ty = vw < 900 ? vh * 0.3 : vh * 0.5;
+      let a = tx - Z * px, b = ty - Z * py;
+      a = Math.min(0, Math.max(vw - w * Z, a));      // не лишаємо порожніх країв
+      b = Math.min(0, Math.max(vh - h * Z, b));
+      zoomImg.style.width  = w + 'px';
+      zoomImg.style.height = h + 'px';
+      objx.style.setProperty('--t0', `translate(${ox}px, ${oy}px) scale(1)`);
+      objx.style.setProperty('--t1', `translate(${a}px, ${b}px) scale(${Z})`);
+    }
+
+    function fill(i) {
+      const it = items[i];
+      elNum.textContent   = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+      elTitle.textContent = it.title;
+      elDesc.textContent  = it.desc;
+      if (it.photo) { mediaImg.src = it.photo; mediaImg.alt = it.alt; media.classList.remove('is-empty'); }
+      else { mediaImg.removeAttribute('src'); media.classList.add('is-empty'); }
+    }
+
+    function openObj(i) {
+      openIdx = i;
+      if (!zoomImg.getAttribute('src') && planImg) zoomImg.src = planImg.currentSrc || planImg.src;
+      fill(i);
+      frame(i);
+      void objx.offsetWidth;               // фіксуємо старт, щоб анімація програлась
+      objx.classList.add('is-open');
+      objx.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      objx.querySelector('.objx__close').focus({ preventScroll: true });
+    }
+
+    function goto(i) {
+      openIdx = (i + total) % total;
+      fill(openIdx);
+      frame(openIdx);
+      setActive(openIdx);                  // мітки на генплані теж переключаємо
+    }
+
+    function closeObj() {
+      objx.classList.remove('is-open');
+      objx.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (openIdx >= 0) {
+        const scrollable = mapx.offsetHeight - window.innerHeight;
+        const y = mapx.offsetTop + scrollable * ((openIdx + 0.45) / total) * 0.86;
+        window.scrollTo({ top: y, behavior: 'auto' });   // лишаємось на «своєму» обʼєкті
+      }
+      openIdx = -1;
+    }
+
+    pins.forEach((p, n) => p.addEventListener('click', () => openObj(n)));
+
+    // кнопка «Детальніше» на кожній картці
+    cards.forEach((card, n) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'mapx__more';
+      b.innerHTML = 'Детальніше <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
+      b.addEventListener('click', () => openObj(n));
+      card.appendChild(b);
+    });
+
+    objx.querySelector('.objx__close').addEventListener('click', closeObj);
+    objx.querySelector('.objx__nav--prev').addEventListener('click', () => goto(openIdx - 1));
+    objx.querySelector('.objx__nav--next').addEventListener('click', () => goto(openIdx + 1));
+    objx.querySelector('.objx__veil').addEventListener('click', closeObj);
+    objx.querySelector('.objx__cta').addEventListener('click', closeObj);   // далі спрацює js-open-modal
+
+    document.addEventListener('keydown', e => {
+      if (!objx.classList.contains('is-open')) return;
+      if (e.key === 'Escape')     closeObj();
+      if (e.key === 'ArrowLeft')  goto(openIdx - 1);
+      if (e.key === 'ArrowRight') goto(openIdx + 1);
+    });
+
+    window.addEventListener('resize', () => { if (openIdx >= 0) frame(openIdx); });
+  } else {
+    // запасний варіант: клік по мітці гортає до її кроку
+    pins.forEach((p, n) => p.addEventListener('click', () => {
+      const scrollable = mapx.offsetHeight - window.innerHeight;
+      const y = mapx.offsetTop + scrollable * ((n + 0.45) / total) * 0.86;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }));
+  }
 }
 
 // ===== Блоки-тези: текст зʼявляється, коли секція входить в екран =====

@@ -914,3 +914,90 @@ img{max-width:100%;display:block}
 .mapx__card figure{margin:0 0 20px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04)}
 .mapx__card figure img{width:100%;height:190px;object-fit:cover;display:block}
 .mapx__card--nophoto figure{display:none}
+
+/* ===== ПЕРЕХІД ДО ОБʼЄКТА (лупа → повний кадр) ===== */
+.mapx__pin{cursor:pointer}
+.mapx__card{cursor:default}
+.mapx__more{
+  margin-top:18px;display:inline-flex;align-items:center;gap:9px;
+  background:none;border:0;padding:0;cursor:pointer;
+  font:inherit;font-size:14px;font-weight:400;letter-spacing:.4px;color:var(--accent);
+  transition:gap .3s ease,color .3s ease;
+}
+.mapx__more:hover{gap:14px;color:#E2A870}
+.mapx__more svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.objx{
+  position:fixed;inset:0;z-index:1200;
+  opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s;
+}
+.objx.is-open{opacity:1;visibility:visible}
+
+/* шар генплану, який «наїжджає» на потрібну точку */
+.objx__zoom{position:absolute;inset:0;overflow:hidden;background:#0b0907}
+.objx__zoom img{
+  position:absolute;left:0;top:0;display:block;max-width:none;
+  transform-origin:0 0;
+  transform:var(--t0,none);
+  transition:transform 1.15s cubic-bezier(.16,.84,.28,1),filter 1.15s ease;
+  filter:saturate(.86) brightness(.82);
+  will-change:transform;
+}
+.objx.is-open .objx__zoom img{transform:var(--t1,none)}
+
+.objx__veil{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 26% 50%, rgba(11,9,7,.20) 0%, rgba(11,9,7,.80) 62%, rgba(11,9,7,.94) 100%),
+    linear-gradient(90deg, rgba(11,9,7,.10) 0%, rgba(11,9,7,.55) 46%, rgba(11,9,7,.92) 100%);
+}
+
+/* панель з описом */
+.objx__panel{
+  position:absolute;z-index:3;right:max(28px,5vw);top:50%;
+  width:min(430px,86vw);
+  transform:translateY(-46%);opacity:0;
+  transition:opacity .7s ease .28s,transform .8s cubic-bezier(.2,.7,.2,1) .28s;
+}
+.objx.is-open .objx__panel{opacity:1;transform:translateY(-50%)}
+.objx__media{margin:0 0 22px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.objx__media img{width:100%;height:240px;object-fit:cover;display:block}
+.objx__media.is-empty{display:none}
+.objx__num{display:block;font-size:13px;letter-spacing:2.4px;color:var(--accent);margin-bottom:12px}
+.objx__title{font-size:clamp(23px,2.4vw,34px);font-weight:300;line-height:1.2;color:#fff;margin-bottom:14px}
+.objx__desc{font-size:16px;font-weight:300;line-height:1.68;color:var(--muted)}
+.objx__cta{margin-top:26px}
+
+/* кнопки керування */
+.objx__close,.objx__nav{
+  position:absolute;z-index:4;display:grid;place-items:center;cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:50%;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:background .3s ease,border-color .3s ease,transform .3s ease;
+}
+.objx__close:hover,.objx__nav:hover{background:var(--accent);border-color:var(--accent);transform:scale(1.07)}
+.objx__close svg,.objx__nav svg{fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round}
+.objx__close{top:max(22px,3vh);right:max(22px,3vw);width:48px;height:48px}
+.objx__close svg{width:20px;height:20px}
+.objx__nav{top:50%;margin-top:-25px;width:50px;height:50px}
+.objx__nav svg{width:22px;height:22px}
+.objx__nav--prev{left:max(20px,2.4vw)}
+.objx__nav--next{left:calc(max(20px,2.4vw) + 62px)}
+
+@media (max-width:900px){
+  .objx__veil{background:linear-gradient(180deg, rgba(11,9,7,.30) 0%, rgba(11,9,7,.72) 42%, rgba(11,9,7,.96) 100%)}
+  .objx__panel{right:20px;left:20px;width:auto;top:auto;bottom:104px;transform:translateY(22px)}
+  .objx.is-open .objx__panel{transform:translateY(0)}
+  .objx__media img{height:170px}
+  .objx__desc{font-size:15px}
+  .objx__nav{top:auto;bottom:28px;margin-top:0;width:46px;height:46px}
+  .objx__nav--prev{left:20px}
+  .objx__nav--next{left:78px}
+  .objx__close{width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .objx__zoom img,.objx__panel{transition-duration:.01ms}
+}
+.mapx__hint{margin-top:12px;font-size:13px;font-weight:300;letter-spacing:.5px;color:var(--muted);opacity:.8}
+@media (max-width:900px){.mapx__hint{font-size:12px}}
