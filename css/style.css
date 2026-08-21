@@ -1008,3 +1008,23 @@ img{max-width:100%;display:block}
   background:rgba(11,9,7,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   font-size:11px;font-weight:300;letter-spacing:.7px;color:rgba(255,255,255,.82);
 }
+
+/* ===== Хід будівництва: чесний блок замість вигаданих етапів ===== */
+.progress-note{
+  max-width:660px;margin:0 auto;text-align:center;
+  padding:40px max(24px,4vw);
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(192,130,78,.07), rgba(255,255,255,.02));
+}
+.progress-note p{font-size:17px;font-weight:300;line-height:1.7;color:var(--muted);margin-bottom:26px}
+.gallery-grid__item.is-viz{position:relative;margin:0}
+.gallery-grid__item.is-viz figcaption{
+  position:absolute;left:12px;bottom:12px;
+  padding:4px 10px;border-radius:99px;
+  background:rgba(11,9,7,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  font-size:11px;font-weight:300;letter-spacing:.7px;color:rgba(255,255,255,.82);
+}
+@media (max-width:700px){
+  .progress-note{padding:30px 20px}
+  .progress-note p{font-size:15px}
+}

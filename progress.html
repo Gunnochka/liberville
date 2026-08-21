@@ -72,34 +72,21 @@
         <h2 class="section__title">Як просувається будівництво</h2>
       </div>
 
-      <div class="features" style="grid-template-columns:1fr">
-        <div class="feature" style="border-color:var(--line)">
-          <span class="feature__num" style="color:var(--gold)">2026</span>
-          <div>
-            <h3 style="color:var(--text)">II квартал</h3>
-            <p style="color:var(--muted)">Завершено монтаж 15 поверхів. Ведуться фасадні роботи.</p>
-          </div>
-        </div>
-        <div class="feature" style="border-color:var(--line)">
-          <span class="feature__num" style="color:var(--gold)">2026</span>
-          <div>
-            <h3 style="color:var(--text)">I квартал</h3>
-            <p style="color:var(--muted)">Зведено каркас будівлі, розпочато внутрішні роботи.</p>
-          </div>
-        </div>
-        <div class="feature" style="border-color:var(--line)">
-          <span class="feature__num" style="color:var(--gold)">2025</span>
-          <div>
-            <h3 style="color:var(--text)">IV квартал</h3>
-            <p style="color:var(--muted)">Завершено роботи з фундаменту та підземного паркінгу.</p>
-          </div>
-        </div>
+      <div class="progress-note">
+        <p>Будівництво ЖК Liberville триває. Актуальний фотозвіт з майданчика та графік робіт
+           надсилаємо на запит — з датами, етапами та документами по об'єкту.</p>
+        <button class="btn btn--accent js-open-modal" type="button">Отримати фотозвіт з майданчика</button>
       </div>
 
-      <div class="gallery-grid" style="margin-top:50px">
-        <div class="gallery-grid__item"><img src="assets/img/aerial_01.jpg" alt="Аерофотозйомка будівництва ЖК Liberville у Ходосівці" loading="lazy" decoding="async"></div>
-        <div class="gallery-grid__item"><img src="assets/img/cam_04.jpg" alt="Хід будівництва ЖК Liberville — вид на майданчик" loading="lazy" decoding="async"></div>
-        <div class="gallery-grid__item"><img src="assets/img/cam_03.jpg" alt="Хід будівництва ЖК Liberville — зведення башт" loading="lazy" decoding="async"></div>
+      <div class="center-head" style="margin-top:70px">
+        <span class="eyebrow">Візуалізації</span>
+        <h2 class="section__title">Яким буде комплекс</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gallery-grid__item is-viz"><img src="assets/img/aerial_01.jpg" alt="Візуалізація ЖК Liberville у Ходосівці — вигляд згори" loading="lazy" decoding="async"><figcaption>Візуалізація</figcaption></figure>
+        <figure class="gallery-grid__item is-viz"><img src="assets/img/cam_04.jpg" alt="Візуалізація ЖК Liberville — вигляд на квартал" loading="lazy" decoding="async"><figcaption>Візуалізація</figcaption></figure>
+        <figure class="gallery-grid__item is-viz"><img src="assets/img/cam_03.jpg" alt="Візуалізація ЖК Liberville — архітектура будинків" loading="lazy" decoding="async"><figcaption>Візуалізація</figcaption></figure>
       </div>
     </div>
   </section>
@@ -110,6 +97,31 @@
       <a href="index.html">На головну</a>
     </div>
   </footer>
+
+  <!-- МОДАЛЬНА ФОРМА -->
+  <div class="modal" id="modal">
+    <div class="modal__overlay js-close-modal"></div>
+    <div class="modal__box">
+      <button class="modal__close js-close-modal" aria-label="Закрити">×</button>
+      <h3 class="modal__title">Залиште заявку</h3>
+      <p class="modal__text">Надішлемо актуальні ціни, планування та умови розстрочки. Менеджер зв'яжеться найближчим часом.</p>
+      <form class="form" id="form">
+        <input type="text" name="name" placeholder="Ваше ім'я" required autocomplete="name">
+        <input type="tel" name="phone" placeholder="Телефон" required autocomplete="tel">
+        <!-- анти-спам: приховане поле-пастка, людина його не заповнює -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <label class="form__consent">
+          <input type="checkbox" name="consent" required>
+          <span>Я погоджуюсь на обробку персональних даних згідно з <a href="privacy.html" target="_blank" rel="noopener">Політикою конфіденційності</a></span>
+        </label>
+        <button type="submit" class="btn btn--accent btn--full">Отримати ціни</button>
+      </form>
+      <div class="form__success" id="formSuccess">
+        <p>Дякуємо! Заявку відправлено.</p>
+        <button class="btn btn--accent js-close-modal">ОК</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 
