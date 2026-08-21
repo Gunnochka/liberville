@@ -316,14 +316,16 @@ if (mapx) {
     // дані обʼєктів беремо з наявної розмітки — жодного дублювання текстів
     const items = pins.map((pin, n) => {
       const card = cards[n];
-      const img  = card && card.querySelector('figure img');
+      const fig  = card && card.querySelector('figure');
+      const img  = fig && fig.querySelector('img');
       return {
         x: parseFloat(pin.style.getPropertyValue('--x')) / 100,
         y: parseFloat(pin.style.getPropertyValue('--y')) / 100,
         title: card ? card.querySelector('h3').textContent.trim() : pin.getAttribute('aria-label'),
         desc:  card ? card.querySelector('p').textContent.trim() : '',
         photo: img ? img.currentSrc || img.src : '',
-        alt:   img ? img.alt : ''
+        alt:   img ? img.alt : '',
+        viz:   !!(fig && fig.classList.contains('is-viz'))
       };
     });
 
@@ -355,6 +357,10 @@ if (mapx) {
       elDesc.textContent  = it.desc;
       if (it.photo) { mediaImg.src = it.photo; mediaImg.alt = it.alt; media.classList.remove('is-empty'); }
       else { mediaImg.removeAttribute('src'); media.classList.add('is-empty'); }
+      media.classList.toggle('is-viz', !!it.viz);
+      let cap = media.querySelector('figcaption');
+      if (it.viz && !cap) { cap = document.createElement('figcaption'); cap.textContent = 'Візуалізація'; media.appendChild(cap); }
+      else if (!it.viz && cap) cap.remove();
     }
 
     function openObj(i) {
