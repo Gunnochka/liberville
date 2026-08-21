@@ -596,16 +596,36 @@ reveals.forEach(el => observer.observe(el));
 // ===== «Ленивые» видео: грузятся и играют только в зоне видимости =====
 // (экономит трафик и ускоряет первую загрузку — видео не качаются все сразу)
 // ===== Промо-фільм: вантажимо тільки коли натиснули =====
-// Файл у повній 4K-якості (~69 МБ) — автозапуск з'їв би трафік відвідувача,
-// тому стартуємо по кліку й одразу зі звуком.
+// Автозапуск з'їв би трафік відвідувача, тому стартуємо по кліку.
+// За замовчуванням у плеєрі легка версія 1080p (11 МБ); якщо екран великий
+// і зв'язок не економний — підміняємо на оригінал 4K (66 МБ).
 const promoFrame = document.getElementById('promoFrame');
 const promoVideo = document.getElementById('promoVideo');
 if (promoFrame && promoVideo) {
+  function wantsUHD() {
+    const uhd = promoVideo.dataset.uhd;
+    if (!uhd) return null;
+    const c = navigator.connection;
+    if (c && (c.saveData || /(^|-)[23]g$/.test(c.effectiveType || ''))) return null;
+    const px = promoFrame.getBoundingClientRect().width * Math.min(window.devicePixelRatio || 1, 2);
+    return px > 1600 ? uhd : null;
+  }
+
   const startPromo = () => {
     if (promoFrame.classList.contains('is-playing')) return;
     promoFrame.classList.add('is-playing');
+    const uhd = wantsUHD();
+    if (uhd && !promoVideo.getAttribute('src')) {
+      promoVideo.setAttribute('src', uhd);
+      promoVideo.load();
+    }
     promoVideo.play().catch(() => {});
-    if (typeof gtag === 'function') gtag('event', 'video_start', { video_title: 'Liberville promo' });
+    if (typeof gtag === 'function') {
+      gtag('event', 'video_start', {
+        video_title: 'Liberville promo',
+        video_quality: uhd ? '4K' : '1080p'
+      });
+    }
   };
   promoFrame.querySelector('.video-play').addEventListener('click', startPromo);
   promoVideo.addEventListener('play', () => promoFrame.classList.add('is-playing'));

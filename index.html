@@ -239,8 +239,10 @@
         <p class="section__lead">Півхвилини про квартал: архітектура, лобі, двір та інфраструктура кварталу.</p>
       </div>
       <div class="video-frame video-frame--cta reveal" id="promoFrame">
-        <video id="promoVideo" poster="assets/img/promo_poster.jpg" controls playsinline preload="none">
-          <source src="assets/video/liberville-promo.mp4" type="video/mp4">
+        <!-- за замовчуванням легка версія; на великих екранах JS підміняє на 4K -->
+        <video id="promoVideo" poster="assets/img/promo_poster.jpg" controls playsinline preload="none"
+               data-uhd="assets/video/liberville-promo.mp4">
+          <source src="assets/video/liberville-promo-1080.mp4" type="video/mp4">
         </video>
         <button class="video-play" type="button" aria-label="Відтворити фільм про Liberville">
           <span class="video-play__ring">
