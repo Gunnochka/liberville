@@ -879,35 +879,26 @@ img{max-width:100%;display:block}
   .stmt__text{
     font-size:clamp(20px,5.2vw,27px);max-width:88vw;margin:0 auto;padding:0 20px;
   }
-  /* Перший кадр: фасад по центру зайнятий — опускаємо текст на бруківку,
-     там порожньо і світло, темні літери читаються. */
-  .stmt--dark-text .stmt__text--tl{
+  /* Обидва кадри: текст унизу, де порожньо — під будинком і під двором. */
+  .stmt__text--tl,.stmt__text--cl{
     align-self:flex-end;
-    margin-top:0;margin-bottom:clamp(92px,15vh,175px);
+    margin-top:0;margin-bottom:clamp(62px,9vh,115px);
+    max-width:82vw;
   }
-  /* Другий кадр: піднімаємо текст у небо над будинком. */
-  .stmt__text--cl{
-    align-self:flex-start;
-    margin-top:clamp(104px,17vh,190px);
+  /* На телефоні обидва кадри темні (26–42% яскравості), тож текст білий —
+     без світлої підложки, яка виглядала як біла пляма. */
+  .stmt--dark-text .stmt__text{
+    color:#fff;
+    text-shadow:0 2px 26px rgba(0,0,0,.7), 0 1px 8px rgba(0,0,0,.5);
   }
-
-  /* мʼякі підсвітки рівно там, де тепер лежить текст */
+  .stmt--dark-text .stmt__key{color:var(--accent)}
+  /* легке затемнення знизу — рівно під рядками */
   .stmt::after{
     content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(11,9,7,.52) 0%, rgba(11,9,7,.16) 32%, rgba(11,9,7,0) 52%);
-  }
-  /* Кадр вулиці на телефоні весь у середніх тонах (28–51% яскравості),
-     світлого місця під темні літери немає — тож піднімаємо низ серпанком. */
-  .stmt--dark-text::after{
     background:linear-gradient(0deg,
-      rgba(255,255,255,.52) 0%,
-      rgba(255,255,255,.47) 30%,
-      rgba(255,255,255,.12) 46%,
-      rgba(255,255,255,0)   60%);
-  }
-  .stmt--dark-text .stmt__text{
-    color:#2E1A10;
-    text-shadow:0 2px 22px rgba(255,255,255,.9), 0 1px 5px rgba(255,255,255,.75);
+      rgba(11,9,7,.58) 0%,
+      rgba(11,9,7,.34) 26%,
+      rgba(11,9,7,0)   48%);
   }
 }
 
@@ -1209,3 +1200,103 @@ img{max-width:100%;display:block}
 }
 .only-mob{display:none}
 @media (max-width:900px){.only-desk{display:none}.only-mob{display:inline}}
+
+/* ===== КАРУСЕЛЬ ПЛАНУВАНЬ ===== */
+.pcar__filter{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+  margin:34px 0 40px;
+}
+
+.pcar{position:relative;margin:0 -4vw}
+.pcar__track{
+  display:flex;gap:24px;
+  padding:14px max(50% - 235px, 24px) 20px;   /* центруємо першу й останню картку */
+  overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;overscroll-behavior-x:contain;
+}
+.pcar__track::-webkit-scrollbar{display:none}
+
+.pcard{
+  flex:0 0 470px;max-width:86vw;scroll-snap-align:center;
+  border-radius:20px;overflow:hidden;cursor:pointer;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  border:1px solid var(--line);
+  transform:scale(.9);opacity:.42;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .55s ease,
+             border-color .55s ease,box-shadow .55s ease;
+}
+.pcard.is-active{
+  transform:scale(1);opacity:1;cursor:default;
+  border-color:rgba(192,130,78,.38);
+  box-shadow:0 30px 70px -28px rgba(0,0,0,.85);
+}
+
+/* «аркуш» із планом — світлий, як у друкованій документації */
+.pcard__sheet{
+  position:relative;background:#F6F2EC;
+  aspect-ratio:4 / 3;display:grid;place-items:center;padding:22px;
+}
+.pcard__sheet img{width:100%;height:100%;object-fit:contain;display:block}
+.pcard__tag{
+  position:absolute;top:14px;left:14px;
+  padding:6px 13px;border-radius:99px;
+  background:rgba(46,26,16,.82);
+  font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:#F3E3D3;
+}
+
+.pcard__body{padding:22px 24px 24px}
+.pcard__head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:18px}
+.pcard__head h3{font-size:20px;font-weight:400;color:#fff;letter-spacing:.6px}
+.pcard__area{font-size:26px;font-weight:200;color:var(--accent);white-space:nowrap}
+.pcard__area i{font-size:14px;font-style:normal;opacity:.75;margin-left:3px}
+
+.pcard__specs{display:flex;gap:26px;margin-bottom:22px}
+.pcard__specs dt{font-size:11.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted-dim);margin-bottom:5px}
+.pcard__specs dd{font-size:15px;font-weight:300;color:var(--text)}
+
+/* круглі стрілки — заходять на картки, як у референсі */
+.pcar__arrow{
+  position:absolute;z-index:4;top:38%;transform:translateY(-50%);
+  width:56px;height:56px;border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;
+  background:var(--accent);border:0;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  transition:background .3s ease,transform .25s ease,opacity .3s ease;
+}
+.pcar__arrow svg{width:24px;height:24px;fill:none;stroke:#1B120C;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pcar__arrow:hover{background:#DDA06A;transform:translateY(-50%) scale(1.07)}
+.pcar__arrow:active{transform:translateY(-50%) scale(.94)}
+.pcar__arrow[disabled]{opacity:.25;pointer-events:none}
+.pcar__arrow--prev{left:max(10px,3vw)}
+.pcar__arrow--next{right:max(10px,3vw)}
+
+.pcar__dots{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
+.pcar__dot{
+  width:7px;height:7px;border-radius:50%;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.22);border:0;
+  transition:background .3s ease,width .3s ease;
+}
+.pcar__dot.is-on{background:var(--accent);width:22px;border-radius:99px}
+
+.pcar__note{
+  margin-top:26px;text-align:center;
+  font-size:13.5px;font-weight:300;color:var(--muted-dim);
+}
+
+@media (max-width:900px){
+  .pcar{margin:0 -20px}
+  .pcar__track{gap:16px;padding:10px calc(50% - 155px) 16px}
+  .pcard{flex-basis:310px;transform:scale(.88)}
+  .pcard__body{padding:18px 20px 20px}
+  .pcard__head h3{font-size:18px}
+  .pcard__area{font-size:23px}
+  .pcard__specs{gap:20px;margin-bottom:18px}
+  .pcar__arrow{width:48px;height:48px;top:34%}
+  .pcar__arrow--prev{left:8px}
+  .pcar__arrow--next{right:8px}
+  .pcar__filter{gap:8px;margin:26px 0 30px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pcard{transition:none}
+  .pcar__track{scroll-behavior:auto}
+}

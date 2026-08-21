@@ -49,59 +49,125 @@ if (burger && nav) {
   );
 }
 
-// ===== Каталог квартир (фильтр + рендер из assets/data/flats.js) =====
-const flatsGrid = document.getElementById('flatsGrid');
-const flatFilter = document.getElementById('flatFilter');
+// ===== Карусель планувань (дані з assets/data/plans.js) =====
+const planTrack  = document.getElementById('planTrack');
+const planFilter = document.getElementById('planFilter');
+const planDots   = document.getElementById('planDots');
+const planCar    = document.getElementById('planCar');
 
-function roomsWord(n) { return n + '-кімнатна'; }
-function fmtPrice(p) { return p ? '$' + Number(p).toLocaleString('uk-UA') : 'Ціна за запитом'; }
+if (planTrack && window.PLANS) {
+  const roomsWord = n => n === 1 ? '1 кімната' : n + ' кімнати';
+  const num = v => v.toFixed(2).replace('.', ',');
+  let items = [];
 
-function renderFlats(rooms) {
-  if (!flatsGrid || !window.FLATS) return;
-  const list = rooms === 'all'
-    ? window.FLATS
-    : window.FLATS.filter(f => String(f.rooms) === String(rooms));
-  if (!list.length) {
-    flatsGrid.innerHTML = '<p class="flats-empty">Немає квартир за цим фільтром.</p>';
-    return;
+  function render(rooms) {
+    items = rooms === 'all'
+      ? window.PLANS
+      : window.PLANS.filter(p => String(p.rooms) === String(rooms));
+
+    planTrack.innerHTML = items.map((p, i) => `
+      <article class="pcard" data-i="${i}">
+        <div class="pcard__sheet">
+          <picture>
+            <source srcset="assets/img/plans/${p.img}.webp" type="image/webp">
+            <img src="assets/img/plans/${p.img}.jpg" loading="lazy" decoding="async"
+                 alt="Планування квартири ${p.code} — ${roomsWord(p.rooms)}, ${num(p.total)} м², ЖК Liberville">
+          </picture>
+          <span class="pcard__tag">${roomsWord(p.rooms)}</span>
+        </div>
+        <div class="pcard__body">
+          <div class="pcard__head">
+            <h3>${p.code}</h3>
+            <span class="pcard__area">${num(p.total)} <i>м²</i></span>
+          </div>
+          <dl class="pcard__specs">
+            <div><dt>Житлова</dt><dd>${num(p.living)} м²</dd></div>
+            <div><dt>Поверх</dt><dd>${p.floor}</dd></div>
+          </dl>
+          <button class="btn btn--accent btn--full js-open-modal" type="button">Дізнатись ціну</button>
+        </div>
+      </article>
+    `).join('');
+
+    if (planDots) {
+      planDots.innerHTML = items.map((_, i) =>
+        `<button class="pcar__dot" type="button" data-i="${i}" aria-label="Планування ${i + 1}"></button>`).join('');
+    }
+    planTrack.scrollLeft = 0;
+    requestAnimationFrame(sync);
   }
-  flatsGrid.innerHTML = list.map(f => `
-    <div class="flat-card">
-      <div class="flat-card__top">
-        <span class="flat-card__rooms">${roomsWord(f.rooms)}</span>
-        <span class="flat-badge flat-badge--${f.status}">${f.status === 'available' ? 'Вільна' : 'Заброньована'}</span>
-      </div>
-      <div class="flat-card__params">
-        <div><span>Площа</span><b>${f.area} м²</b></div>
-        <div><span>Поверх</span><b>${f.floor}</b></div>
-        <div><span>Секція</span><b>${f.section}</b></div>
-      </div>
-      <div class="flat-card__price">${fmtPrice(f.price)}</div>
-      <button class="btn btn--accent btn--full js-open-modal">Дізнатись ціну</button>
-    </div>
-  `).join('');
-}
 
-if (flatFilter) {
-  flatFilter.addEventListener('click', e => {
+  // підсвічуємо картку, що зараз по центру — сусідні відходять углиб
+  let active = -1;
+  function sync() {
+    const cards = planTrack.children;
+    if (!cards.length) return;
+    const mid = planTrack.scrollLeft + planTrack.clientWidth / 2;
+    let best = 0, bestD = Infinity;
+    for (let i = 0; i < cards.length; i++) {
+      const c = cards[i];
+      const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+      if (d < bestD) { bestD = d; best = i; }
+      c.classList.toggle('is-active', false);
+    }
+    cards[best].classList.add('is-active');
+    if (best !== active) {
+      active = best;
+      if (planDots) [...planDots.children].forEach((d, i) => d.classList.toggle('is-on', i === best));
+    }
+    const max = planTrack.scrollWidth - planTrack.clientWidth;
+    if (prev) prev.disabled = planTrack.scrollLeft <= 2;
+    if (next) next.disabled = planTrack.scrollLeft >= max - 2;
+  }
+
+  function goto(i) {
+    const c = planTrack.children[Math.max(0, Math.min(i, planTrack.children.length - 1))];
+    if (!c) return;
+    planTrack.scrollTo({
+      left: c.offsetLeft - (planTrack.clientWidth - c.offsetWidth) / 2,
+      behavior: 'smooth'
+    });
+  }
+
+  const prev = planCar && planCar.querySelector('.pcar__arrow--prev');
+  const next = planCar && planCar.querySelector('.pcar__arrow--next');
+  if (prev) prev.addEventListener('click', () => goto(active - 1));
+  if (next) next.addEventListener('click', () => goto(active + 1));
+  if (planDots) planDots.addEventListener('click', e => {
+    const d = e.target.closest('.pcar__dot');
+    if (d) goto(+d.dataset.i);
+  });
+  // тап по сусідній картці підводить її в центр
+  planTrack.addEventListener('click', e => {
+    const card = e.target.closest('.pcard');
+    if (card && !card.classList.contains('is-active') && !e.target.closest('button')) {
+      goto(+card.dataset.i);
+    }
+  });
+
+  planTrack.addEventListener('scroll', () => {
+    clearTimeout(planTrack._t);
+    planTrack._t = setTimeout(sync, 60);
+    sync();
+  }, { passive: true });
+  window.addEventListener('resize', sync);
+
+  document.addEventListener('keydown', e => {
+    if (!planTrack.matches(':hover') && document.activeElement !== planTrack) return;
+    if (e.key === 'ArrowLeft')  goto(active - 1);
+    if (e.key === 'ArrowRight') goto(active + 1);
+  });
+
+  if (planFilter) planFilter.addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
-    flatFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+    planFilter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
     btn.classList.add('is-active');
-    renderFlats(btn.dataset.rooms);
-    if (flatsGrid) flatsGrid.scrollLeft = 0; // на початок при зміні типу
+    render(btn.dataset.rooms);
   });
-  renderFlats('all');
-}
 
-// Стрелки слайдера каталога
-const flatsPrev = document.getElementById('flatsPrev');
-const flatsNext = document.getElementById('flatsNext');
-function slideFlats(dir) {
-  if (flatsGrid) flatsGrid.scrollBy({ left: dir * flatsGrid.clientWidth * 0.85, behavior: 'smooth' });
+  render('all');
 }
-if (flatsPrev) flatsPrev.addEventListener('click', () => slideFlats(-1));
-if (flatsNext) flatsNext.addEventListener('click', () => slideFlats(1));
 
 // ===== Модальное окно =====
 const modal = document.getElementById('modal');

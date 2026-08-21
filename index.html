@@ -674,29 +674,29 @@
     <div class="container">
       <div class="center-head reveal">
         <span class="eyebrow">Планування</span>
-        <h2 class="section__title">210 квартир на вибір</h2>
-        <p class="section__lead">Багато кутових квартир із панорамними видами. Оберіть свій формат.</p>
+        <h2 class="section__title">Оберіть своє планування</h2>
+        <p class="section__lead">14 варіантів від 45 до 111 м² — від компактної однокімнатної до трикімнатної з терасою.</p>
       </div>
 
-      <div class="tabs reveal" id="flatFilter">
-        <button class="filter-btn is-active" data-rooms="all">Всі</button>
-        <button class="filter-btn" data-rooms="1">1К</button>
-        <button class="filter-btn" data-rooms="2">2К</button>
-        <button class="filter-btn" data-rooms="3">3К</button>
-        <button class="filter-btn" data-rooms="4">4К</button>
+      <div class="pcar__filter reveal" id="planFilter">
+        <button class="filter-btn is-active" data-rooms="all" type="button">Всі</button>
+        <button class="filter-btn" data-rooms="1" type="button">1 кімната</button>
+        <button class="filter-btn" data-rooms="2" type="button">2 кімнати</button>
+        <button class="filter-btn" data-rooms="3" type="button">3 кімнати</button>
       </div>
 
-      <div class="flats-slider reveal">
-        <button class="flats-nav flats-nav--prev" id="flatsPrev" aria-label="Назад">‹</button>
-        <div class="flats-track" id="flatsGrid"></div>
-        <button class="flats-nav flats-nav--next" id="flatsNext" aria-label="Вперед">›</button>
+      <div class="pcar reveal" id="planCar">
+        <button class="pcar__arrow pcar__arrow--prev" type="button" aria-label="Попереднє планування">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="pcar__track" id="planTrack"></div>
+        <button class="pcar__arrow pcar__arrow--next" type="button" aria-label="Наступне планування">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="pcar__dots" id="planDots"></div>
       </div>
-      <p class="flats-note reveal">Демонстраційний перелік. Повний каталог з реальними квартирами та цінами з'явиться після завантаження даних.</p>
 
-      <div class="plan-example reveal">
-        <div class="plan-example__img"><img loading="lazy" decoding="async" src="assets/img/plan_s01.jpg" alt="Приклад планування поверху"></div>
-        <p class="plan-example__cap">Приклад планування поверху (секція S01)</p>
-      </div>
+      <p class="pcar__note reveal">Планування з робочої документації проєкту. Актуальні ціни та наявність — у відділі продажу.</p>
 
       <div class="plan-actions">
         <a href="assets/pdf/project.pdf" class="btn btn--accent" download>Завантажити презентацію (PDF)</a>
@@ -916,7 +916,7 @@
     </div>
   </div>
 
-  <script src="assets/data/flats.js"></script>
+  <script src="assets/data/plans.js"></script>
   <script src="js/main.js"></script>
 
   <!-- Плаваюча кнопка Telegram -->
