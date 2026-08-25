@@ -832,7 +832,7 @@ img{max-width:100%;display:block}
   position:relative;z-index:2;
   margin:0 max(28px,6vw);
   max-width:min(700px,84vw);
-  font-size:clamp(23px,2.9vw,40px);line-height:1.34;font-weight:300;color:#fff;
+  font-size:clamp(20px,2.35vw,33px);line-height:1.34;font-weight:300;color:#fff;
   text-shadow:0 2px 28px rgba(0,0,0,.55), 0 1px 8px rgba(0,0,0,.35);
   opacity:0;transform:translateY(26px);
   transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1);
@@ -873,8 +873,10 @@ img{max-width:100%;display:block}
 }
 .stmt--dark-text .stmt__key{color:#8A5326}
 
-.stmt__text--tl{align-self:flex-start;margin-top:clamp(112px,16vh,200px)}
-.stmt__text--cl{align-self:center}
+.stmt__text--tl,.stmt__text--cl{
+  align-self:flex-start;
+  margin-top:clamp(100px,12vh,150px);
+}
 
 @media(prefers-reduced-motion:reduce){
   .stmt__media img{animation:none}
