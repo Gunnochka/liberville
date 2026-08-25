@@ -1377,18 +1377,18 @@ img{max-width:100%;display:block}
   background-repeat:no-repeat;
   background-image:url(../assets/img/pattern-arcs.svg);
   background-size:auto 122%;
-  opacity:var(--pattern-alpha,.10);
+  opacity:var(--pattern-alpha,.20);
 }
 /* світло згасає до центру, щоб лінії не заважали тексту */
 .has-pattern--left::before{
-  background-position:left -230px center;
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 22%,transparent 56%);
-          mask-image:linear-gradient(90deg,#000 0%,#000 22%,transparent 56%);
+  background-position:left -170px top 50%;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 72%);
+          mask-image:linear-gradient(90deg,#000 0%,#000 34%,transparent 72%);
 }
 .has-pattern--right::before{
-  background-position:right -230px center;
-  -webkit-mask-image:linear-gradient(270deg,#000 0%,#000 22%,transparent 56%);
-          mask-image:linear-gradient(270deg,#000 0%,#000 22%,transparent 56%);
+  background-position:right -170px top 50%;
+  -webkit-mask-image:linear-gradient(270deg,#000 0%,#000 34%,transparent 72%);
+          mask-image:linear-gradient(270deg,#000 0%,#000 34%,transparent 72%);
 }
 
 /* сітка — для великих рівних площин */
@@ -1398,21 +1398,21 @@ img{max-width:100%;display:block}
   content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background-image:url(../assets/img/pattern-grid.svg);
   background-size:240px 240px;
-  opacity:var(--pattern-alpha,.075);
+  opacity:var(--pattern-alpha,.14);
   -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
           mask-image:radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
 }
 
 /* фінальний заклик — сітка помітніша, це головний блок конверсії */
-.cta-final.has-grid{--pattern-alpha:.10}
+.cta-final.has-grid{--pattern-alpha:.18}
 /* підвал — ледь-ледь */
-.footer.has-grid{--pattern-alpha:.06}
+.footer.has-grid{--pattern-alpha:.12}
 
 /* дуга в кутку модального вікна */
-.modal__box.has-pattern{--pattern-alpha:.12}
+.modal__box.has-pattern{--pattern-alpha:.20}
 .modal__box.has-pattern::before{
   background-size:auto 150%;
-  background-position:right -120px top -60px;
+  background-position:right -90px top -40px;
   -webkit-mask-image:radial-gradient(90% 80% at 100% 0%, #000 0%, transparent 68%);
           mask-image:radial-gradient(90% 80% at 100% 0%, #000 0%, transparent 68%);
 }
@@ -1420,7 +1420,7 @@ img{max-width:100%;display:block}
 @media(max-width:900px){
   /* на телефоні мотив дрібніший і ще тихіший — екран вузький, лінії
      не мають лізти на текст */
-  .has-pattern::before{background-size:auto 78%;opacity:calc(var(--pattern-alpha,.10) * .75)}
+  .has-pattern::before{background-size:auto 78%;opacity:calc(var(--pattern-alpha,.20) * .8)}
   .has-pattern--left::before {background-position:left  -150px top 8%}
   .has-pattern--right::before{background-position:right -150px bottom 8%}
   .has-grid::before{background-size:170px 170px}
