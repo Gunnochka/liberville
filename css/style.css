@@ -891,6 +891,10 @@ img{max-width:100%;display:block}
   .stmt__text--cl{
     align-self:flex-start;
     margin-bottom:0;margin-top:clamp(96px,13vh,165px);
+    /* блок звужується по контенту, тож auto з обох боків тягнув його
+       до центру — впритул до будинку. Притискаємо до лівого краю. */
+    margin-left:0;margin-right:auto;
+    padding-left:max(24px,6vw);padding-right:16px;
   }
   /* На телефоні обидва кадри темні (26–42% яскравості), тож текст білий —
      без світлої підложки, яка виглядала як біла пляма. */
