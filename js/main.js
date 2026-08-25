@@ -355,7 +355,12 @@ if (mapx) {
       p.classList.toggle('is-on', n === i);
       p.classList.toggle('is-seen', n < i || i >= total); // після фіналу — усі видимі
     });
-    cards.forEach((c, n) => c.classList.toggle('is-on', n === i));
+    cards.forEach((c, n) => {
+      const on = n === i;
+      c.classList.toggle('is-on', on);
+      const v = c.querySelector('video');
+      if (v) { on ? v.play().catch(() => {}) : v.pause(); }
+    });
     if (counter) counter.textContent = String(Math.min(i + 1, total)).padStart(2, '0');
   }
 
@@ -463,6 +468,8 @@ if (mapx) {
         desc:  card ? card.querySelector('p').textContent.trim() : '',
         photo: img ? img.currentSrc || img.src : '',
         alt:   img ? img.alt : '',
+        video: fig ? (v => v ? v.getAttribute('src') : '')(fig.querySelector('video')) : '',
+        poster: fig ? (v => v ? v.getAttribute('poster') : '')(fig.querySelector('video')) : '',
         viz:   !!(fig && fig.classList.contains('is-viz'))
       };
     });
@@ -493,8 +500,23 @@ if (mapx) {
       elNum.textContent   = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
       elTitle.textContent = it.title;
       elDesc.textContent  = it.desc;
-      if (it.photo) { mediaImg.src = it.photo; mediaImg.alt = it.alt; media.classList.remove('is-empty'); }
-      else { mediaImg.removeAttribute('src'); media.classList.add('is-empty'); }
+      const mediaVid = media.querySelector('video');
+      if (it.video) {
+        mediaVid.src = it.video;
+        if (it.poster) mediaVid.poster = it.poster;
+        mediaVid.hidden = false; mediaImg.hidden = true;
+        mediaImg.removeAttribute('src');
+        media.classList.remove('is-empty');
+        mediaVid.play().catch(() => {});
+      } else if (it.photo) {
+        mediaImg.src = it.photo; mediaImg.alt = it.alt;
+        mediaImg.hidden = false; mediaVid.hidden = true;
+        mediaVid.pause(); mediaVid.removeAttribute('src');
+        media.classList.remove('is-empty');
+      } else {
+        mediaImg.removeAttribute('src'); mediaVid.pause();
+        media.classList.add('is-empty');
+      }
       media.classList.toggle('is-viz', !!it.viz);
       let cap = media.querySelector('figcaption');
       if (it.viz && !cap) { cap = document.createElement('figcaption'); cap.textContent = 'Візуалізація'; media.appendChild(cap); }
@@ -523,6 +545,8 @@ if (mapx) {
     function closeObj() {
       objx.classList.remove('is-open');
       objx.setAttribute('aria-hidden', 'true');
+      const ov = objx.querySelector('.objx__media video');
+      if (ov) ov.pause();
       document.body.style.overflow = '';
       // на десктопі повертаємось на «свій» крок скролу; на мобільному панорама
       // нікуди не їхала — чіпати позицію сторінки не треба

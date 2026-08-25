@@ -1428,3 +1428,9 @@ img{max-width:100%;display:block}
 @media print{
   .has-pattern::before,.has-grid::before{display:none}
 }
+
+/* відео в картці обʼєкта — поводиться так само, як фото */
+.mapx__card figure video{width:100%;height:190px;object-fit:cover;display:block}
+.objx__media video{width:100%;height:240px;object-fit:cover;display:block}
+.objx__media img[hidden],.objx__media video[hidden]{display:none}
+@media (max-width:900px){.objx__media video{height:170px}}
