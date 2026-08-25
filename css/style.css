@@ -1365,3 +1365,66 @@ img{max-width:100%;display:block}
 }
 /* акцент без збільшення кегля — коли підсвічуємо словосполучення, а не одне слово */
 .stmt__key--flat{font-size:1em;letter-spacing:0}
+
+/* ===== ФІРМОВИЙ ПАТЕРН ЯК ПІДЛОЖКА =====
+   Геометрична мова бренду з логобука: сітка, дуги, кола.
+   Лягає в порожні поля секцій «у приглушеному світлі» — має читатись
+   як фактура паперу, а не як малюнок. */
+.has-pattern{position:relative;overflow:hidden}
+.has-pattern > *{position:relative;z-index:1}
+.has-pattern::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-repeat:no-repeat;
+  background-image:url(../assets/img/pattern-arcs.svg);
+  background-size:auto 122%;
+  opacity:var(--pattern-alpha,.10);
+}
+/* світло згасає до центру, щоб лінії не заважали тексту */
+.has-pattern--left::before{
+  background-position:left -230px center;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 22%,transparent 56%);
+          mask-image:linear-gradient(90deg,#000 0%,#000 22%,transparent 56%);
+}
+.has-pattern--right::before{
+  background-position:right -230px center;
+  -webkit-mask-image:linear-gradient(270deg,#000 0%,#000 22%,transparent 56%);
+          mask-image:linear-gradient(270deg,#000 0%,#000 22%,transparent 56%);
+}
+
+/* сітка — для великих рівних площин */
+.has-grid{position:relative;overflow:hidden}
+.has-grid > *{position:relative;z-index:1}
+.has-grid::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url(../assets/img/pattern-grid.svg);
+  background-size:240px 240px;
+  opacity:var(--pattern-alpha,.075);
+  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
+          mask-image:radial-gradient(120% 90% at 50% 0%, #000 0%, transparent 72%);
+}
+
+/* фінальний заклик — сітка помітніша, це головний блок конверсії */
+.cta-final.has-grid{--pattern-alpha:.10}
+/* підвал — ледь-ледь */
+.footer.has-grid{--pattern-alpha:.06}
+
+/* дуга в кутку модального вікна */
+.modal__box.has-pattern{--pattern-alpha:.12}
+.modal__box.has-pattern::before{
+  background-size:auto 150%;
+  background-position:right -120px top -60px;
+  -webkit-mask-image:radial-gradient(90% 80% at 100% 0%, #000 0%, transparent 68%);
+          mask-image:radial-gradient(90% 80% at 100% 0%, #000 0%, transparent 68%);
+}
+
+@media(max-width:900px){
+  /* на телефоні мотив дрібніший і ще тихіший — екран вузький, лінії
+     не мають лізти на текст */
+  .has-pattern::before{background-size:auto 78%;opacity:calc(var(--pattern-alpha,.10) * .75)}
+  .has-pattern--left::before {background-position:left  -150px top 8%}
+  .has-pattern--right::before{background-position:right -150px bottom 8%}
+  .has-grid::before{background-size:170px 170px}
+}
+@media print{
+  .has-pattern::before,.has-grid::before{display:none}
+}
