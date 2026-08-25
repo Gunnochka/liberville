@@ -1339,3 +1339,5 @@ img{max-width:100%;display:block}
 @media (prefers-reduced-motion:reduce){
   .video-play__ring{animation:none}
 }
+/* акцент без збільшення кегля — коли підсвічуємо словосполучення, а не одне слово */
+.stmt__key--flat{font-size:1em;letter-spacing:0}
