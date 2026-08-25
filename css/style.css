@@ -312,7 +312,13 @@ img{max-width:100%;display:block}
 /* ===== Features (детали) ===== */
 .features{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
 .feature{display:flex;gap:24px;align-items:flex-start;padding:28px 0;border-bottom:1px solid var(--line-soft)}
-.feature__num{font-size:34px;font-weight:200;color:var(--accent);min-width:54px}
+.feature__num{
+  flex:none;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;margin-top:2px;
+  font-size:13px;font-weight:400;letter-spacing:.4px;color:var(--accent);
+  border:1px solid rgba(192,130,78,.42);background:rgba(192,130,78,.09);
+}
+@media(max-width:700px){.feature__num{width:34px;height:34px;font-size:12px}}
 .feature h3{font-size:20px;font-weight:500;margin-bottom:8px;color:#fff}
 .feature p{color:var(--muted);font-size:15px;font-weight:300}
 

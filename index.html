@@ -555,7 +555,9 @@
       </div>
       <div class="video-frame video-frame--cta reveal" id="promoFrame">
         <!-- за замовчуванням легка версія; на великих екранах JS підміняє на 4K -->
-        <video id="promoVideo" poster="assets/img/promo_poster.jpg" controls playsinline preload="none"
+        <!-- controls вмикаються лише після старту: інакше iOS малює власну
+             кнопку play поверх нашої -->
+        <video id="promoVideo" poster="assets/img/promo_poster.jpg" playsinline preload="none"
                data-uhd="assets/video/liberville-promo.mp4">
           <source src="assets/video/liberville-promo-1080.mp4" type="video/mp4">
         </video>
@@ -690,9 +692,6 @@
           <h3>Двір без машин</h3>
           <p>Амфітеатр, дитячі майданчики та озеленення у три рівні.</p>
         </div>
-      </div>
-      <div class="media-wide reveal" style="height:auto;margin-top:40px;background:#fff;padding:10px">
-        <img loading="lazy" decoding="async" src="assets/img/floor1.jpg" alt="Схема першого поверху" style="height:auto;object-fit:contain">
       </div>
     </div>
   </section>
@@ -1053,8 +1052,8 @@
           <span class="trust__idx">01</span>
           <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2.6 9.2 12 3.4l9.4 5.8H2.6Z"/><path d="M4.8 9.2v9.4m4.4-9.4v9.4m5.6-9.4v9.4m4.4-9.4v9.4"/><path d="M3 20.6h18"/></svg></span>
           <span class="trust__rule" aria-hidden="true"></span>
-          <h3>POLOTNO Architects</h3>
-          <p>Архітектурне бюро проекту — впізнавана силуетна забудова та фірмовий мідний навіс у дворі.</p>
+          <h3>Авторська архітектура</h3>
+          <p>Впізнавана силуетна забудова та фірмовий мідний навіс у дворі.</p>
         </div>
         <div class="trust__item">
           <span class="trust__idx">02</span>
@@ -1087,7 +1086,7 @@
       <div class="center-head reveal">
         <span class="eyebrow">Забудовник</span>
         <h2 class="section__title">Time Development</h2>
-        <p class="section__lead">Будівельна компанія, що реалізує житловий квартал Liberville у Ходосівці разом з архітектурним бюро POLOTNO Architects.</p>
+        <p class="section__lead">Будівельна компанія, що реалізує житловий квартал Liberville у Ходосівці.</p>
       </div>
 
       <div class="dev-info reveal">
@@ -1099,7 +1098,7 @@
         <div class="dev-info__card">
           <span class="dev-info__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 15.4 15.4 3.2l5.4 5.4L8.6 20.8Z"/><path d="m7.1 11.5 2 2m1.4-5 2 2m-8.2 5.3 2 2"/></svg></span>
           <h3>Архітектура</h3>
-          <p>Авторський проект POLOTNO Architects: чотири башти на спільному стилобаті та закритий двір.</p>
+          <p>Авторський проект: чотири башти на спільному стилобаті та закритий двір.</p>
         </div>
         <div class="dev-info__card dev-info__card--accent">
           <span class="dev-info__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2.8h7.6L19 8.2v13H6Z"/><path d="M13.4 2.8v5.6H19"/><path d="M9 13h7m-7 3.6h5"/></svg></span>
@@ -1165,7 +1164,7 @@
         <p class="cta-final__text">Менеджер зв'яжеться з вами, розповість про вільні квартири, умови купівлі та розстрочки. Безкоштовно і ні до чого не зобов'язує.</p>
         <button class="btn btn--accent btn--lg js-open-modal">Отримати ціни та планування</button>
         <div class="cta-final__trust">
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 9.2 12 3.4l9.4 5.8H2.6Z"/><path d="M4.8 9.2v9.4m4.4-9.4v9.4m5.6-9.4v9.4m4.4-9.4v9.4"/><path d="M3 20.6h18"/></svg>Архітектура POLOTNO Architects</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 9.2 12 3.4l9.4 5.8H2.6Z"/><path d="M4.8 9.2v9.4m4.4-9.4v9.4m5.6-9.4v9.4m4.4-9.4v9.4"/><path d="M3 20.6h18"/></svg>Авторська архітектура</span>
           <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 20.8V4.8h14.8v16"/><path d="M2.8 20.8h18.4"/><path d="M8.4 8.8h2.1m3 0h2.1M8.4 13h2.1m3 0h2.1"/><path d="M10 20.8v-4.2h4v4.2"/></svg>I черга — старт продажів</span>
           <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.4s6.8-6 6.8-10.8a6.8 6.8 0 1 0-13.6 0C5.2 15.4 12 21.4 12 21.4Z"/><circle cx="12" cy="10.3" r="2.5"/></svg>Ходосівка, Київська обл.</span>
         </div>

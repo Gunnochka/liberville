@@ -619,6 +619,7 @@ if (promoFrame && promoVideo) {
       promoVideo.setAttribute('src', uhd);
       promoVideo.load();
     }
+    promoVideo.controls = true;
     promoVideo.play().catch(() => {});
     if (typeof gtag === 'function') {
       gtag('event', 'video_start', {
