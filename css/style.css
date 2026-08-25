@@ -880,10 +880,17 @@ img{max-width:100%;display:block}
     font-size:clamp(20px,5.2vw,27px);max-width:88vw;margin:0 auto;padding:0 20px;
   }
   /* Обидва кадри: текст унизу, де порожньо — під будинком і під двором. */
-  .stmt__text--tl,.stmt__text--cl{
+  .stmt__text--tl,.stmt__text--cl{max-width:82vw}
+  /* Перший кадр: текст унизу, на бруківці під вітринами. */
+  .stmt__text--tl{
     align-self:flex-end;
     margin-top:0;margin-bottom:clamp(62px,9vh,115px);
-    max-width:82vw;
+  }
+  /* Другий кадр: текст у небі над будинком — як на брендовому слайді.
+     Відступ зверху тримає рядки нижче фіксованої шапки. */
+  .stmt__text--cl{
+    align-self:flex-start;
+    margin-bottom:0;margin-top:clamp(96px,13vh,165px);
   }
   /* На телефоні обидва кадри темні (26–42% яскравості), тож текст білий —
      без світлої підложки, яка виглядала як біла пляма. */
@@ -892,9 +899,16 @@ img{max-width:100%;display:block}
     text-shadow:0 2px 26px rgba(0,0,0,.7), 0 1px 8px rgba(0,0,0,.5);
   }
   .stmt--dark-text .stmt__key{color:var(--accent)}
-  /* легке затемнення знизу — рівно під рядками */
+  /* затемнення там, де лежать рядки: у другому кадрі — зверху… */
   .stmt::after{
     content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(11,9,7,.60) 0%,
+      rgba(11,9,7,.36) 30%,
+      rgba(11,9,7,0)   52%);
+  }
+  /* …а в першому — знизу */
+  .stmt--dark-text::after{
     background:linear-gradient(0deg,
       rgba(11,9,7,.58) 0%,
       rgba(11,9,7,.34) 26%,
