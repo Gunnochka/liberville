@@ -69,8 +69,12 @@ if (planTrack && window.PLANS) {
       <article class="pcard" data-i="${i}">
         <div class="pcard__sheet">
           <picture>
-            <source srcset="assets/img/plans/${p.img}.webp" type="image/webp">
-            <img src="assets/img/plans/${p.img}.jpg" loading="lazy" decoding="async"
+            <source type="image/webp"
+                    srcset="assets/img/plans/${p.img}-sm.webp 620w, assets/img/plans/${p.img}.webp 1200w"
+                    sizes="(max-width:900px) 62vw, 430px">
+            <img src="assets/img/plans/${p.img}-sm.jpg" loading="lazy" decoding="async"
+                 srcset="assets/img/plans/${p.img}-sm.jpg 620w, assets/img/plans/${p.img}.jpg 1200w"
+                 sizes="(max-width:900px) 62vw, 430px"
                  alt="Планування квартири ${p.code} — ${roomsWord(p.rooms)}, ${num(p.total)} м², ЖК Liberville">
           </picture>
           <span class="pcard__tag">${roomsWord(p.rooms)}</span>
@@ -94,30 +98,58 @@ if (planTrack && window.PLANS) {
         `<button class="pcar__dot" type="button" data-i="${i}" aria-label="Планування ${i + 1}"></button>`).join('');
     }
     planTrack.scrollLeft = 0;
-    requestAnimationFrame(sync);
+    active = -1;
+    requestAnimationFrame(() => { measure(); sync(); });
   }
 
   // підсвічуємо картку, що зараз по центру — сусідні відходять углиб
   let active = -1;
-  function sync() {
+  let centers = [];      // центри карток, поміряні один раз
+  let maxScroll = 0;
+  let rafId = 0;
+
+  // Геометрію міряємо окремо від прокрутки. Якщо читати offsetLeft на кожному
+  // кадрі, браузер щоразу перераховує розкладку — саме через це карусель
+  // сіпалась на телефоні.
+  function measure() {
     const cards = planTrack.children;
-    if (!cards.length) return;
+    centers = new Array(cards.length);
+    for (let i = 0; i < cards.length; i++) {
+      centers[i] = cards[i].offsetLeft + cards[i].offsetWidth / 2;
+    }
+    maxScroll = planTrack.scrollWidth - planTrack.clientWidth;
+  }
+
+  function sync() {
+    if (!centers.length) return;
     const mid = planTrack.scrollLeft + planTrack.clientWidth / 2;
     let best = 0, bestD = Infinity;
-    for (let i = 0; i < cards.length; i++) {
-      const c = cards[i];
-      const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+    for (let i = 0; i < centers.length; i++) {
+      const d = Math.abs(centers[i] - mid);
       if (d < bestD) { bestD = d; best = i; }
-      c.classList.toggle('is-active', false);
     }
-    cards[best].classList.add('is-active');
+    // класи чіпаємо ЛИШЕ коли активна картка справді змінилась
     if (best !== active) {
+      const cards = planTrack.children;
+      if (active >= 0 && cards[active]) cards[active].classList.remove('is-active');
+      if (cards[best]) cards[best].classList.add('is-active');
+      if (planDots) {
+        const ds = planDots.children;
+        if (active >= 0 && ds[active]) ds[active].classList.remove('is-on');
+        if (ds[best]) ds[best].classList.add('is-on');
+      }
       active = best;
-      if (planDots) [...planDots.children].forEach((d, i) => d.classList.toggle('is-on', i === best));
     }
-    const max = planTrack.scrollWidth - planTrack.clientWidth;
-    if (prev) prev.disabled = planTrack.scrollLeft <= 2;
-    if (next) next.disabled = planTrack.scrollLeft >= max - 2;
+    const atStart = planTrack.scrollLeft <= 2;
+    const atEnd   = planTrack.scrollLeft >= maxScroll - 2;
+    if (prev && prev.disabled !== atStart) prev.disabled = atStart;
+    if (next && next.disabled !== atEnd)   next.disabled = atEnd;
+  }
+
+  // на кадр — не більше одного перерахунку
+  function onScrollFrame() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => { rafId = 0; sync(); });
   }
 
   function goto(i) {
@@ -145,12 +177,8 @@ if (planTrack && window.PLANS) {
     }
   });
 
-  planTrack.addEventListener('scroll', () => {
-    clearTimeout(planTrack._t);
-    planTrack._t = setTimeout(sync, 60);
-    sync();
-  }, { passive: true });
-  window.addEventListener('resize', sync);
+  planTrack.addEventListener('scroll', onScrollFrame, { passive: true });
+  window.addEventListener('resize', () => { measure(); sync(); });
 
   document.addEventListener('keydown', e => {
     if (!planTrack.matches(':hover') && document.activeElement !== planTrack) return;

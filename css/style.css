@@ -1251,6 +1251,7 @@ img{max-width:100%;display:block}
   transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .55s ease,
              border-color .55s ease,box-shadow .55s ease;
 }
+.pcard{contain:layout paint}
 .pcard.is-active{
   transform:scale(1);opacity:1;cursor:default;
   border-color:rgba(192,130,78,.38);
