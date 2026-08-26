@@ -619,6 +619,60 @@ reveals.forEach(el => observer.observe(el));
 
 // ===== «Ленивые» видео: грузятся и играют только в зоне видимости =====
 // (экономит трафик и ускоряет первую загрузку — видео не качаются все сразу)
+// ===== Перегляд кварталу: кадр змінюється за рухом курсора =====
+const scrub = document.getElementById('genplanScrub');
+if (scrub) {
+  const frames = [...scrub.querySelectorAll('.scrub__frame')];
+  const bars   = [...scrub.querySelectorAll('.scrub__bars i')];
+  const cap    = scrub.querySelector('.scrub__cap');
+  const caps   = frames.map(f => f.dataset.cap || '');
+  let cur = 0;
+
+  function show(i) {
+    i = Math.max(0, Math.min(i, frames.length - 1));
+    if (i === cur) return;
+    cur = i;
+    frames.forEach((f, n) => f.classList.toggle('is-on', n === i));
+    bars.forEach((b, n) => b.classList.toggle('is-on', n === i));
+    if (cap) cap.textContent = caps[i];
+  }
+
+  function fromX(clientX) {
+    const r = scrub.getBoundingClientRect();
+    const p = (clientX - r.left) / r.width;
+    show(Math.floor(p * frames.length));
+  }
+
+  scrub.addEventListener('pointermove', e => {
+    // на тачскріні реагуємо лише коли палець веде по кадру
+    if (e.pointerType !== 'mouse' && e.buttons === 0) return;
+    scrub.classList.add('is-touched');
+    fromX(e.clientX);
+  });
+  scrub.addEventListener('pointerdown', e => {
+    scrub.classList.add('is-touched');
+    fromX(e.clientX);
+  });
+  scrub.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); show(cur - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+  });
+
+  // на телефоні курсора немає — показуємо кадри по черзі самі,
+  // поки блок на екрані
+  if (window.matchMedia('(hover: none)').matches) {
+    let timer = null;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !timer) {
+        timer = setInterval(() => show((cur + 1) % frames.length), 2600);
+      } else if (!e.isIntersecting && timer) {
+        clearInterval(timer); timer = null;
+      }
+    }, { threshold: .4 });
+    io.observe(scrub);
+  }
+}
+
 // ===== Промо-фільм: вантажимо тільки коли натиснули =====
 // Автозапуск з'їв би трафік відвідувача, тому стартуємо по кліку.
 // За замовчуванням у плеєрі легка версія 1080p (11 МБ); якщо екран великий

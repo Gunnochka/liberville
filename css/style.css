@@ -1436,3 +1436,61 @@ img{max-width:100%;display:block}
 .objx__media video{width:100%;height:240px;object-fit:cover;display:block}
 .objx__media img[hidden],.objx__media video[hidden]{display:none}
 @media (max-width:900px){.objx__media video{height:170px}}
+
+/* ===== ПЕРЕГЛЯД КВАРТАЛУ: кадр змінюється за рухом курсора ===== */
+.scrub{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  aspect-ratio:10 / 7;background:#0b0907;cursor:ew-resize;
+  border:1px solid var(--line);
+  box-shadow:0 26px 60px -28px rgba(0,0,0,.8);
+}
+.scrub:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.scrub__stage{position:absolute;inset:0}
+.scrub__frame{
+  position:absolute;inset:0;
+  opacity:0;transition:opacity .32s ease;
+}
+.scrub__frame.is-on{opacity:1}
+.scrub__frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* смужки-поділки зверху — видно, скільки кадрів і де ти зараз */
+.scrub__bars{
+  position:absolute;z-index:3;top:14px;left:14px;right:14px;
+  display:flex;gap:5px;
+}
+.scrub__bars i{
+  flex:1;height:2.5px;border-radius:2px;
+  background:rgba(255,255,255,.26);
+  transition:background .3s ease;
+}
+.scrub__bars i.is-on{background:var(--accent)}
+
+.scrub__cap{
+  position:absolute;z-index:3;left:20px;bottom:18px;right:20px;
+  font-size:14px;font-weight:300;letter-spacing:.3px;color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,.8);
+  pointer-events:none;
+}
+.scrub__hint{
+  position:absolute;z-index:3;right:18px;top:34px;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 13px;border-radius:99px;
+  background:rgba(11,9,7,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.85);
+  transition:opacity .4s ease;pointer-events:none;
+}
+.scrub.is-touched .scrub__hint{opacity:0}
+/* легке затемнення знизу — під підпис */
+.scrub__stage::after{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(0deg, rgba(11,9,7,.62) 0%, rgba(11,9,7,0) 32%),
+             linear-gradient(180deg, rgba(11,9,7,.42) 0%, rgba(11,9,7,0) 22%);
+}
+@media (max-width:900px){
+  .scrub{cursor:default}
+  .scrub__cap{font-size:13px;left:16px;right:16px;bottom:15px}
+  .scrub__hint{font-size:10px;right:14px;top:28px;padding:5px 11px}
+}
+@media (prefers-reduced-motion:reduce){
+  .scrub__frame{transition:none}
+}
