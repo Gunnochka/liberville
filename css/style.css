@@ -1177,8 +1177,12 @@ img{max-width:100%;display:block}
   /* картки й лічильник тут зайві — деталі відкриваються по тапу */
   .mapx__cards,.mapx__counter{display:none}
 
-  .mapx__head{top:96px;left:20px;right:20px}
-  .mapx__head h2{font-size:26px}
+  .mapx__head{top:82px;left:20px;right:20px}
+  .mapx__head h2{font-size:23px;line-height:1.2}
+  .mapx__head .eyebrow{margin-bottom:7px}
+  /* Кадр починається ПІД заголовком — інакше лупи лізли просто на текст.
+     Мітки прив'язані до полотна, тож зсуваються разом із ним. */
+  .mapx__scroll{top:184px}
   .mapx__hint{text-shadow:0 2px 16px rgba(0,0,0,.85)}
   /* затемнення зверху сильніше — заголовок читається і на світлому кадрі */
   .mapx__stage::after{
