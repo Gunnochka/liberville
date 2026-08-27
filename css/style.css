@@ -882,6 +882,12 @@ img{max-width:100%;display:block}
   align-self:flex-start;
   margin-top:clamp(100px,12vh,150px);
 }
+/* друга теза — у відкрите небо, правіше від башти на передньому плані.
+   Небо там світліше за фасад, тож підсилюємо тінь під літерами. */
+.stmt__text--cl{
+  margin-left:clamp(150px,19vw,330px);
+  text-shadow:0 2px 30px rgba(11,9,7,.72), 0 1px 10px rgba(11,9,7,.55);
+}
 
 @media(prefers-reduced-motion:reduce){
   .stmt__media img{animation:none}
