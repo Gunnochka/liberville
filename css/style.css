@@ -1501,3 +1501,12 @@ img{max-width:100%;display:block}
 @media (prefers-reduced-motion:reduce){
   .scrub__frame{transition:none}
 }
+
+/* короткий акцентний рядок під лідом — «Продумана архітектура. Природне світло…» */
+.section__lead--accent{
+  margin-top:16px;
+  color:var(--accent);
+  font-weight:400;
+  letter-spacing:.3px;
+}
+@media (max-width:700px){.section__lead--accent{margin-top:12px}}
