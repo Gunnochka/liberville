@@ -732,7 +732,12 @@ img{max-width:100%;display:block}
 /* ===== Головний екран (за бренд-макетом) ===== */
 .lead{position:relative;min-height:100svh;overflow:hidden;background:#0b0907}
 .lead__media{position:absolute;inset:0;z-index:0}
-.lead__media img{width:100%;height:100%;object-fit:cover;display:block}
+.lead__media img{width:100%;height:100%;object-fit:cover;display:block;
+  /* вікно кадрування зсувається при прокрутці — небо «сходить» униз.
+     Рухаємо саме кадрування, а не картинку: краї ніколи не оголяться. */
+  object-position:50% var(--sky, 50%);
+}
+@media (prefers-reduced-motion:reduce){.lead__media img{object-position:50% 50% !important}}
 /* легке затемнення лише вгорі — щоб читалося меню й бейдж локації.
    Небо нижче лишаємо світлим: на ньому напис фірмовим коричневим. */
 .lead::after{

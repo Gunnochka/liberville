@@ -647,6 +647,28 @@ reveals.forEach(el => observer.observe(el));
 
 // ===== «Ленивые» видео: грузятся и играют только в зоне видимости =====
 // (экономит трафик и ускоряет первую загрузку — видео не качаются все сразу)
+// ===== Небо на головній сходить униз при прокрутці =====
+// Рухаємо вікно кадрування (object-position), а не саму картинку — тоді
+// композиція на місці, краї не оголюються, а хмари з рендера пливуть донизу.
+// На телефоні знімок обрізається лише по ширині, запасу висоти нема — там ефект вимкнено.
+const leadSec = document.getElementById('lead');
+const leadImg = leadSec && leadSec.querySelector('.lead__media img');
+if (leadImg && matchMedia('(min-width:701px)').matches &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const SHIFT = 30;              // на скільки відсотків зсуваємо кадрування
+  let rafSky = 0;
+  function skyTick() {
+    rafSky = 0;
+    const h = leadSec.offsetHeight || 1;
+    const p = Math.min(Math.max(window.scrollY / h, 0), 1);
+    leadImg.style.setProperty('--sky', (50 - SHIFT * p).toFixed(1) + '%');
+  }
+  addEventListener('scroll', () => { if (!rafSky) rafSky = requestAnimationFrame(skyTick); },
+                   { passive: true });
+  addEventListener('resize', skyTick);
+  skyTick();
+}
+
 // ===== Перегляд кварталу: кадр змінюється за рухом курсора =====
 const scrub = document.getElementById('genplanScrub');
 if (scrub) {
