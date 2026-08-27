@@ -655,7 +655,7 @@ const leadSec = document.getElementById('lead');
 const leadImg = leadSec && leadSec.querySelector('.lead__media img');
 if (leadImg && matchMedia('(min-width:701px)').matches &&
     !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const SHIFT = 30;              // на скільки відсотків зсуваємо кадрування
+  const SHIFT = 44;              // з 50 доступних — лишаємо 6 у запас від краю
   let rafSky = 0;
   function skyTick() {
     rafSky = 0;
