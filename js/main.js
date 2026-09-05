@@ -670,8 +670,9 @@ if (leadImg && matchMedia('(min-width:701px)').matches &&
 }
 
 // ===== Перегляд кварталу: кадр змінюється за рухом курсора =====
-const scrub = document.getElementById('genplanScrub');
-if (scrub) {
+// Галерея-перегортайка. Працює на кожному .scrub на сторінці:
+// генплан у «Схемі генерального плану» і фітнес-клуб.
+document.querySelectorAll('.scrub').forEach(scrub => {
   const frames = [...scrub.querySelectorAll('.scrub__frame')];
   const bars   = [...scrub.querySelectorAll('.scrub__bars i')];
   const cap    = scrub.querySelector('.scrub__cap');
@@ -721,7 +722,7 @@ if (scrub) {
     }, { threshold: .4 });
     io.observe(scrub);
   }
-}
+});
 
 // ===== Промо-фільм: вантажимо тільки коли натиснули =====
 // Автозапуск з'їв би трафік відвідувача, тому стартуємо по кліку.

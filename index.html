@@ -630,8 +630,23 @@
         <h2 class="section__title">Фітнес-клуб у комплексі</h2>
         <p>Власний фітнес-клуб на перших поверхах стилобату — тренування поряд з домом, без поїздок через усе місто.</p>
       </div>
-      <div class="two-cols__media reveal">
-        <img loading="lazy" decoding="async" src="assets/img/cam_05.jpg" alt="Фітнес-клуб">
+      <div class="two-cols__media reveal" style="height:auto;background:none;padding:0">
+        <div class="scrub" id="gymScrub" tabindex="0" role="group"
+             aria-label="Фото фітнес-клубу: ведіть курсором або стрілками">
+          <div class="scrub__stage">
+          <picture data-cap="Зона відпочинку клубу" class="scrub__frame is-on">
+            <source srcset="assets/img/infra/gym-lounge.webp" type="image/webp">
+            <img src="assets/img/infra/gym-lounge.jpg" alt="Зона відпочинку фітнес-клубу BANDA у ЖК Liberville" loading="lazy" decoding="async">
+          </picture>
+          <picture data-cap="Зал вільних ваг і кардіо" class="scrub__frame">
+            <source srcset="assets/img/infra/gym.webp" type="image/webp">
+            <img src="assets/img/infra/gym.jpg" alt="Тренувальна зона фітнес-клубу BANDA у ЖК Liberville" loading="lazy" decoding="async">
+          </picture>
+          </div>
+          <div class="scrub__bars" aria-hidden="true"><i class="is-on"></i><i class=""></i></div>
+          <span class="scrub__cap">Зона відпочинку клубу</span>
+          <span class="scrub__hint">Ведіть курсором</span>
+        </div>
       </div>
     </div>
   </section>
