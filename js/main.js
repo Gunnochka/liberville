@@ -206,7 +206,39 @@ const formSuccess = document.getElementById('formSuccess');
 // (підсторінки — privacy.html, progress.html тощо — підключають той самий main.js без форми)
 if (form && modal && formSuccess) {
 
-function openModal() {
+// Тема заявки. Кнопка може сказати, навіщо відкриває форму: data-lead="Екскурсія".
+// Від теми залежить заголовок форми, а головне — менеджер у Telegram і CRM
+// бачить, що людина хоче саме на екскурсію, а не просто ціни.
+// Кнопки без data-lead відкривають форму як раніше.
+const modalTitle = modal.querySelector('.modal__title');
+const modalText  = modal.querySelector('.modal__text');
+const submitBtn  = form.querySelector('button[type="submit"]');
+const MODAL_DEFAULT = {
+  title:  modalTitle ? modalTitle.textContent : '',
+  text:   modalText  ? modalText.textContent  : '',
+  submit: submitBtn  ? submitBtn.textContent  : ''
+};
+const MODAL_TOPICS = {
+  'Екскурсія': {
+    title:  'Запис на екскурсію',
+    text:   'Залиште контакти — менеджер зателефонує й узгодить зручний день і час.',
+    submit: 'Записатись на екскурсію'
+  },
+  'Підбір планування': {
+    title:  'Підберемо планування',
+    text:   'Менеджер розпитає, що саме шукаєте, підбере варіанти та надішле актуальні ціни.',
+    submit: 'Залишити заявку'
+  }
+  // «Ціни» окремих текстів не має: стандартна форма й так про ціни
+};
+let leadTopic = '';
+
+function openModal(topic) {
+  leadTopic = topic || '';
+  const t = MODAL_TOPICS[leadTopic] || MODAL_DEFAULT;
+  if (modalTitle) modalTitle.textContent = t.title;
+  if (modalText)  modalText.textContent  = t.text;
+  if (submitBtn)  submitBtn.textContent  = t.submit;
   modal.classList.add('is-open');
   form.style.display = 'flex';
   formSuccess.classList.remove('is-visible');
@@ -216,7 +248,8 @@ function closeModal() {
 }
 // Делегирование: работает и для кнопок, созданных каталогом динамически
 document.addEventListener('click', e => {
-  if (e.target.closest('.js-open-modal')) openModal();
+  const opener = e.target.closest('.js-open-modal');
+  if (opener) openModal(opener.dataset.lead);
   else if (e.target.closest('.js-close-modal')) closeModal();
 });
 
@@ -262,7 +295,8 @@ form.addEventListener('submit', async e => {
 
   // 1) Telegram — миттєве сповіщення менеджеру
   if (LEAD.tgToken && LEAD.tgChat) {
-    const text = `🏠 Нова заявка — Liberville\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n🌐 Сторінка: ${page}`;
+    const topicLine = leadTopic ? `\n🎯 Запит: ${leadTopic}` : '';
+    const text = `🏠 Нова заявка — Liberville${topicLine}\n\n👤 Ім'я: ${name}\n📞 Телефон: ${phone}\n🌐 Сторінка: ${page}`;
     tasks.push(
       fetch(`https://api.telegram.org/bot${LEAD.tgToken}/sendMessage`, {
         method: 'POST',
@@ -280,9 +314,10 @@ form.addEventListener('submit', async e => {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: LEAD.web3Key,
-          subject: 'Нова заявка з сайту Liberville',
+          subject: 'Нова заявка з сайту Liberville' + (leadTopic ? ' — ' + leadTopic : ''),
           from_name: 'Liberville сайт',
-          name, phone, page
+          name, phone, page,
+          topic: leadTopic || 'загальна'
         })
       }).then(r => r.ok).catch(() => false)
     );
@@ -296,7 +331,7 @@ form.addEventListener('submit', async e => {
       partner_id: LEAD.crm.partnerId,
       name, phone,
       lang: 'ua',
-      note: `Заявка з сайту Liberville (${page})`
+      note: `Заявка з сайту Liberville${leadTopic ? ' — ' + leadTopic : ''} (${page})`
     };
     // прокидаємо UTM-мітки, щоб у CRM було видно, з якої реклами прийшов лід
     new URLSearchParams(location.search).forEach((v, k) => {
@@ -324,7 +359,8 @@ form.addEventListener('submit', async e => {
     formSuccess.classList.add('is-visible');
     // Конверсія: повідомляємо рекламну аналітику про заявку.
     // Спрацює автоматично, щойно підключимо GA4 та Meta Pixel (до того — мовчить).
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_page: page });
+    // lead_topic показує, яка саме кнопка привела до заявки
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_page: page, lead_topic: leadTopic || 'загальна' });
     if (typeof fbq === 'function') fbq('track', 'Lead');
   } else {
     alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 77 507 55 57');

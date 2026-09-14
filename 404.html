@@ -30,6 +30,19 @@
     a{display:inline-block;padding:14px 28px;border-radius:999px;background:#C0824E;color:#17120F;
       text-decoration:none;font-weight:500;transition:.25s}
     a:hover{background:#A2683B}
+    /* плаваючі кнопки — без цього загальне правило a{} робило з Telegram пігулку в потоці */
+    .tg-fab,.call-fab{position:fixed;right:24px;bottom:24px;z-index:900;width:58px;height:58px;padding:0;
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#C0824E,#A2683B);box-shadow:0 8px 26px rgba(192,130,78,.42),0 2px 8px rgba(0,0,0,.35)}
+    .call-fab{bottom:94px}
+    .tg-fab svg{width:27px;height:27px;fill:#17120F;margin-right:2px}
+    .call-fab svg{width:24px;height:24px;fill:#17120F}
+    @media(max-width:600px){
+      .tg-fab,.call-fab{right:16px;bottom:16px;width:52px;height:52px}
+      .call-fab{bottom:80px}
+      .tg-fab svg{width:24px;height:24px}
+      .call-fab svg{width:21px;height:21px}
+    }
   </style>
 </head>
 <body>
@@ -37,6 +50,14 @@
   <h1>Сторінку не знайдено</h1>
   <p>На жаль, такої сторінки не існує або вона була переміщена.</p>
   <a href="/">Повернутись на головну</a>
+
+  <!-- Плаваюча кнопка дзвінка -->
+  <a class="call-fab" href="tel:+380775075557"
+     aria-label="Зателефонувати: +380 77 507 55 57" title="Зателефонувати">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
+  </a>
 
   <!-- Плаваюча кнопка Telegram -->
   <a class="tg-fab" href="https://t.me/+380775075557" target="_blank" rel="noopener"

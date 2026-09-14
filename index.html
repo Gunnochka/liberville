@@ -41,7 +41,7 @@
   <link rel="preload" href="/assets/img/hero-mobile.webp" as="image" type="image/webp" media="(max-width:700px)">
   <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=043d92ba">
+  <link rel="stylesheet" href="css/style.css?v=6ad3641d">
 
   <!-- Мікророзмітка Schema.org (для Google: організація, ЖК, сайт) -->
   <script type="application/ld+json">
@@ -494,7 +494,10 @@
           <img src="assets/img/hero-wordmark.png" alt="Liberville — вільне містечко" fetchpriority="high">
         </picture>
       </h1>
-      <a href="#about" class="lead__btn">Дізнатися більше</a>
+      <div class="lead__actions">
+        <a href="#about" class="lead__btn">Дізнатися більше</a>
+        <button type="button" class="lead__btn lead__btn--ghost js-open-modal" data-lead="Ціни">Отримати ціни</button>
+      </div>
     </div>
 
     <span class="lead__scroll" aria-hidden="true">Гортайте вниз</span>
@@ -948,6 +951,21 @@
     </div>
   </section>
 
+  <!-- ЗАКЛИК: ЕКСКУРСІЯ — генплан з мітками суто інформаційний, тут даємо наступний крок -->
+  <section class="section section--dark section--band">
+    <div class="container">
+      <div class="cta-band reveal">
+        <div class="cta-band__text">
+          <h3 class="cta-band__title">Хочете побачити квартал наживо?</h3>
+          <p>Замовте екскурсію територією.</p>
+        </div>
+        <div class="cta-band__actions">
+          <button type="button" class="btn btn--accent js-open-modal" data-lead="Екскурсія">Записатись на екскурсію</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ПЕРЕХІД ДО ОБʼЄКТА: лупа розкривається в повний кадр -->
   <div class="objx" id="objx" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Обʼєкт інфраструктури">
     <div class="objx__zoom"><img alt="" decoding="async"></div>
@@ -1124,8 +1142,15 @@
 
       <p class="pcar__note reveal">Планування з робочої документації проєкту. Актуальні ціни та наявність — у відділі продажу.</p>
 
-      <div class="plan-actions">
-        <a href="assets/pdf/project.pdf" class="btn btn--accent" download>Завантажити презентацію (PDF)</a>
+      <div class="cta-band reveal">
+        <div class="cta-band__text">
+          <h3 class="cta-band__title">Не знайшли підходящий варіант?</h3>
+          <p>Залиште заявку — підберемо планування під ваш запит.</p>
+        </div>
+        <div class="cta-band__actions">
+          <button type="button" class="btn btn--accent js-open-modal" data-lead="Підбір планування">Залишити заявку</button>
+          <a href="assets/pdf/project.pdf" class="btn btn--outline" download>Завантажити презентацію (PDF)</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1342,7 +1367,15 @@
   </div>
 
   <script src="assets/data/plans.js"></script>
-  <script src="js/main.js?v=7cdeba1f"></script>
+  <script src="js/main.js?v=6c5c6592"></script>
+
+  <!-- Плаваюча кнопка дзвінка -->
+  <a class="call-fab" href="tel:+380775075557"
+     aria-label="Зателефонувати: +380 77 507 55 57" title="Зателефонувати">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </svg>
+  </a>
 
   <!-- Плаваюча кнопка Telegram -->
   <a class="tg-fab" href="https://t.me/+380775075557" target="_blank" rel="noopener"
