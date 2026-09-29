@@ -141,6 +141,12 @@ GA4 (`lead_topic`). Без `data-lead` — стандартна форма. Но
 ## Аналітика й пошук
 
 - **GA4** `G-SY2NJYV4XC` — на всіх сторінках. Події: `generate_lead`, `video_start`.
+- **Google Tag Manager** `GTM-55MV9QTR` — на всіх 12 сторінках (з 2026-09-29), вище за GA4.
+  Заявка кладе в `dataLayer` подію `{event:'generate_lead', lead_topic, form_page}` —
+  на неї в GTM вішається тригер «Custom Event» для Meta Pixel, Google Ads тощо.
+  > ⚠️ GA4 зараз прописаний у коді напряму. **Не додавати в GTM ще й тег GA4 з
+  > тим самим `G-SY2NJYV4XC`** — кожен перегляд і кожна заявка порахуються двічі.
+  > Або GA4 у коді, або в GTM. Якщо переносити в GTM — прибрати блок gtag з усіх сторінок.
 - **Search Console** — підтверджено через GA4, sitemap подано (10 сторінок).
 - **Meta Pixel** — код готовий, потрібен вхід власника у Facebook.
 - **Schema.org** на головній: Organization, WebSite, ApartmentComplex,

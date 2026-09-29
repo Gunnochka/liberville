@@ -361,6 +361,12 @@ form.addEventListener('submit', async e => {
     // Спрацює автоматично, щойно підключимо GA4 та Meta Pixel (до того — мовчить).
     // lead_topic показує, яка саме кнопка привела до заявки
     if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_page: page, lead_topic: leadTopic || 'загальна' });
+    // Для Google Tag Manager — окрема подія. gtag() кладе в dataLayer не {event: …},
+    // тож тригери GTM його не бачать. На цю подію в GTM вішається тригер
+    // «Custom Event → generate_lead» для Meta Pixel, Google Ads тощо.
+    (window.dataLayer = window.dataLayer || []).push({
+      event: 'generate_lead', lead_topic: leadTopic || 'загальна', form_page: page
+    });
     if (typeof fbq === 'function') fbq('track', 'Lead');
   } else {
     alert('Не вдалося відправити заявку. Зателефонуйте нам: +380 77 507 55 57');
