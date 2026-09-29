@@ -206,9 +206,9 @@ const formSuccess = document.getElementById('formSuccess');
 // (підсторінки — privacy.html, progress.html тощо — підключають той самий main.js без форми)
 if (form && modal && formSuccess) {
 
-// Тема заявки. Кнопка може сказати, навіщо відкриває форму: data-lead="Екскурсія".
+// Тема заявки. Кнопка може сказати, навіщо відкриває форму: data-lead="Перегляд".
 // Від теми залежить заголовок форми, а головне — менеджер у Telegram і CRM
-// бачить, що людина хоче саме на екскурсію, а не просто ціни.
+// бачить, що людина хоче саме на перегляд, а не просто ціни.
 // Кнопки без data-lead відкривають форму як раніше.
 const modalTitle = modal.querySelector('.modal__title');
 const modalText  = modal.querySelector('.modal__text');
@@ -219,10 +219,10 @@ const MODAL_DEFAULT = {
   submit: submitBtn  ? submitBtn.textContent  : ''
 };
 const MODAL_TOPICS = {
-  'Екскурсія': {
-    title:  'Запис на екскурсію',
-    text:   'Залиште контакти — менеджер зателефонує й узгодить зручний день і час.',
-    submit: 'Записатись на екскурсію'
+  'Перегляд': {
+    title:  'Запис на перегляд',
+    text:   'Залиште контакти — менеджер зателефонує й узгодить зручний день і час перегляду.',
+    submit: 'Записатися на перегляд'
   },
   'Підбір планування': {
     title:  'Підберемо планування',
@@ -631,16 +631,6 @@ if (mapx) {
     }
 
     pins.forEach((p, n) => p.addEventListener('click', () => openObj(n)));
-
-    // кнопка «Детальніше» на кожній картці
-    cards.forEach((card, n) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'mapx__more';
-      b.innerHTML = 'Детальніше <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
-      b.addEventListener('click', () => openObj(n));
-      card.appendChild(b);
-    });
 
     objx.querySelector('.objx__close').addEventListener('click', closeObj);
     objx.querySelector('.objx__nav--prev').addEventListener('click', () => goto(openIdx - 1));

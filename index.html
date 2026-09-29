@@ -49,7 +49,7 @@
   <link rel="preload" href="/assets/img/hero-mobile.webp" as="image" type="image/webp" media="(max-width:700px)">
   <link rel="preload" href="/assets/fonts/RoadUI-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/RoadUI-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=6ad3641d">
+  <link rel="stylesheet" href="css/style.css?v=90f065aa">
 
   <!-- Мікророзмітка Schema.org (для Google: організація, ЖК, сайт) -->
   <script type="application/ld+json">
@@ -469,7 +469,7 @@
         <a href="#infrastructure">Інфраструктура</a>
         <a href="#plan">Планування</a>
         <a href="#location">Локація</a>
-        <a href="#genplan">Генплан</a>
+        <a href="#infra-map">Генплан</a>
         <a href="gallery.html">Галерея</a>
         <a href="articles.html">Статті</a>
         <a href="progress.html">Хід будівництва</a>
@@ -594,10 +594,18 @@
       <div class="two-cols__text reveal">
         <span class="eyebrow">Концепція</span>
         <h2 class="section__title">Основна ідея</h2>
-        <p>Liberville — приватний простір, створений для тих, хто цінує більше.</p>
-        <p>Архітектура, що формує характер. Простір, у якому продумані не лише будинки, а й кожна деталь щоденного життя.</p>
-        <p>Liberville поєднує сучасну естетику, приватність та комфорт у єдиній концепції — від архітектури комплексу до атмосфери власного подвір'я.</p>
-        <p>Це місце, де простір стає стилем життя.</p>
+        <p>Liberville — приватний простір нового формату, де архітектура, сервіс і щоденний комфорт об'єднані в єдину концепцію.</p>
+        <p>Тут продумано більше, ніж просто житловий простір. Закрита територія, сучасна архітектура та власна інфраструктура формують середовище, у якому все необхідне для життя — поруч.</p>
+        <p>На території Liberville:</p>
+        <ul class="about-list">
+          <li>приватний садочок та початкова школа;</li>
+          <li>сучасний спортзал;</li>
+          <li>ресторан та кав'ярня;</li>
+          <li>салон краси та грумінг;</li>
+          <li>мінімаркет та аптека.</li>
+        </ul>
+        <p>Вам не потрібно витрачати час на зайві поїздки — основні щоденні потреби доступні в межах приватного простору.</p>
+        <p>Liberville — коли комфорт стає частиною стилю життя.</p>
       </div>
       <div class="two-cols__media reveal">
         <video src="assets/video/about.mp4" poster="assets/img/about_poster.jpg" muted loop playsinline preload="none" data-autoplay></video>
@@ -612,12 +620,12 @@
         <span class="eyebrow">Благоустрій</span>
         <h2 class="section__title">Простір приватного життя</h2>
         <p>Закритий приватний двір на стилобаті — затишні зони відпочинку, дитячі майданчики та продумане озеленення.</p>
-        <p>Візитівка простору — скульптурна мідна конструкція, що формує впізнаване обличчя комплексу.</p>
+        <p>Простір, створений для гармонійного життя всієї родини, де кожен знаходить своє місце для відпочинку та натхнення. Для дітей — сучасні дитячі та спортивні майданчики європейського рівня від компаній Berliner та HAGS, адаптовані до різного віку, для дорослих — затишні зони, де можна насолодитися кавою з друзями, почитати книгу або побути наодинці. Преміальне середовище, у якому комфорт кожного члена родини стає частиною щоденного життя.</p>
       </div>
       <div class="two-cols__media reveal">
         <picture>
-          <source srcset="assets/img/quarter-sunset.webp" type="image/webp">
-          <img loading="lazy" decoding="async" src="assets/img/quarter-sunset.jpg" alt="Квартал Liberville на заході сонця — вежі та комерція на перших поверхах">
+          <source srcset="assets/img/cam_06.webp" type="image/webp">
+          <img loading="lazy" decoding="async" src="assets/img/cam_06.jpg" alt="Двір ЖК Liberville: пергола, зони відпочинку та дитячий майданчик">
         </picture>
       </div>
     </div>
@@ -632,8 +640,11 @@
         <p class="section__lead">Будинки розташовані так, щоб не закривати світло та панорами один одному. Тому у квартирах — багато природного світла, більше приватності та краєвиди, якими хочеться насолоджуватися щодня.</p>
         <p class="section__lead section__lead--accent">Продумана архітектура. Природне світло. Відкритий горизонт.</p>
       </div>
-      <div class="media-wide reveal">
-        <video src="assets/video/panorama.mp4" poster="assets/img/panorama_poster.jpg" muted loop playsinline preload="none" data-autoplay></video>
+      <div class="media-wide media-wide--aerial reveal">
+        <picture>
+          <source srcset="assets/img/aerial-01-2400.webp" type="image/webp">
+          <img src="assets/img/aerial-01-2400.jpg" alt="ЖК Liberville з висоти: чотири башти на спільному стилобаті та зелений двір" loading="lazy" decoding="async">
+        </picture>
       </div>
     </div>
   </section>
@@ -643,12 +654,12 @@
     <div class="container two-cols">
       <div class="two-cols__text reveal">
         <span class="eyebrow">Здоров'я</span>
-        <h2 class="section__title">Фітнес-клуб у комплексі</h2>
-        <p>Власний фітнес-клуб на перших поверхах стилобату — тренування поряд з домом, без поїздок через усе місто.</p>
+        <h2 class="section__title">CrossFit-клуб BANDA</h2>
+        <p>Двоповерховий інноваційний спортивний простір понад 1200 м² поряд з домом, без поїздок через усе місто, де передбачено як персональні, так і групові тренування.</p>
       </div>
       <div class="two-cols__media reveal" style="height:auto;background:none;padding:0">
         <div class="scrub" id="gymScrub" tabindex="0" role="group"
-             aria-label="Фото фітнес-клубу: ведіть курсором або стрілками">
+             aria-label="Фото CrossFit-клубу BANDA: ведіть курсором або стрілками">
           <div class="scrub__stage">
           <picture data-cap="Зона відпочинку клубу" class="scrub__frame is-on">
             <source srcset="assets/img/infra/gym-lounge.webp" type="image/webp">
@@ -673,7 +684,7 @@
       <div class="center-head reveal">
         <span class="eyebrow">Інфраструктура</span>
         <h2 class="section__title">Усе необхідне — у кількох кроках від дому</h2>
-        <p class="section__lead">Продуманий стилобат об'єднує ключові сервіси для комфортного щоденного життя: дитячий садок, школу, ресторан, фітнес, коворкінг та магазини.</p>
+        <p class="section__lead">Продумані комерційні приміщення об'єднують ключові сервіси для щоденного життя: дитячий садок, школу, ресторан, кав'ярню, фітнес, коворкінг та магазини.</p>
         <p class="section__lead section__lead--accent">Усе поруч. Без зайвих поїздок. Більше часу для себе.</p>
       </div>
       <div class="cards-4">
@@ -701,7 +712,7 @@
             </svg>
           </div>
           <h3>Спорт та робота</h3>
-          <p>Фітнес-клуб і коворкінг просто у вашому будинку.</p>
+          <p>CrossFit-клуб BANDA і коворкінг просто у вашому будинку.</p>
         </div>
         <div class="card reveal">
           <div class="card__icon">
@@ -920,10 +931,10 @@
           <figure>
             <picture>
               <source srcset="assets/img/infra/playground.webp" type="image/webp">
-              <img src="assets/img/infra/playground.jpg" alt="Майданчик школи та садочка у ЖК Liberville" loading="lazy" decoding="async">
+              <img src="assets/img/infra/playground.jpg" alt="Функціональний майданчик HAGS у ЖК Liberville" loading="lazy" decoding="async">
             </picture>
           </figure>
-          <h3>Функціональний майданчик школи та садочка</h3>
+          <h3>Функціональний майданчик від компанії HAGS</h3>
           <p>Безпечний приватний простір для активних ігор, розвитку та відпочинку дітей.</p>
         </article>
         <article class="mapx__card" data-i="10">
@@ -938,12 +949,13 @@
         </article>
         <article class="mapx__card" data-i="11">
           <figure>
-            <video src="assets/video/parking.mp4" poster="assets/img/infra/parking.jpg"
-                   muted loop playsinline preload="none"
-                   aria-label="Заїзд у підземний паркінг ЖК Liberville"></video>
+            <picture>
+              <source srcset="assets/img/infra/parking.webp" type="image/webp">
+              <img src="assets/img/infra/parking.jpg" alt="Заїзд у підземний паркінг ЖК Liberville" loading="lazy" decoding="async">
+            </picture>
           </figure>
           <h3>Заїзд у підземний паркінг</h3>
-          <p>Зручний вʼїзд до підземного паркінгу забезпечує комфорт у будь-яку пору року.</p>
+          <p>Зручний широкий 6-метровий вʼїзд до підземного паркінгу. Гарантована безпека вашого автомобіля і комфорт у будь-яку пору року.</p>
         </article>
       </div>
 
@@ -964,16 +976,16 @@
     </div>
   </section>
 
-  <!-- ЗАКЛИК: ЕКСКУРСІЯ — генплан з мітками суто інформаційний, тут даємо наступний крок -->
+  <!-- ЗАКЛИК: ПЕРЕГЛЯД — генплан з мітками суто інформаційний, тут даємо наступний крок -->
   <section class="section section--dark section--band">
     <div class="container">
       <div class="cta-band reveal">
         <div class="cta-band__text">
-          <h3 class="cta-band__title">Хочете побачити квартал наживо?</h3>
-          <p>Замовте екскурсію територією.</p>
+          <h3 class="cta-band__title">Хочете побачити комплекс наживо?</h3>
+          <p>Запишіться на перегляд.</p>
         </div>
         <div class="cta-band__actions">
-          <button type="button" class="btn btn--accent js-open-modal" data-lead="Екскурсія">Записатись на екскурсію</button>
+          <button type="button" class="btn btn--accent js-open-modal" data-lead="Перегляд">Записатися на перегляд</button>
         </div>
       </div>
     </div>
@@ -1040,6 +1052,20 @@
             <p>Безпечне та комфортне паркування без зайвого руху автомобілів у дворі — 186 машиномісць.</p>
           </div>
         </div>
+        <div class="feature reveal">
+          <span class="feature__num">05</span>
+          <div>
+            <h3>Дизайнерське лобі</h3>
+            <p>Стильне дизайнерське лобі з атмосферою преміального готелю.</p>
+          </div>
+        </div>
+        <div class="feature reveal">
+          <span class="feature__num">06</span>
+          <div>
+            <h3>Сервіс і охорона</h3>
+            <p>Консьєрж-сервіс у вхідній групі і цілодобова охорона: піший патруль на території комплексу і відеоспостереження 24/7.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1051,7 +1077,7 @@
         <span class="eyebrow">Локація</span>
         <h2 class="section__title">20 хв від центру Києва</h2>
         <p class="section__lead">Є місця, де місто залишається достатньо близько, але його ритм більше не визначає ваше життя. Ходосівка — саме таке місце.</p>
-        <p class="section__lead section__lead--accent">«Мануфактура» та необхідна інфраструктура — поруч. Ліс і природний простір — навколо.</p>
+        <p class="section__lead section__lead--accent">Розвинена інфраструктура — поруч. Ліси і озера — навколо.</p>
       </div>
 
       <div class="location">
@@ -1079,48 +1105,6 @@
             src="https://maps.google.com/maps?q=%D0%A5%D0%BE%D0%B4%D0%BE%D1%81%D1%96%D0%B2%D0%BA%D0%B0%2C%20%D0%9A%D0%B8%D1%97%D0%B2%D1%81%D1%8C%D0%BA%D0%B0%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C&z=13&hl=uk&gl=UA&output=embed"
             title="Розташування ЖК Liberville — Ходосівка, Київська область"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ГЕНПЛАН -->
-  <section class="section" id="genplan">
-    <div class="container two-cols">
-      <div class="two-cols__text reveal">
-        <span class="eyebrow">Генплан</span>
-        <h2 class="section__title">Схема генерального плану</h2>
-        <p>Відкритий доступ до комерції по периметру та закритий приватний двір на стилобаті. Поетапна реалізація у дві черги без втрати цілісності середовища.</p>
-        <p>Площа ділянки — 1,2 га. Чотири башти заввишки 9–10 поверхів.</p>
-      </div>
-      <div class="two-cols__media reveal" style="height:auto;background:none;padding:0">
-        <div class="scrub" id="genplanScrub" tabindex="0" role="group"
-             aria-label="Перегляд кварталу: ведіть курсором або стрілками">
-          <div class="scrub__stage">
-          <picture data-cap="Двір із висоти" class="scrub__frame is-on">
-            <source srcset="assets/img/gp/gp1.webp" type="image/webp">
-            <img src="assets/img/gp/gp1.jpg" alt="Двір ЖК Liberville з висоти — перголи, майданчик, зони відпочинку" loading="lazy" decoding="async">
-          </picture>
-          <picture data-cap="Внутрішній двір увечері" class="scrub__frame">
-            <source srcset="assets/img/gp/gp2.webp" type="image/webp">
-            <img src="assets/img/gp/gp2.jpg" alt="Внутрішній двір увечері — ЖК Liberville" loading="lazy" decoding="async">
-          </picture>
-          <picture data-cap="Мідний навіс — серце двору" class="scrub__frame">
-            <source srcset="assets/img/gp/gp3.webp" type="image/webp">
-            <img src="assets/img/gp/gp3.jpg" alt="Мідний навіс — серце двору — ЖК Liberville" loading="lazy" decoding="async">
-          </picture>
-          <picture data-cap="Двір на стилобаті" class="scrub__frame">
-            <source srcset="assets/img/gp/gp4.webp" type="image/webp">
-            <img src="assets/img/gp/gp4.jpg" alt="Двір на стилобаті — ЖК Liberville" loading="lazy" decoding="async">
-          </picture>
-          <picture data-cap="Зони відпочинку" class="scrub__frame">
-            <source srcset="assets/img/gp/gp5.webp" type="image/webp">
-            <img src="assets/img/gp/gp5.jpg" alt="Зони відпочинку — ЖК Liberville" loading="lazy" decoding="async">
-          </picture>
-          </div>
-          <div class="scrub__bars" aria-hidden="true"><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div>
-          <span class="scrub__cap">Двір із висоти</span>
-          <span class="scrub__hint">Ведіть курсором</span>
         </div>
       </div>
     </div>
@@ -1203,7 +1187,7 @@
           <span class="trust__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="4.4"/><path d="M9.7 16.7V7.6h3.1a2.85 2.85 0 0 1 0 5.7H9.7"/></svg></span>
           <span class="trust__rule" aria-hidden="true"></span>
           <h3>Підземний паркінг</h3>
-          <p>186 машиномісць під стилобатом — автівки не заїжджають у внутрішній двір кварталу.</p>
+          <p>186 машиномісць — автівки не заїжджають у внутрішній двір кварталу.</p>
         </div>
         <div class="trust__item">
           <span class="trust__idx">04</span>
@@ -1246,30 +1230,6 @@
     </div>
   </section>
 
-  <!-- НОВИНИ -->
-  <section class="section section--dark" id="news">
-    <div class="container">
-      <div class="center-head reveal">
-        <span class="eyebrow">Новини</span>
-        <h2 class="section__title">Останні новини</h2>
-      </div>
-      <div class="news-grid">
-        <article class="news-card reveal">
-          <div class="news-card__img"><video src="assets/video/news_start.mp4" poster="assets/img/news_start_poster.jpg" muted loop playsinline preload="none" data-autoplay></video></div>
-          <div class="news-card__body">
-            <time>Червень 2026</time>
-            <h3>Старт продажів I черги Liberville</h3>
-            <p>Відкрито бронювання квартир першого пускового комплексу.</p>
-            <a href="news.html" class="link-arrow">Читати →</a>
-          </div>
-        </article>
-      </div>
-      <div class="center-btn">
-        <a href="news.html" class="btn btn--outline">Всі новини</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ГАЛЕРЕЯ -->
   <section class="section">
     <div class="container">
@@ -1297,11 +1257,11 @@
       <div class="cta-final__box reveal">
         <span class="eyebrow">Зацікавив проект?</span>
         <h2 class="section__title">Залиште заявку — надішлемо ціни та планування</h2>
-        <p class="cta-final__text">Менеджер зв'яжеться з вами, розповість про вільні квартири, умови купівлі та розстрочки. Безкоштовно і ні до чого не зобов'язує.</p>
+        <p class="cta-final__text">Менеджер зв'яжеться з вами у робочий час з 11:00 до 19:00, надасть актуальну інформацію про ціни і вільні квартири, допоможе обрати планування під ваш особистий запит.</p>
         <button class="btn btn--accent btn--lg js-open-modal">Отримати ціни та планування</button>
         <div class="cta-final__trust">
           <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 9.2 12 3.4l9.4 5.8H2.6Z"/><path d="M4.8 9.2v9.4m4.4-9.4v9.4m5.6-9.4v9.4m4.4-9.4v9.4"/><path d="M3 20.6h18"/></svg>Авторська архітектура</span>
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 20.8V4.8h14.8v16"/><path d="M2.8 20.8h18.4"/><path d="M8.4 8.8h2.1m3 0h2.1M8.4 13h2.1m3 0h2.1"/><path d="M10 20.8v-4.2h4v4.2"/></svg>I черга — старт продажів</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 20.8V4.8h14.8v16"/><path d="M2.8 20.8h18.4"/><path d="M8.4 8.8h2.1m3 0h2.1M8.4 13h2.1m3 0h2.1"/><path d="M10 20.8v-4.2h4v4.2"/></svg>I черга — старт бронювань</span>
           <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.4s6.8-6 6.8-10.8a6.8 6.8 0 1 0-13.6 0C5.2 15.4 12 21.4 12 21.4Z"/><circle cx="12" cy="10.3" r="2.5"/></svg>Ходосівка, Київська обл.</span>
         </div>
       </div>
@@ -1330,7 +1290,7 @@
         <h4>Меню</h4>
         <a href="#about">Про комплекс</a>
         <a href="#infrastructure">Інфраструктура</a>
-        <a href="#genplan">Генплан</a>
+        <a href="#infra-map">Генплан</a>
         <a href="#plan">Планування</a>
         <a href="gallery.html">Галерея</a>
       </div>
@@ -1380,7 +1340,7 @@
   </div>
 
   <script src="assets/data/plans.js"></script>
-  <script src="js/main.js?v=24421f41"></script>
+  <script src="js/main.js?v=7bb03f52"></script>
 
   <!-- Плаваюча кнопка дзвінка -->
   <a class="call-fab" href="tel:+380775075557"

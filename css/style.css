@@ -769,14 +769,18 @@ img{max-width:100%;display:block}
 /* назва — у світлій частині неба, фірмовим коричневим */
 .lead__box{
   position:absolute;z-index:3;
-  top:clamp(140px,24vh,265px);
+  /* вище, ніж було (24vh): з другою кнопкою блок став довшим і сповзав на мідний
+     навіс (правка замовника «лого й кнопки налазять на будинок»). Дах навісу на
+     кадрі — приблизно на половині висоти екрана, блок має закінчуватись вище */
+  top:clamp(96px,14.5vh,210px);
   right:clamp(40px,12vw,215px);
   text-align:right;max-width:min(560px,72vw);
 }
 /* напис — фірмове накреслення з логотипу (той самий, що в шапці) */
 .lead__title{margin:0;line-height:0}
 .lead__title img{
-  width:clamp(215px,29vw,455px);height:auto;display:block;margin-left:auto;
+  /* 46vh — щоб на невисокому вікні ноутбука напис разом із кнопками вмістився в небо */
+  width:clamp(215px,min(29vw,46vh),455px);height:auto;display:block;margin-left:auto;
   filter:drop-shadow(0 6px 26px rgba(255,255,255,.42)) drop-shadow(0 2px 6px rgba(90,51,32,.28));
 }
 .lead__sub{
@@ -985,6 +989,12 @@ button.lead__btn{font-family:inherit;line-height:inherit;border:0;cursor:pointer
     font-size:clamp(18px,2vw,28px);
     margin-top:clamp(88px,10.5vh,112px);
   }
+  /* Друга теза — одразу під шапкою (правка замовника: «новий стиль» лягав на
+     помаранчевий захід і не читався). На кадрі синє небо до ~38% висоти, далі
+     захід. Кадр масштабується за шириною, тож на низькому вікні (Safari з панелями)
+     захід підіймається — при старих 100–150px рядок «новий стиль» опинявся на 34–38%,
+     тобто на межі. Від 96px він на 23–34% за будь-якої висоти вікна — у синьому */
+  .stmt__text--cl{margin-top:96px}
 }
 
 /* ===== Інтерактивний генплан ===== */
@@ -998,12 +1008,20 @@ button.lead__btn{font-family:inherit;line-height:inherit;border:0;cursor:pointer
 .mapx__mini{display:none}
 .mapx__media{position:absolute;inset:0;z-index:0}
 .mapx__media img{width:100%;height:100%;object-fit:cover;display:block}
+/* Затемнення під заголовком. Шар лежить НИЖЧЕ за мітки (z 1 проти 3), тож мітки
+   лишаються яскравими — темніє лише фото. Раніше в зоні тексту було ~20% і
+   «ІНФРАСТРУКТУРА» мала контраст 1:1 (правка замовника: «не читабельний»).
+   Пляма з лівого верхнього кута — саме там, де стоїть текст, а не смуга на всю ширину */
 .mapx__stage::after{
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(180deg, rgba(11,9,7,.55) 0%, rgba(11,9,7,.12) 22%, rgba(11,9,7,0) 40%),
+    radial-gradient(ellipse 58% 46% at 16% 24%, rgba(11,9,7,.74) 0%, rgba(11,9,7,.5) 48%, rgba(11,9,7,0) 100%),
+    linear-gradient(180deg, rgba(11,9,7,.55) 0%, rgba(11,9,7,.18) 24%, rgba(11,9,7,0) 42%),
     linear-gradient(0deg, rgba(11,9,7,.45) 0%, rgba(11,9,7,0) 30%);
 }
+/* надзаголовок і підказка — світліші, ніж на темних секціях: під ними все ж фото */
+.mapx__head .eyebrow{color:#E6AE78}
+.mapx__head .mapx__hint{color:rgba(255,255,255,.86);opacity:1}
 .mapx__head{
   position:absolute;z-index:4;top:clamp(128px,18vh,200px);left:max(28px,5vw);
   color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.6);
@@ -1091,14 +1109,6 @@ button.lead__btn{font-family:inherit;line-height:inherit;border:0;cursor:pointer
 /* ===== ПЕРЕХІД ДО ОБʼЄКТА (лупа → повний кадр) ===== */
 .mapx__pin{cursor:pointer}
 .mapx__card{cursor:default}
-.mapx__more{
-  margin-top:18px;display:inline-flex;align-items:center;gap:9px;
-  background:none;border:0;padding:0;cursor:pointer;
-  font:inherit;font-size:14px;font-weight:400;letter-spacing:.4px;color:var(--accent);
-  transition:gap .3s ease,color .3s ease;
-}
-.mapx__more:hover{gap:14px;color:#E2A870}
-.mapx__more svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 .objx{
   position:fixed;inset:0;z-index:1200;
@@ -1245,10 +1255,11 @@ button.lead__btn{font-family:inherit;line-height:inherit;border:0;cursor:pointer
      а низ кадру просто обрізається. */
   .mapx__canvas{height:112%}
   .mapx__hint{text-shadow:0 2px 16px rgba(0,0,0,.85)}
-  /* затемнення зверху сильніше — заголовок читається і на світлому кадрі */
+  /* затемнення зверху — заголовок на всю ширину, тож смуга, що плавно сходить.
+     Було .34 на 26% висоти — підказка під заголовком читалась на 1.5:1 */
   .mapx__stage::after{
     background:
-      linear-gradient(180deg, rgba(11,9,7,.72) 0%, rgba(11,9,7,.34) 26%, rgba(11,9,7,0) 48%),
+      linear-gradient(180deg, rgba(11,9,7,.78) 0%, rgba(11,9,7,.66) 24%, rgba(11,9,7,.28) 34%, rgba(11,9,7,0) 44%),
       linear-gradient(0deg, rgba(11,9,7,.62) 0%, rgba(11,9,7,0) 26%);
   }
 
@@ -1594,3 +1605,20 @@ button.lead__btn{font-family:inherit;line-height:inherit;border:0;cursor:pointer
   .cta-band__actions .btn{width:100%}
   .section--band{padding:44px 0 0}
 }
+
+/* «Основна ідея»: що є на території — бронзові крапки, як решта фірмових дрібниць */
+.about-list{list-style:none;margin:0 0 16px;padding:0}
+.about-list li{
+  position:relative;padding-left:20px;margin-bottom:6px;
+  color:var(--muted);font-weight:300;font-size:17px;
+}
+.about-list li::before{
+  content:'';position:absolute;left:2px;top:.72em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+
+/* «Архітектура»: кадр з висоти 4:3. У стандартні 540px влазило лише 58% висоти —
+   зникали дах задньої башти й основа передньої. 16:10 показує комплекс цілком */
+.media-wide--aerial{height:auto;aspect-ratio:16 / 10}
+.media-wide--aerial img{object-position:50% 40%}
+@media(max-width:700px){.media-wide--aerial{aspect-ratio:4 / 3}}
